@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Registro";
+}
+
+<div class="registro margen-interno">
+    <br>
+    <h1><u><b>FORMULARIO DE REGISTRO</b></u></h1>
+
+    <div ID="pnlMensaje" title="Error" style="display:none">
+        <div>
+            <strong>Atención!</strong> Se ha presentado el siguiente problema.
+            <br />
+            <br />
+            <p ID="blMensajes"></p>
+        </div>
+    </div>
+    <div ID="pnlInfo" title="Mensaje" style="display: none">
+        <div>
+            <strong>Información!</strong> Procesamiento éxitoso.
+            <br />
+            <br />
+            <p ID="blInfo"></p>
+        </div>
+    </div>
+
+    <div class="registro">
+        <div class="form-group col-5">
+            <div class="">
+                <label for="usr">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+        </div>
+        <div class="form-group col-5">
+            <label for="cedula">Cédula</label>
+            <input type="text" class="form-control" id="cedula" name="cedula" required>
+        </div>
+        <div class="form-group col-5">
+            <label for="celular">Número de teléfono</label>
+            <input type="text" class="form-control" id="celular" name="celular" required>
+        </div>
+        <div class="form-group col-5">
+            <label for="correo">Correo Electrónico</label>
+            <input type="text" class="form-control" id="correo" name="correo" required>
+        </div>
+        <div class="form-group col-5">
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento"
+                   required>
+        </div>
+        <div class="form-group col-5 ">
+            <label for="idDoctor" placeholder="Seleccione un doctor">Seleccione un Doctor</label>
+            <select class="form-control" name="idDoctor" id="idDoctor" required></select>
+        </div>
+        <div class="form-group col-5">
+            <label for="fechaCita">Seleccione la fecha de la cita</label>
+            <input type="date" class="form-control" id="fechaCita" name="fechaCita" required>
+        </div>
+        <div class="form-group col-5">
+            <label for="padecimiento">Padecimiento</label>
+            <textarea class="form-control" id="padecimiento" name="padecimiento"
+                      placeholder="Indique cuales son sus padecimientos"
+                      style="height:200px"></textarea><br><br>
+
+            <input type="submit" name="btEnviar" value="Enviar datos" id="btEnviar" style="width:112px;" />
+            &nbsp;
+            <input type="reset" name="btRestablecer" value="Restablecer" id="btRestablecer" style="width:112px;" />
+        </div>
+
+    </div>
+
+</div>
