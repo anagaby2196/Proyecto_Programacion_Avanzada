@@ -5,38 +5,88 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/css/animate.css">
+
+    <link rel="stylesheet" href="~/Assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Assets/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="~/Assets/css/aos.css">
+
+    <link rel="stylesheet" href="~/Assets/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="~/Assets/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Assets/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="~/Assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/Assets/css/icomoon.css">
+    <link rel="stylesheet" href="~/Assets/css/style.css">
+   
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top sticky-top" id="ftco-navbar">
+        <div class="container-fluid">
+            
+                <a class="navbar-brand" href="/">Denta<span>Care</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
                 </button>
-                @Html.ActionLink("Registro", "Registro", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            
+
+
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item nav-link active">@Html.ActionLink("Citas Programadas", "Citas", "Home")</li>
+                        <li class="nav-item nav-link">@Html.ActionLink("Nosotros", "Nosotros", "Home")</li>
+                        <li class="nav-item nav-link">@Html.ActionLink("Servicios", "Servicios", "Home")</li>
+                        <li class="nav-item nav-link">@Html.ActionLink("Promociones de Temporada", "Promociones", "Home")</li>
+                        <li class="nav-item nav-link">@Html.ActionLink("Contacto", "Contacto", "Home")</li>
+                        
+                        <li class="nav-item cta"><a href="/contacto" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Make an Appointment</span></a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Citas Programadas", "Citas", "Home")</li>
-                    <li>@Html.ActionLink("Nosotros", "Nosotros", "Home")</li>
-                    <li>@Html.ActionLink("Servicios", "Servicios", "Home")</li>
-                    <li>@Html.ActionLink("Promociones de Temporada", "Promociones", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contacto", "Home")</li>
-                </ul>
+</nav>
+    <!-- END nav -->
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Registro", "Registro", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Citas Programadas", "Citas", "Home")</li>
+                        <li>@Html.ActionLink("Nosotros", "Nosotros", "Home")</li>
+                        <li>@Html.ActionLink("Servicios", "Servicios", "Home")</li>
+                        <li>@Html.ActionLink("Promociones de Temporada", "Promociones", "Home")</li>
+                        <li>@Html.ActionLink("Contacto", "Contacto", "Home")</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
-    </div>
+        </div>*@
+    
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+    </footer>
+</div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
