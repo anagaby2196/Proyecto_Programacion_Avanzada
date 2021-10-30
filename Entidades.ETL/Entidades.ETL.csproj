@@ -41,7 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CitasETL.cs" />
+    <Compile Include="CitasProgramadasETL.cs" />
+    <Compile Include="DireccionETL.cs" />
+    <Compile Include="DoctorETL.cs" />
+    <Compile Include="ExpedienteETL.cs" />
+    <Compile Include="PacienteETL.cs" />
+    <Compile Include="PersonaETL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReporteCitasETL.cs" />
+    <Compile Include="TipoUsuarioETL.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
