@@ -8,5 +8,10 @@ namespace Entidades.ETL
 {
     class DireccionETL
     {
+        public long CodigoDireccion { get; set; }
+        public string Provincia { get; set; }
+        public string Canton { get; set; }
+        public string Distrito { get; set; }
+        public string resena { get; set; }
     }
 }

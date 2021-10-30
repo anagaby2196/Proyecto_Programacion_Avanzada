@@ -8,5 +8,7 @@ namespace Entidades.ETL
 {
     class TipoUsuarioETL
     {
+        public int CodigoTipoUsuario { get; set; }
+        public string Descripcion { get; set; }
     }
 }

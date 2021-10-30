@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades.ETL
 {
-    class DoctorETL
+    class DoctorETL : PersonaETL
     {
+        public long CodigoDoctor { get; set; }
+        public long CodigoPersona { get; set; }
     }
 }
