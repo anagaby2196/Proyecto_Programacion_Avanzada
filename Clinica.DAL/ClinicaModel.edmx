@@ -1,0 +1,778 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ClinicaMedicaV1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="citas">
+          <Key>
+            <PropertyRef Name="codigoCitas" />
+          </Key>
+          <Property Name="codigoCitas" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dia" Type="date" />
+          <Property Name="hora" Type="time" Precision="7" />
+          <Property Name="estado" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="citasProgramadas">
+          <Key>
+            <PropertyRef Name="codigoCitaProgramadas" />
+          </Key>
+          <Property Name="codigoCitaProgramadas" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigoCitasFK" Type="bigint" Nullable="false" />
+          <Property Name="codigoPacienteFK" Type="bigint" Nullable="false" />
+          <Property Name="codigoDoctorFK" Type="bigint" Nullable="false" />
+          <Property Name="padecimiento" Type="varchar" MaxLength="50" />
+          <Property Name="tratamiento" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="dbo_persona">
+          <Key>
+            <PropertyRef Name="codigoDireccionFK" />
+          </Key>
+          <Property Name="codigoDireccionFK" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="direccion">
+          <Key>
+            <PropertyRef Name="codigoDireccion" />
+          </Key>
+          <Property Name="codigoDireccion" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="provincia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="canton" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="distrito" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="resena" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="doctor">
+          <Key>
+            <PropertyRef Name="codigoDoctor" />
+          </Key>
+          <Property Name="codigoDoctor" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigoPersonaFk" Type="bigint" />
+        </EntityType>
+        <EntityType Name="expediente">
+          <Key>
+            <PropertyRef Name="codigoExpediente" />
+          </Key>
+          <Property Name="codigoExpediente" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigoCitaProgramadasFK" Type="bigint" />
+        </EntityType>
+        <EntityType Name="paciente">
+          <Key>
+            <PropertyRef Name="codigoPaciente" />
+          </Key>
+          <Property Name="codigoPaciente" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigoPersonaFK" Type="bigint" />
+          <Property Name="codigoCitaProgramadaFK" Type="bigint" />
+          <Property Name="codigoExpedienteFK" Type="bigint" />
+        </EntityType>
+        <EntityType Name="persona">
+          <Key>
+            <PropertyRef Name="codigoPersona" />
+          </Key>
+          <Property Name="codigoPersona" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="primerApellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="segundoApellido" Type="varchar" MaxLength="50" />
+          <Property Name="identificacion" Type="varchar" MaxLength="20" />
+          <Property Name="telefono" Type="varchar" MaxLength="15" />
+          <Property Name="correo" Type="varchar" MaxLength="50" />
+          <Property Name="tipoUsuarioFK" Type="int" />
+          <Property Name="codigoDireccionFK" Type="bigint" />
+        </EntityType>
+        <EntityType Name="reporteCitas">
+          <Key>
+            <PropertyRef Name="codigoreporteCitas" />
+          </Key>
+          <Property Name="codigoreporteCitas" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigoExpedienteFK" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tipoUsuario">
+          <Key>
+            <PropertyRef Name="codigoTipoUsuario" />
+          </Key>
+          <Property Name="codigoTipoUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="codigoCitaProgramada_FK">
+          <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="0..1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="citasProgramadas">
+              <PropertyRef Name="codigoCitaProgramadas" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="codigoCitaProgramadaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoCitaProgramadas_FK">
+          <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="0..1" />
+          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="citasProgramadas">
+              <PropertyRef Name="codigoCitaProgramadas" />
+            </Principal>
+            <Dependent Role="expediente">
+              <PropertyRef Name="codigoCitaProgramadasFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoCitas_FK">
+          <End Role="citas" Type="Self.citas" Multiplicity="1" />
+          <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="citas">
+              <PropertyRef Name="codigoCitas" />
+            </Principal>
+            <Dependent Role="citasProgramadas">
+              <PropertyRef Name="codigoCitasFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoDireccion_FK">
+          <End Role="direccion" Type="Self.direccion" Multiplicity="0..1" />
+          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="direccion">
+              <PropertyRef Name="codigoDireccion" />
+            </Principal>
+            <Dependent Role="persona">
+              <PropertyRef Name="codigoDireccionFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoDoctor_FK">
+          <End Role="doctor" Type="Self.doctor" Multiplicity="1" />
+          <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctor">
+              <PropertyRef Name="codigoDoctor" />
+            </Principal>
+            <Dependent Role="citasProgramadas">
+              <PropertyRef Name="codigoDoctorFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoExpediente_FK">
+          <End Role="expediente" Type="Self.expediente" Multiplicity="0..1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="expediente">
+              <PropertyRef Name="codigoExpediente" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="codigoExpedienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoExpedienteFK_FK">
+          <End Role="expediente" Type="Self.expediente" Multiplicity="0..1" />
+          <End Role="reporteCitas" Type="Self.reporteCitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="expediente">
+              <PropertyRef Name="codigoExpediente" />
+            </Principal>
+            <Dependent Role="reporteCitas">
+              <PropertyRef Name="codigoExpedienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoPaciente_FK">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="codigoPaciente" />
+            </Principal>
+            <Dependent Role="citasProgramadas">
+              <PropertyRef Name="codigoPacienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoPersona_FK">
+          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+          <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="codigoPersona" />
+            </Principal>
+            <Dependent Role="doctor">
+              <PropertyRef Name="codigoPersonaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoPersonaPac_FK">
+          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="codigoPersona" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="codigoPersonaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tipoUsuario_FK">
+          <End Role="tipoUsuario" Type="Self.tipoUsuario" Multiplicity="0..1" />
+          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoUsuario">
+              <PropertyRef Name="codigoTipoUsuario" />
+            </Principal>
+            <Dependent Role="persona">
+              <PropertyRef Name="tipoUsuarioFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="actualizaDireccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigo" Type="bigint" Mode="In" />
+          <Parameter Name="provincia" Type="varchar" Mode="In" />
+          <Parameter Name="canton" Type="varchar" Mode="In" />
+          <Parameter Name="distrito" Type="varchar" Mode="In" />
+          <Parameter Name="resena" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="consultar_trabajadores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="consultarDireccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="eliminarDireccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigo" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="insertarDireccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="provincia" Type="varchar" Mode="In" />
+          <Parameter Name="canton" Type="varchar" Mode="In" />
+          <Parameter Name="distrito" Type="varchar" Mode="In" />
+          <Parameter Name="resena" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ultimaInsercion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="ClinicaMedicaV1ModelStoreContainer">
+          <EntitySet Name="citas" EntityType="Self.citas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="citasProgramadas" EntityType="Self.citasProgramadas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="direccion" EntityType="Self.direccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="doctor" EntityType="Self.doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="expediente" EntityType="Self.expediente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paciente" EntityType="Self.paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="persona" EntityType="Self.persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reporteCitas" EntityType="Self.reporteCitas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipoUsuario" EntityType="Self.tipoUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dbo_persona" EntityType="Self.dbo_persona" store:Type="Tables" store:Schema="dbo" store:Name="dbo.persona">
+            <DefiningQuery>SELECT 
+    [dbo_persona].[codigoDireccionFK] AS [codigoDireccionFK]
+    FROM [dbo].[dbo.persona] AS [dbo_persona]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="codigoCitaProgramada_FK" Association="Self.codigoCitaProgramada_FK">
+            <End Role="citasProgramadas" EntitySet="citasProgramadas" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <AssociationSet Name="codigoCitaProgramadas_FK" Association="Self.codigoCitaProgramadas_FK">
+            <End Role="citasProgramadas" EntitySet="citasProgramadas" />
+            <End Role="expediente" EntitySet="expediente" />
+          </AssociationSet>
+          <AssociationSet Name="codigoCitas_FK" Association="Self.codigoCitas_FK">
+            <End Role="citas" EntitySet="citas" />
+            <End Role="citasProgramadas" EntitySet="citasProgramadas" />
+          </AssociationSet>
+          <AssociationSet Name="codigoDireccion_FK" Association="Self.codigoDireccion_FK">
+            <End Role="direccion" EntitySet="direccion" />
+            <End Role="persona" EntitySet="persona" />
+          </AssociationSet>
+          <AssociationSet Name="codigoDoctor_FK" Association="Self.codigoDoctor_FK">
+            <End Role="doctor" EntitySet="doctor" />
+            <End Role="citasProgramadas" EntitySet="citasProgramadas" />
+          </AssociationSet>
+          <AssociationSet Name="codigoExpediente_FK" Association="Self.codigoExpediente_FK">
+            <End Role="expediente" EntitySet="expediente" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <AssociationSet Name="codigoExpedienteFK_FK" Association="Self.codigoExpedienteFK_FK">
+            <End Role="expediente" EntitySet="expediente" />
+            <End Role="reporteCitas" EntitySet="reporteCitas" />
+          </AssociationSet>
+          <AssociationSet Name="codigoPaciente_FK" Association="Self.codigoPaciente_FK">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="citasProgramadas" EntitySet="citasProgramadas" />
+          </AssociationSet>
+          <AssociationSet Name="codigoPersona_FK" Association="Self.codigoPersona_FK">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="doctor" EntitySet="doctor" />
+          </AssociationSet>
+          <AssociationSet Name="codigoPersonaPac_FK" Association="Self.codigoPersonaPac_FK">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <AssociationSet Name="tipoUsuario_FK" Association="Self.tipoUsuario_FK">
+            <End Role="tipoUsuario" EntitySet="tipoUsuario" />
+            <End Role="persona" EntitySet="persona" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClinicaMedicaV1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="citas">
+          <Key>
+            <PropertyRef Name="codigoCitas" />
+          </Key>
+          <Property Name="codigoCitas" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dia" Type="DateTime" Precision="0" />
+          <Property Name="hora" Type="Time" Precision="7" />
+          <Property Name="estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="citasProgramadas" Relationship="Self.codigoCitas_FK" FromRole="citas" ToRole="citasProgramadas" />
+        </EntityType>
+        <EntityType Name="citasProgramadas">
+          <Key>
+            <PropertyRef Name="codigoCitaProgramadas" />
+          </Key>
+          <Property Name="codigoCitaProgramadas" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigoCitasFK" Type="Int64" Nullable="false" />
+          <Property Name="codigoPacienteFK" Type="Int64" Nullable="false" />
+          <Property Name="codigoDoctorFK" Type="Int64" Nullable="false" />
+          <Property Name="padecimiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tratamiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="citas" Relationship="Self.codigoCitas_FK" FromRole="citasProgramadas" ToRole="citas" />
+          <NavigationProperty Name="paciente" Relationship="Self.codigoCitaProgramada_FK" FromRole="citasProgramadas" ToRole="paciente" />
+          <NavigationProperty Name="expediente" Relationship="Self.codigoCitaProgramadas_FK" FromRole="citasProgramadas" ToRole="expediente" />
+          <NavigationProperty Name="doctor" Relationship="Self.codigoDoctor_FK" FromRole="citasProgramadas" ToRole="doctor" />
+          <NavigationProperty Name="paciente1" Relationship="Self.codigoPaciente_FK" FromRole="citasProgramadas" ToRole="paciente" />
+        </EntityType>
+        <EntityType Name="direccion">
+          <Key>
+            <PropertyRef Name="codigoDireccion" />
+          </Key>
+          <Property Name="codigoDireccion" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="canton" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="distrito" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="resena" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="persona" Relationship="Self.codigoDireccion_FK" FromRole="direccion" ToRole="persona" />
+        </EntityType>
+        <EntityType Name="doctor">
+          <Key>
+            <PropertyRef Name="codigoDoctor" />
+          </Key>
+          <Property Name="codigoDoctor" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigoPersonaFk" Type="Int64" />
+          <NavigationProperty Name="citasProgramadas" Relationship="Self.codigoDoctor_FK" FromRole="doctor" ToRole="citasProgramadas" />
+          <NavigationProperty Name="persona" Relationship="Self.codigoPersona_FK" FromRole="doctor" ToRole="persona" />
+        </EntityType>
+        <EntityType Name="expediente">
+          <Key>
+            <PropertyRef Name="codigoExpediente" />
+          </Key>
+          <Property Name="codigoExpediente" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigoCitaProgramadasFK" Type="Int64" />
+          <NavigationProperty Name="citasProgramadas" Relationship="Self.codigoCitaProgramadas_FK" FromRole="expediente" ToRole="citasProgramadas" />
+          <NavigationProperty Name="paciente" Relationship="Self.codigoExpediente_FK" FromRole="expediente" ToRole="paciente" />
+          <NavigationProperty Name="reporteCitas" Relationship="Self.codigoExpedienteFK_FK" FromRole="expediente" ToRole="reporteCitas" />
+        </EntityType>
+        <EntityType Name="paciente">
+          <Key>
+            <PropertyRef Name="codigoPaciente" />
+          </Key>
+          <Property Name="codigoPaciente" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigoPersonaFK" Type="Int64" />
+          <Property Name="codigoCitaProgramadaFK" Type="Int64" />
+          <Property Name="codigoExpedienteFK" Type="Int64" />
+          <NavigationProperty Name="citasProgramadas" Relationship="Self.codigoCitaProgramada_FK" FromRole="paciente" ToRole="citasProgramadas" />
+          <NavigationProperty Name="citasProgramadas1" Relationship="Self.codigoPaciente_FK" FromRole="paciente" ToRole="citasProgramadas" />
+          <NavigationProperty Name="expediente" Relationship="Self.codigoExpediente_FK" FromRole="paciente" ToRole="expediente" />
+          <NavigationProperty Name="persona" Relationship="Self.codigoPersonaPac_FK" FromRole="paciente" ToRole="persona" />
+        </EntityType>
+        <EntityType Name="persona">
+          <Key>
+            <PropertyRef Name="codigoPersona" />
+          </Key>
+          <Property Name="codigoPersona" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="primerApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="segundoApellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipoUsuarioFK" Type="Int32" />
+          <Property Name="codigoDireccionFK" Type="Int64" />
+          <NavigationProperty Name="direccion" Relationship="Self.codigoDireccion_FK" FromRole="persona" ToRole="direccion" />
+          <NavigationProperty Name="doctor" Relationship="Self.codigoPersona_FK" FromRole="persona" ToRole="doctor" />
+          <NavigationProperty Name="paciente" Relationship="Self.codigoPersonaPac_FK" FromRole="persona" ToRole="paciente" />
+          <NavigationProperty Name="tipoUsuario" Relationship="Self.tipoUsuario_FK" FromRole="persona" ToRole="tipoUsuario" />
+        </EntityType>
+        <EntityType Name="reporteCitas">
+          <Key>
+            <PropertyRef Name="codigoreporteCitas" />
+          </Key>
+          <Property Name="codigoreporteCitas" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigoExpedienteFK" Type="Int64" />
+          <NavigationProperty Name="expediente" Relationship="Self.codigoExpedienteFK_FK" FromRole="reporteCitas" ToRole="expediente" />
+        </EntityType>
+        <EntityType Name="tipoUsuario">
+          <Key>
+            <PropertyRef Name="codigoTipoUsuario" />
+          </Key>
+          <Property Name="codigoTipoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="persona" Relationship="Self.tipoUsuario_FK" FromRole="tipoUsuario" ToRole="persona" />
+        </EntityType>
+        <EntityType Name="dbo_persona">
+          <Key>
+            <PropertyRef Name="codigoDireccionFK" />
+          </Key>
+          <Property Name="codigoDireccionFK" Type="Int64" Nullable="false" />
+        </EntityType>
+        <Association Name="codigoCitas_FK">
+          <End Role="citas" Type="Self.citas" Multiplicity="1" />
+          <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="citas">
+              <PropertyRef Name="codigoCitas" />
+            </Principal>
+            <Dependent Role="citasProgramadas">
+              <PropertyRef Name="codigoCitasFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoCitaProgramada_FK">
+          <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="0..1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="citasProgramadas">
+              <PropertyRef Name="codigoCitaProgramadas" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="codigoCitaProgramadaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoCitaProgramadas_FK">
+          <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="0..1" />
+          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="citasProgramadas">
+              <PropertyRef Name="codigoCitaProgramadas" />
+            </Principal>
+            <Dependent Role="expediente">
+              <PropertyRef Name="codigoCitaProgramadasFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoDoctor_FK">
+          <End Role="doctor" Type="Self.doctor" Multiplicity="1" />
+          <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="doctor">
+              <PropertyRef Name="codigoDoctor" />
+            </Principal>
+            <Dependent Role="citasProgramadas">
+              <PropertyRef Name="codigoDoctorFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoPaciente_FK">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="1" />
+          <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="codigoPaciente" />
+            </Principal>
+            <Dependent Role="citasProgramadas">
+              <PropertyRef Name="codigoPacienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoDireccion_FK">
+          <End Role="direccion" Type="Self.direccion" Multiplicity="0..1" />
+          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="direccion">
+              <PropertyRef Name="codigoDireccion" />
+            </Principal>
+            <Dependent Role="persona">
+              <PropertyRef Name="codigoDireccionFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoPersona_FK">
+          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+          <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="codigoPersona" />
+            </Principal>
+            <Dependent Role="doctor">
+              <PropertyRef Name="codigoPersonaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoExpediente_FK">
+          <End Role="expediente" Type="Self.expediente" Multiplicity="0..1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="expediente">
+              <PropertyRef Name="codigoExpediente" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="codigoExpedienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoExpedienteFK_FK">
+          <End Role="expediente" Type="Self.expediente" Multiplicity="0..1" />
+          <End Role="reporteCitas" Type="Self.reporteCitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="expediente">
+              <PropertyRef Name="codigoExpediente" />
+            </Principal>
+            <Dependent Role="reporteCitas">
+              <PropertyRef Name="codigoExpedienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoPersonaPac_FK">
+          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="codigoPersona" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="codigoPersonaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tipoUsuario_FK">
+          <End Role="tipoUsuario" Type="Self.tipoUsuario" Multiplicity="0..1" />
+          <End Role="persona" Type="Self.persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoUsuario">
+              <PropertyRef Name="codigoTipoUsuario" />
+            </Principal>
+            <Dependent Role="persona">
+              <PropertyRef Name="tipoUsuarioFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClinicaMedicaV1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="citas" EntityType="Self.citas" />
+          <EntitySet Name="citasProgramadas" EntityType="Self.citasProgramadas" />
+          <EntitySet Name="direccion" EntityType="Self.direccion" />
+          <EntitySet Name="doctor" EntityType="Self.doctor" />
+          <EntitySet Name="expediente" EntityType="Self.expediente" />
+          <EntitySet Name="paciente" EntityType="Self.paciente" />
+          <EntitySet Name="persona" EntityType="Self.persona" />
+          <EntitySet Name="reporteCitas" EntityType="Self.reporteCitas" />
+          <EntitySet Name="tipoUsuario" EntityType="Self.tipoUsuario" />
+          <EntitySet Name="dbo_persona" EntityType="Self.dbo_persona" />
+          <AssociationSet Name="codigoCitas_FK" Association="Self.codigoCitas_FK">
+            <End Role="citas" EntitySet="citas" />
+            <End Role="citasProgramadas" EntitySet="citasProgramadas" />
+          </AssociationSet>
+          <AssociationSet Name="codigoCitaProgramada_FK" Association="Self.codigoCitaProgramada_FK">
+            <End Role="citasProgramadas" EntitySet="citasProgramadas" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <AssociationSet Name="codigoCitaProgramadas_FK" Association="Self.codigoCitaProgramadas_FK">
+            <End Role="citasProgramadas" EntitySet="citasProgramadas" />
+            <End Role="expediente" EntitySet="expediente" />
+          </AssociationSet>
+          <AssociationSet Name="codigoDoctor_FK" Association="Self.codigoDoctor_FK">
+            <End Role="doctor" EntitySet="doctor" />
+            <End Role="citasProgramadas" EntitySet="citasProgramadas" />
+          </AssociationSet>
+          <AssociationSet Name="codigoPaciente_FK" Association="Self.codigoPaciente_FK">
+            <End Role="paciente" EntitySet="paciente" />
+            <End Role="citasProgramadas" EntitySet="citasProgramadas" />
+          </AssociationSet>
+          <AssociationSet Name="codigoDireccion_FK" Association="Self.codigoDireccion_FK">
+            <End Role="direccion" EntitySet="direccion" />
+            <End Role="persona" EntitySet="persona" />
+          </AssociationSet>
+          <AssociationSet Name="codigoPersona_FK" Association="Self.codigoPersona_FK">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="doctor" EntitySet="doctor" />
+          </AssociationSet>
+          <AssociationSet Name="codigoExpediente_FK" Association="Self.codigoExpediente_FK">
+            <End Role="expediente" EntitySet="expediente" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <AssociationSet Name="codigoExpedienteFK_FK" Association="Self.codigoExpedienteFK_FK">
+            <End Role="expediente" EntitySet="expediente" />
+            <End Role="reporteCitas" EntitySet="reporteCitas" />
+          </AssociationSet>
+          <AssociationSet Name="codigoPersonaPac_FK" Association="Self.codigoPersonaPac_FK">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
+          <AssociationSet Name="tipoUsuario_FK" Association="Self.tipoUsuario_FK">
+            <End Role="tipoUsuario" EntitySet="tipoUsuario" />
+            <End Role="persona" EntitySet="persona" />
+          </AssociationSet>
+          <FunctionImport Name="actualizaDireccion">
+            <Parameter Name="codigo" Mode="In" Type="Int64" />
+            <Parameter Name="provincia" Mode="In" Type="String" />
+            <Parameter Name="canton" Mode="In" Type="String" />
+            <Parameter Name="distrito" Mode="In" Type="String" />
+            <Parameter Name="resena" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="consultar_trabajadores" />
+          <FunctionImport Name="consultarDireccion" ReturnType="Collection(ClinicaMedicaV1Model.consultarDireccion_Result)" />
+          <FunctionImport Name="eliminarDireccion">
+            <Parameter Name="codigo" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="insertarDireccion">
+            <Parameter Name="provincia" Mode="In" Type="String" />
+            <Parameter Name="canton" Mode="In" Type="String" />
+            <Parameter Name="distrito" Mode="In" Type="String" />
+            <Parameter Name="resena" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ultimaInsercion" ReturnType="Collection(Int64)" />
+        </EntityContainer>
+        <ComplexType Name="consultarDireccion_Result">
+          <Property Type="Int64" Name="codigoDireccion" Nullable="false" />
+          <Property Type="String" Name="provincia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="canton" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="distrito" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="resena" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClinicaMedicaV1ModelStoreContainer" CdmEntityContainer="ClinicaMedicaV1Entities">
+          <EntitySetMapping Name="citas">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.citas">
+              <MappingFragment StoreEntitySet="citas">
+                <ScalarProperty Name="codigoCitas" ColumnName="codigoCitas" />
+                <ScalarProperty Name="dia" ColumnName="dia" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="citasProgramadas">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.citasProgramadas">
+              <MappingFragment StoreEntitySet="citasProgramadas">
+                <ScalarProperty Name="codigoCitaProgramadas" ColumnName="codigoCitaProgramadas" />
+                <ScalarProperty Name="codigoCitasFK" ColumnName="codigoCitasFK" />
+                <ScalarProperty Name="codigoPacienteFK" ColumnName="codigoPacienteFK" />
+                <ScalarProperty Name="codigoDoctorFK" ColumnName="codigoDoctorFK" />
+                <ScalarProperty Name="padecimiento" ColumnName="padecimiento" />
+                <ScalarProperty Name="tratamiento" ColumnName="tratamiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="direccion">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.direccion">
+              <MappingFragment StoreEntitySet="direccion">
+                <ScalarProperty Name="codigoDireccion" ColumnName="codigoDireccion" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="resena" ColumnName="resena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="doctor">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.doctor">
+              <MappingFragment StoreEntitySet="doctor">
+                <ScalarProperty Name="codigoDoctor" ColumnName="codigoDoctor" />
+                <ScalarProperty Name="codigoPersonaFk" ColumnName="codigoPersonaFk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="expediente">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.expediente">
+              <MappingFragment StoreEntitySet="expediente">
+                <ScalarProperty Name="codigoExpediente" ColumnName="codigoExpediente" />
+                <ScalarProperty Name="codigoCitaProgramadasFK" ColumnName="codigoCitaProgramadasFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paciente">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.paciente">
+              <MappingFragment StoreEntitySet="paciente">
+                <ScalarProperty Name="codigoPaciente" ColumnName="codigoPaciente" />
+                <ScalarProperty Name="codigoPersonaFK" ColumnName="codigoPersonaFK" />
+                <ScalarProperty Name="codigoCitaProgramadaFK" ColumnName="codigoCitaProgramadaFK" />
+                <ScalarProperty Name="codigoExpedienteFK" ColumnName="codigoExpedienteFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="persona">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.persona">
+              <MappingFragment StoreEntitySet="persona">
+                <ScalarProperty Name="codigoPersona" ColumnName="codigoPersona" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="primerApellido" ColumnName="primerApellido" />
+                <ScalarProperty Name="segundoApellido" ColumnName="segundoApellido" />
+                <ScalarProperty Name="identificacion" ColumnName="identificacion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="tipoUsuarioFK" ColumnName="tipoUsuarioFK" />
+                <ScalarProperty Name="codigoDireccionFK" ColumnName="codigoDireccionFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reporteCitas">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.reporteCitas">
+              <MappingFragment StoreEntitySet="reporteCitas">
+                <ScalarProperty Name="codigoreporteCitas" ColumnName="codigoreporteCitas" />
+                <ScalarProperty Name="codigoExpedienteFK" ColumnName="codigoExpedienteFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipoUsuario">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.tipoUsuario">
+              <MappingFragment StoreEntitySet="tipoUsuario">
+                <ScalarProperty Name="codigoTipoUsuario" ColumnName="codigoTipoUsuario" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dbo_persona">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.dbo_persona">
+              <MappingFragment StoreEntitySet="dbo_persona">
+                <ScalarProperty Name="codigoDireccionFK" ColumnName="codigoDireccionFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="actualizaDireccion" FunctionName="ClinicaMedicaV1Model.Store.actualizaDireccion" />
+          <FunctionImportMapping FunctionImportName="consultar_trabajadores" FunctionName="ClinicaMedicaV1Model.Store.consultar_trabajadores" />
+          <FunctionImportMapping FunctionImportName="consultarDireccion" FunctionName="ClinicaMedicaV1Model.Store.consultarDireccion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClinicaMedicaV1Model.consultarDireccion_Result">
+                <ScalarProperty Name="codigoDireccion" ColumnName="codigoDireccion" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="resena" ColumnName="resena" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="eliminarDireccion" FunctionName="ClinicaMedicaV1Model.Store.eliminarDireccion" />
+          <FunctionImportMapping FunctionImportName="insertarDireccion" FunctionName="ClinicaMedicaV1Model.Store.insertarDireccion" />
+          <FunctionImportMapping FunctionImportName="ultimaInsercion" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercion" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -43,5 +43,15 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Clinica.DAL\Clinica.DAL.csproj">
+      <Project>{ee7e1385-8c51-471f-b120-bfc6acb7dc9a}</Project>
+      <Name>Clinica.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidades.ETL\Entidades.ETL.csproj">
+      <Project>{cf9a132d-041d-458a-ab0b-cfa31a4f0b68}</Project>
+      <Name>Entidades.ETL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
