@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades.ETL
 {
-    class CitasETL
+    public class CitasETL
     {
         public long CodigoCitas { get; set; }
         public DateTime Dia { get; set; }

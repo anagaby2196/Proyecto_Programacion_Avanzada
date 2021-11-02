@@ -51,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReporteCitasETL.cs" />
     <Compile Include="TipoUsuarioETL.cs" />
+    <Compile Include="UsuarioETL.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

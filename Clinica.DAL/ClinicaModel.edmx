@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ClinicaMedicaV1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ClinicaMedicaV1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="citas">
           <Key>
             <PropertyRef Name="codigoCitas" />
@@ -24,14 +24,6 @@
           <Property Name="codigoDoctorFK" Type="bigint" Nullable="false" />
           <Property Name="padecimiento" Type="varchar" MaxLength="50" />
           <Property Name="tratamiento" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="dbo_persona">
-          <Key>
-            <PropertyRef Name="codigoDireccionFK" />
-          </Key>
-          <Property Name="codigoDireccionFK" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="direccion">
           <Key>
@@ -93,6 +85,14 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
           </Key>
           <Property Name="codigoTipoUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="codigoUsuario" />
+          </Key>
+          <Property Name="codigoUsuario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contrasena" Type="varchar" MaxLength="12" />
+          <Property Name="codigoPersonaFK" Type="bigint" />
         </EntityType>
         <Association Name="codigoCitaProgramada_FK">
           <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="0..1" />
@@ -202,6 +202,18 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="codigoPersona_UFK">
+          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="codigoPersona" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="codigoPersonaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="codigoPersonaPac_FK">
           <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
           <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
@@ -233,18 +245,75 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
           <Parameter Name="distrito" Type="varchar" Mode="In" />
           <Parameter Name="resena" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="consultar_trabajadores" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="actualizaPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="primerApellido" Type="varchar" Mode="In" />
+          <Parameter Name="segundoApellido" Type="varchar" Mode="In" />
+          <Parameter Name="identificacion" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+          <Parameter Name="tipoUsuarioFK" Type="int" Mode="In" />
+        </Function>
         <Function Name="consultarDireccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="consultarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="identificacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="consultarPersonas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="eliminarDireccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codigo" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="eliminarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="identificacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="insertarDireccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="provincia" Type="varchar" Mode="In" />
           <Parameter Name="canton" Type="varchar" Mode="In" />
           <Parameter Name="distrito" Type="varchar" Mode="In" />
           <Parameter Name="resena" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="insertarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="PRIMERAPELLIDO" Type="varchar" Mode="In" />
+          <Parameter Name="segundoApellido" Type="varchar" Mode="In" />
+          <Parameter Name="identificacion" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+          <Parameter Name="tipoUsuarioFK" Type="int" Mode="In" />
+          <Parameter Name="CODIGODIRECCIONFK" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ultimaInsercion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ultimaInsercionPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ClinicaMedicaV1ModelStoreContainer">
           <EntitySet Name="citas" EntityType="Self.citas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="citasProgramadas" EntityType="Self.citasProgramadas" Schema="dbo" store:Type="Tables" />
@@ -255,11 +324,7 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
           <EntitySet Name="persona" EntityType="Self.persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reporteCitas" EntityType="Self.reporteCitas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tipoUsuario" EntityType="Self.tipoUsuario" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="dbo_persona" EntityType="Self.dbo_persona" store:Type="Tables" store:Schema="dbo" store:Name="dbo.persona">
-            <DefiningQuery>SELECT 
-    [dbo_persona].[codigoDireccionFK] AS [codigoDireccionFK]
-    FROM [dbo].[dbo.persona] AS [dbo_persona]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="codigoCitaProgramada_FK" Association="Self.codigoCitaProgramada_FK">
             <End Role="citasProgramadas" EntitySet="citasProgramadas" />
             <End Role="paciente" EntitySet="paciente" />
@@ -296,6 +361,10 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
             <End Role="persona" EntitySet="persona" />
             <End Role="doctor" EntitySet="doctor" />
           </AssociationSet>
+          <AssociationSet Name="codigoPersona_UFK" Association="Self.codigoPersona_UFK">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
           <AssociationSet Name="codigoPersonaPac_FK" Association="Self.codigoPersonaPac_FK">
             <End Role="persona" EntitySet="persona" />
             <End Role="paciente" EntitySet="paciente" />
@@ -305,8 +374,7 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
             <End Role="persona" EntitySet="persona" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClinicaMedicaV1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -396,6 +464,7 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
           <NavigationProperty Name="doctor" Relationship="Self.codigoPersona_FK" FromRole="persona" ToRole="doctor" />
           <NavigationProperty Name="paciente" Relationship="Self.codigoPersonaPac_FK" FromRole="persona" ToRole="paciente" />
           <NavigationProperty Name="tipoUsuario" Relationship="Self.tipoUsuario_FK" FromRole="persona" ToRole="tipoUsuario" />
+          <NavigationProperty Name="usuarios" Relationship="ClinicaMedicaV1Model.codigoPersona_UFK" FromRole="persona" ToRole="usuarios" />
         </EntityType>
         <EntityType Name="reporteCitas">
           <Key>
@@ -412,12 +481,6 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
           <Property Name="codigoTipoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="persona" Relationship="Self.tipoUsuario_FK" FromRole="tipoUsuario" ToRole="persona" />
-        </EntityType>
-        <EntityType Name="dbo_persona">
-          <Key>
-            <PropertyRef Name="codigoDireccionFK" />
-          </Key>
-          <Property Name="codigoDireccionFK" Type="Int64" Nullable="false" />
         </EntityType>
         <Association Name="codigoCitas_FK">
           <End Role="citas" Type="Self.citas" Multiplicity="1" />
@@ -561,7 +624,6 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
           <EntitySet Name="persona" EntityType="Self.persona" />
           <EntitySet Name="reporteCitas" EntityType="Self.reporteCitas" />
           <EntitySet Name="tipoUsuario" EntityType="Self.tipoUsuario" />
-          <EntitySet Name="dbo_persona" EntityType="Self.dbo_persona" />
           <AssociationSet Name="codigoCitas_FK" Association="Self.codigoCitas_FK">
             <End Role="citas" EntitySet="citas" />
             <End Role="citasProgramadas" EntitySet="citasProgramadas" />
@@ -616,7 +678,7 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
           <FunctionImport Name="consultar_trabajadores" />
           <FunctionImport Name="consultarDireccion" ReturnType="Collection(ClinicaMedicaV1Model.consultarDireccion_Result)" />
           <FunctionImport Name="eliminarDireccion">
-            <Parameter Name="codigo" Mode="In" Type="Int64" />
+          <Parameter Name="codigo" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="insertarDireccion">
             <Parameter Name="provincia" Mode="In" Type="String" />
@@ -625,6 +687,68 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
             <Parameter Name="resena" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ultimaInsercion" ReturnType="Collection(Int64)" />
+          <EntitySet Name="usuarios" EntityType="ClinicaMedicaV1Model.usuarios" />
+          <AssociationSet Name="codigoPersona_UFK" Association="ClinicaMedicaV1Model.codigoPersona_UFK">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ClinicaMedicaV1Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ClinicaMedicaV1Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="actualizaPersona">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="primerApellido" Mode="In" Type="String" />
+            <Parameter Name="segundoApellido" Mode="In" Type="String" />
+            <Parameter Name="identificacion" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="tipoUsuarioFK" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="consultarPersona">
+          <Parameter Name="identificacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="consultarPersonas" />
+          <FunctionImport Name="eliminarPersona">
+          <Parameter Name="identificacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="insertarPersona">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="PRIMERAPELLIDO" Mode="In" Type="String" />
+            <Parameter Name="segundoApellido" Mode="In" Type="String" />
+            <Parameter Name="identificacion" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="tipoUsuarioFK" Mode="In" Type="Int32" />
+            <Parameter Name="CODIGODIRECCIONFK" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ultimaInsercionPersona" ReturnType="Collection(Int64)" />
         </EntityContainer>
         <ComplexType Name="consultarDireccion_Result">
           <Property Type="Int64" Name="codigoDireccion" Nullable="false" />
@@ -632,6 +756,38 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
           <Property Type="String" Name="canton" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="distrito" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="resena" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="codigoUsuario" />
+          </Key>
+          <Property Name="codigoUsuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contrasena" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="codigoPersonaFK" Type="Int64" />
+          <NavigationProperty Name="persona" Relationship="ClinicaMedicaV1Model.codigoPersona_UFK" FromRole="usuarios" ToRole="persona" />
+        </EntityType>
+        <Association Name="codigoPersona_UFK">
+          <End Type="ClinicaMedicaV1Model.persona" Role="persona" Multiplicity="0..1" />
+          <End Type="ClinicaMedicaV1Model.usuarios" Role="usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="codigoPersona" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="codigoPersonaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -729,15 +885,7 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="dbo_persona">
-            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.dbo_persona">
-              <MappingFragment StoreEntitySet="dbo_persona">
-                <ScalarProperty Name="codigoDireccionFK" ColumnName="codigoDireccionFK" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="actualizaDireccion" FunctionName="ClinicaMedicaV1Model.Store.actualizaDireccion" />
-          <FunctionImportMapping FunctionImportName="consultar_trabajadores" FunctionName="ClinicaMedicaV1Model.Store.consultar_trabajadores" />
           <FunctionImportMapping FunctionImportName="consultarDireccion" FunctionName="ClinicaMedicaV1Model.Store.consultarDireccion">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ClinicaMedicaV1Model.consultarDireccion_Result">
@@ -752,6 +900,45 @@ warning 6002: The table/view 'ClinicaMedicaV1.dbo.dbo.persona' does not have a p
           <FunctionImportMapping FunctionImportName="eliminarDireccion" FunctionName="ClinicaMedicaV1Model.Store.eliminarDireccion" />
           <FunctionImportMapping FunctionImportName="insertarDireccion" FunctionName="ClinicaMedicaV1Model.Store.insertarDireccion" />
           <FunctionImportMapping FunctionImportName="ultimaInsercion" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercion" />
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="codigoPersonaFK" ColumnName="codigoPersonaFK" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="codigoUsuario" ColumnName="codigoUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ClinicaMedicaV1Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ClinicaMedicaV1Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ClinicaMedicaV1Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ClinicaMedicaV1Model.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClinicaMedicaV1Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ClinicaMedicaV1Model.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClinicaMedicaV1Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ClinicaMedicaV1Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ClinicaMedicaV1Model.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="actualizaPersona" FunctionName="ClinicaMedicaV1Model.Store.actualizaPersona" />
+          <FunctionImportMapping FunctionImportName="consultarPersona" FunctionName="ClinicaMedicaV1Model.Store.consultarPersona" />
+          <FunctionImportMapping FunctionImportName="consultarPersonas" FunctionName="ClinicaMedicaV1Model.Store.consultarPersonas" />
+          <FunctionImportMapping FunctionImportName="eliminarPersona" FunctionName="ClinicaMedicaV1Model.Store.eliminarPersona" />
+          <FunctionImportMapping FunctionImportName="insertarPersona" FunctionName="ClinicaMedicaV1Model.Store.insertarPersona" />
+          <FunctionImportMapping FunctionImportName="ultimaInsercionPersona" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercionPersona" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

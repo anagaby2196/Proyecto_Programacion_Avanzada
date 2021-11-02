@@ -19,6 +19,7 @@ namespace Clinica.DAL
         {
             this.doctor = new HashSet<doctor>();
             this.paciente = new HashSet<paciente>();
+            this.usuarios = new HashSet<usuarios>();
         }
     
         public long codigoPersona { get; set; }
@@ -37,5 +38,7 @@ namespace Clinica.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<paciente> paciente { get; set; }
         public virtual tipoUsuario tipoUsuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<usuarios> usuarios { get; set; }
     }
 }

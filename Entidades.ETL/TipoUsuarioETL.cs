@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades.ETL
 {
-    class TipoUsuarioETL
+    public class TipoUsuarioETL
     {
         public int CodigoTipoUsuario { get; set; }
         public string Descripcion { get; set; }

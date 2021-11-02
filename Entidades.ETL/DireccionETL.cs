@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades.ETL
 {
-    class DireccionETL
+    public class DireccionETL
     {
         public long CodigoDireccion { get; set; }
         public string Provincia { get; set; }

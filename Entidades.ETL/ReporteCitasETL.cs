@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades.ETL
 {
-    class ReporteCitasETL : ExpedienteETL
+    public class ReporteCitasETL : ExpedienteETL
     {
         public long CodigoRporteCita { get; set; }
         public long CodigoExpediente { get; set; }

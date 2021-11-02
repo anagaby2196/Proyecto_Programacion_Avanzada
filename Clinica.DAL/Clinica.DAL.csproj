@@ -79,9 +79,6 @@
     <Compile Include="consultarDireccion_Result.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="dbo_persona.cs">
-      <DependentUpon>ClinicaModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="direccion.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
@@ -107,7 +104,16 @@
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ReporteCitasDAL.cs" />
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ClinicaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>ClinicaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="tipoUsuario.cs">
+      <DependentUpon>ClinicaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usuarios.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

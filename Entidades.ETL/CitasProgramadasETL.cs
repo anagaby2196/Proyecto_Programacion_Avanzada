@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades.ETL
 {
-    class CitasProgramadasETL
+    public class CitasProgramadasETL
     {
         public long CodigoCitasProgramadas { get; set; }
         public long CodigoCita { get; set; }
