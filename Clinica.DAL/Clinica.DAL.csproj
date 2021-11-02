@@ -56,9 +56,11 @@
     <Compile Include="citas.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CitasDAL.cs" />
     <Compile Include="citasProgramadas.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CitasProgramadasDAL.cs" />
     <Compile Include="ClinicaModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,22 +85,28 @@
     <Compile Include="direccion.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DireccionDAL.cs" />
     <Compile Include="doctor.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DoctorDAL.cs" />
     <Compile Include="expediente.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ExpedienteDAL.cs" />
     <Compile Include="paciente.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PacienteDAL.cs" />
     <Compile Include="persona.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PersonaDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="reporteCitas.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReporteCitasDAL.cs" />
     <Compile Include="tipoUsuario.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>
