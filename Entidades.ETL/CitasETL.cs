@@ -10,7 +10,7 @@ namespace Entidades.ETL
     {
         public long CodigoCitas { get; set; }
         public DateTime Dia { get; set; }
-        public DateTime Hora { get; set; }
+        public TimeSpan Hora { get; set; }
         public string Estado { get; set; }
     }
 }

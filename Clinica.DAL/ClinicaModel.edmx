@@ -254,6 +254,9 @@
           <Parameter Name="correo" Type="varchar" Mode="In" />
           <Parameter Name="tipoUsuarioFK" Type="int" Mode="In" />
         </Function>
+        <Function Name="consultarCita" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="estado" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="consultarDireccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="consultarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="identificacion" Type="varchar" Mode="In" />
@@ -749,6 +752,9 @@
             <Parameter Name="CODIGODIRECCIONFK" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="ultimaInsercionPersona" ReturnType="Collection(Int64)" />
+          <FunctionImport Name="consultarCita" ReturnType="Collection(ClinicaMedicaV1Model.consultarCita_Result)">
+            <Parameter Name="estado" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="consultarDireccion_Result">
           <Property Type="Int64" Name="codigoDireccion" Nullable="false" />
@@ -788,6 +794,12 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="consultarCita_Result">
+          <Property Type="Int64" Name="codigoCitas" Nullable="false" />
+          <Property Type="DateTime" Name="dia" Nullable="true" />
+          <Property Type="Time" Name="hora" Nullable="true" />
+          <Property Type="String" Name="estado" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -939,6 +951,16 @@
           <FunctionImportMapping FunctionImportName="eliminarPersona" FunctionName="ClinicaMedicaV1Model.Store.eliminarPersona" />
           <FunctionImportMapping FunctionImportName="insertarPersona" FunctionName="ClinicaMedicaV1Model.Store.insertarPersona" />
           <FunctionImportMapping FunctionImportName="ultimaInsercionPersona" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercionPersona" />
+          <FunctionImportMapping FunctionImportName="consultarCita" FunctionName="ClinicaMedicaV1Model.Store.consultarCita">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClinicaMedicaV1Model.consultarCita_Result">
+                <ScalarProperty Name="codigoCitas" ColumnName="codigoCitas" />
+                <ScalarProperty Name="dia" ColumnName="dia" />
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

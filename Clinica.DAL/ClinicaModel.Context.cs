@@ -308,5 +308,14 @@ namespace Clinica.DAL
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("ultimaInsercionPersona");
         }
+    
+        public virtual ObjectResult<consultarCita_Result> consultarCita(string estado)
+        {
+            var estadoParameter = estado != null ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<consultarCita_Result>("consultarCita", estadoParameter);
+        }
     }
 }

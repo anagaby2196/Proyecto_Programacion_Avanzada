@@ -76,6 +76,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClinicaModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="consultarCita_Result.cs">
+      <DependentUpon>ClinicaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="consultarDireccion_Result.cs">
       <DependentUpon>ClinicaModel.tt</DependentUpon>
     </Compile>

@@ -55,5 +55,19 @@ namespace Clinica.DAL
             }
                 
         }
+
+        public Boolean ActualizarPersona(PersonaETL persona)
+        {
+            using (var contexto = new ClinicaMedicaV1Entities())
+            {
+                contexto.actualizaPersona(persona.Nombre,persona.PrimerApellido,persona.SegundoApellido,
+                                            persona.Identificacion,persona.Telefono,persona.Correo,persona.TipoUsuario);
+                return true;
+            }
+        }
+
+
+
+        //
     }
 }
