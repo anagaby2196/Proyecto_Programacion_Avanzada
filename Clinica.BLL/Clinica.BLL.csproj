@@ -41,7 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CitasBLL.cs" />
+    <Compile Include="CitasProgramadasBLL.cs" />
+    <Compile Include="DireccioBLL.cs" />
+    <Compile Include="DoctorBLL.cs" />
+    <Compile Include="ExpedienteBLL.cs" />
+    <Compile Include="PacienteBLL.cs" />
+    <Compile Include="PersonaBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReporteCitasBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Clinica.DAL\Clinica.DAL.csproj">
