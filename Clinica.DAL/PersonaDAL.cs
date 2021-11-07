@@ -5,6 +5,8 @@ using System.Text;
 using Entidades.ETL;
 using System.Threading.Tasks;
 
+
+
 namespace Clinica.DAL
 {
     public class PersonaDAL
@@ -23,19 +25,14 @@ namespace Clinica.DAL
                 {
 
                     throw;
-                }
-                
-
+                } 
             }
-
         }
-
         public Boolean AgregarUsuario(PersonaETL persona,UsuarioETL usuario)
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
-                try
-                {
+                try                {
                     var ultimaPersona = (from x in contexto.persona select x).LastOrDefault();
 
                     usuarios usr = new usuarios();
@@ -48,14 +45,10 @@ namespace Clinica.DAL
                 }
                 catch (Exception)
                 {
-
                     throw;
-                }
-                
-            }
-                
+                }                
+            }                
         }
-
         public Boolean ActualizarPersona(PersonaETL persona)
         {
             using (var contexto = new ClinicaMedicaV1Entities())
@@ -65,9 +58,5 @@ namespace Clinica.DAL
                 return true;
             }
         }
-
-
-
-        //
     }
 }
