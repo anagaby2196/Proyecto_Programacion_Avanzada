@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <link href="~/Assets/css/login.css" rel="stylesheet" id="bootstrap-css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top sticky-top" id="ftco-navbar">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="/">Denta<span>Care</span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item nav-link active">@Html.ActionLink("Citas Programadas", "Citas", "Home")</li>
+                    <li class="nav-item nav-link">@Html.ActionLink("Nosotros", "Nosotros", "Home")</li>
+                    <li class="nav-item nav-link">@Html.ActionLink("Servicios", "Servicios", "Home")</li>
+                    <li class="nav-item nav-link">@Html.ActionLink("Promociones de Temporada", "Promociones", "Home")</li>
+                    <li class="nav-item nav-link">@Html.ActionLink("Contacto", "Contacto", "Home")</li>
+
+                    <li class="nav-item nav-link">@Html.ActionLink("Login", "Login", "Login")</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="login-reg-panel" style="position: relative;">
+        <div class="login-info-box">
+            <h2>Have an account?</h2>
+            <p>Lorem ipsum dolor sit amet</p>
+            <label id="label-register" for="log-reg-show">Login</label>
+            <input type="radio" name="active-log-panel" id="log-reg-show" checked="checked">
+        </div>
+
+        <div class="register-info-box">
+            <h2>Don't have an account?</h2>
+            <p>Lorem ipsum dolor sit amet</p>
+            <label id="label-login" for="log-login-show">Register</label>
+            <input type="radio" name="active-log-panel" id="log-login-show">
+        </div>
+
+        <div class="white-panel">
+            <div class="login-show">
+                <h2>LOGIN</h2>
+                <input type="text" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <input type="button" value="Login">
+                <a href="">Forgot password?</a>
+            </div>
+
+            <div class="register-show container">
+                <div class="row justify-content-lg-center">
+                    <h2 style="color:black;" class="align-content-center">REGISTER</h2>
+                </div>
+                <div class="row">
+                    <div class="register-show col-6">
+                        <input type="text" placeholder="Nombre">
+                        <input type="text" placeholder="Primer Apellido">
+                        <input type="text" placeholder="Segundo Apellido">
+                        <input type="text" placeholder="Identidicacion">
+                    </div>
+                    <div class="register-show col-6">
+                        <input type="text" placeholder="Telefono">
+                        <input type="text" placeholder="Email">
+                        <input type="password" placeholder="Password">
+                        <input type="password" placeholder="Confirm Password">
+                        <input type="button" value="Register">
+                    </div>
+                </div>
+            </div>
+                
+            
+            
+        </div>
+    </div>
+    <script src="~/Assets/js/login.js"></script>
+</body>
+</html>

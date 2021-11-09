@@ -127,6 +127,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,6 +147,7 @@
     <Content Include="Assets\css\icomoon.css" />
     <Content Include="Assets\css\ionicons.min.css" />
     <Content Include="Assets\css\jquery.timepicker.css" />
+    <Content Include="Assets\css\login.css" />
     <Content Include="Assets\css\magnific-popup.css" />
     <Content Include="Assets\css\open-iconic-bootstrap.min.css" />
     <Content Include="Assets\css\owl.carousel.min.css" />
@@ -196,6 +198,7 @@
     <Content Include="Assets\js\jquery.stellar.min.js" />
     <Content Include="Assets\js\jquery.timepicker.min.js" />
     <Content Include="Assets\js\jquery.waypoints.min.js" />
+    <Content Include="Assets\js\login.js" />
     <Content Include="Assets\js\main.js" />
     <Content Include="Assets\js\owl.carousel.min.js" />
     <Content Include="Assets\js\popper.min.js" />
@@ -348,6 +351,7 @@
     <Content Include="Views\Home\Nosotros.cshtml" />
     <Content Include="Views\Home\Citas.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
