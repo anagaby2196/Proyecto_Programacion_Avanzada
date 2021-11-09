@@ -1,4 +1,4 @@
-﻿
+﻿@model Entidades.ETL.PersonaETL
 @{
     ViewBag.Title = "Login";
     Layout = null;
@@ -21,6 +21,7 @@
 
 </head>
 <body>
+
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top sticky-top" id="ftco-navbar">
         <div class="container-fluid">
 
@@ -45,6 +46,10 @@
             </div>
         </div>
     </nav>
+
+    <div>
+        <h1 style="color:blue">@ViewBag.nombre </h1>
+    </div>
 
 
     <div class="login-reg-panel" style="position: relative;">
@@ -71,29 +76,32 @@
                 <a href="">Forgot password?</a>
             </div>
 
-            <div class="register-show container">
-                <div class="row justify-content-lg-center">
-                    <h2 style="color:black;" class="align-content-center">REGISTER</h2>
-                </div>
-                <div class="row">
-                    <div class="register-show col-6">
-                        <input type="text" placeholder="Nombre">
-                        <input type="text" placeholder="Primer Apellido">
-                        <input type="text" placeholder="Segundo Apellido">
-                        <input type="text" placeholder="Identidicacion">
+            <form method="POST">
+
+                <div class="register-show container">
+                    <div class="row justify-content-lg-center">
+                        <h2 style="color:black;" class="align-content-center">REGISTER</h2>
                     </div>
-                    <div class="register-show col-6">
-                        <input type="text" placeholder="Telefono">
-                        <input type="text" placeholder="Email">
-                        <input type="password" placeholder="Password">
-                        <input type="password" placeholder="Confirm Password">
-                        <input type="button" value="Register">
+                    <div class="row">
+                        <div class="register-show col-6">
+                            @Html.TextBoxFor(model => Model.Nombre,new { @placeholder = "Nombre", @class = "cntrol"})
+                            @Html.TextBoxFor(model => Model.PrimerApellido, new { @placeholder = "Primer Apellido", @class = "cntrol" } )
+                            @Html.TextBoxFor(model => Model.SegundoApellido, new { @placeholder = "Segundo Apellido", @class = "cntrol" } )
+                            @Html.TextBoxFor(model => Model.Identificacion, new { @placeholder = "Identificacion", @class = "cntrol" } )
+                        </div>
+                        <div class="register-show col-6">
+                            @Html.TextBoxFor(model => Model.Telefono, new { @placeholder = "Telefono", @class = "cntrol" } )
+                            @Html.TextBoxFor(model => Model.Correo, new { @placeholder = "Correo", @class = "cntrol" } )
+                            <input type="password" placeholder="Contraseña">
+                            <input type="password" name="Contrasena" placeholder="Confirm Password">
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-                
-            
-            
+            </form>
+
+
+
         </div>
     </div>
     <script src="~/Assets/js/login.js"></script>
