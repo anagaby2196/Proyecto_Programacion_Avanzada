@@ -178,6 +178,8 @@
     <Content Include="Assets\images\image_5.jpg" />
     <Content Include="Assets\images\image_6.jpg" />
     <Content Include="Assets\images\loc.png" />
+    <Content Include="Assets\images\Logo Clínica Médica del Pie.png" />
+    <Content Include="Assets\images\pedicura-medica-running-portada2-1556794999.jpg" />
     <Content Include="Assets\images\person_1.jpg" />
     <Content Include="Assets\images\person_2.jpg" />
     <Content Include="Assets\images\person_3.jpg" />
@@ -353,9 +355,6 @@
     <Content Include="Views\Home\Citas.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Shared\_LayoutDoctor.cshtml" />
-    <Content Include="Views\Paciente\ConsultaPacientes.cshtml" />
-    <Content Include="Views\Paciente\_DetallePaciente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
