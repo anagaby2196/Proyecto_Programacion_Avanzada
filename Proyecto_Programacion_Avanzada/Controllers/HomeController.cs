@@ -8,7 +8,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Registro()
+        public ActionResult Index()
         {
             return View();
         }
