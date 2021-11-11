@@ -44,20 +44,23 @@
         <div class="container">
 
             <a class="navbar-brand" href="/">
-            <img src="../../Assets/images/Logo Clínica Médica del Pie.png" width="270" height="115"></a>
+            <img src="../../Assets/images/Logo Clínica Médica del Pie.png" width="270" height="115" style="margin-right:15%"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>Home</b></a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>About</b></a></li>
-                    <li class="nav-item"><a href="services.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>Services</b></a></li>
-                    <li class="nav-item"><a href="doctors.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>Doctors</b></a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>Blog</b></a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>Contact</b></a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>Login</b></a></li>
+                    
+                    <li class="nav-item" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium; margin-right:2%"><b>@Html.ActionLink("Nosotros", "Nosotros", "Home")</b></li>
+                    <li class="nav-item" style="color: lightseagreen; font-family: 'Copperplate Gothic'; font-size: medium; margin-right: 2% "><b>@Html.ActionLink("Servicios", "Servicios", "Home")</b></li>
+                    <li class="nav-item" style="color: lightseagreen; font-family: 'Copperplate Gothic'; font-size: medium; margin-right: 2% "><b>@Html.ActionLink("Promociones", "Promociones", "Home")</b></li>
+                    <li class="nav-item" style="color: lightseagreen; font-family: 'Copperplate Gothic'; font-size: medium; margin-right: 2% "><b>@Html.ActionLink("Contacto", "Contacto", "Home")</b></li>
+                    <li class="nav-item" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>@Html.ActionLink("Login", "Login", "Login")</b></li>
+
+
+
+
                 </ul>
             </div>
         </div>
