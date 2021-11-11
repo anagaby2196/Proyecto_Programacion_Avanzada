@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Clínica Médica del Pie</title>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/css/animate.css">
+
+    <link rel="stylesheet" href="~/Assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Assets/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="~/Assets/css/aos.css">
+
+    <link rel="stylesheet" href="~/Assets/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="~/Assets/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Assets/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="~/Assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/Assets/css/icomoon.css">
+    <link rel="stylesheet" href="~/Assets/css/style.css">
+
+</head>
+<body style="background-image: url('../../Assets/images/pedicura-medica-running-portada2-1556794999.jpg'); background-size: cover; background-repeat: no-repeat">
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+
+            <a class="navbar-brand" href="/">
+            <img src="../../Assets/images/Logo Clínica Médica del Pie.png" width="270" height="115"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a href="index.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>Home</b></a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>About</b></a></li>
+                    <li class="nav-item"><a href="services.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>Services</b></a></li>
+                    <li class="nav-item"><a href="doctors.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>Doctors</b></a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>Blog</b></a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>Contact</b></a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link" style="color:lightseagreen; font-family:'Copperplate Gothic'; font-size:medium"><b>Login</b></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="home-slider owl-carousel">
+        <div class="slider-item" ;">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text align-items-center" data-scrollax-parent="true">
+                    <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Modern Dentistry in a Calm and Relaxed Environment</h1>
+                        <p class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><a href="#" class="btn btn-primary px-4 py-3">Make an Appointment</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @*<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top sticky-top" id="ftco-navbar">
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href="/">Clínica Médica del Pie</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
+
+
+
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav ml-auto">
+
+                        <li class="nav-item nav-link active">@Html.ActionLink("Citas Programadas", "Citas", "Home")</li>
+                        <li class="nav-item nav-link">@Html.ActionLink("Nosotros", "Nosotros", "Home")</li>
+                        <li class="nav-item nav-link">@Html.ActionLink("Servicios", "Servicios", "Home")</li>
+                        <li class="nav-item nav-link">@Html.ActionLink("Promociones de Temporada", "Promociones", "Home")</li>
+                        <li class="nav-item nav-link">@Html.ActionLink("Contacto", "Contacto", "Home")</li>
+
+                        <li class="nav-item nav-link">@Html.ActionLink("Login", "Login", "Login")</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>*@
+
+
+   
+    <script src="~/Assets/js/login.js"></script>
+</body>
+</html>
