@@ -358,6 +358,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Paciente\ConsultaPacientes.cshtml" />
     <Content Include="Views\Paciente\_DetallePaciente.cshtml" />
+    <Content Include="Views\Shared\_LayoutDoctor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
