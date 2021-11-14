@@ -4,14 +4,18 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ClinicaMedicaV1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ClinicaMedicaV1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="citas">
           <Key>
             <PropertyRef Name="codigoCitas" />
           </Key>
           <Property Name="codigoCitas" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="dia" Type="date" />
-          <Property Name="hora" Type="time" Precision="7" />
+          <Property Name="asunto" Type="varchar" MaxLength="50" />
+          <Property Name="descripsion" Type="varchar" MaxLength="100" />
+          <Property Name="horaInicio" Type="datetime" />
+          <Property Name="horafin" Type="datetime" />
+          <Property Name="temaColor" Type="varchar" MaxLength="15" />
+          <Property Name="esTodoElDia" Type="bit" />
           <Property Name="estado" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="citasProgramadas">
@@ -377,7 +381,8 @@
             <End Role="persona" EntitySet="persona" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClinicaMedicaV1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -386,8 +391,12 @@
             <PropertyRef Name="codigoCitas" />
           </Key>
           <Property Name="codigoCitas" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="dia" Type="DateTime" Precision="0" />
-          <Property Name="hora" Type="Time" Precision="7" />
+          <Property Name="asunto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripsion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="horaInicio" Type="DateTime" Precision="3" />
+          <Property Name="horafin" Type="DateTime" Precision="3" />
+          <Property Name="temaColor" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="esTodoElDia" Type="Boolean" />
           <Property Name="estado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="citasProgramadas" Relationship="Self.codigoCitas_FK" FromRole="citas" ToRole="citasProgramadas" />
         </EntityType>
@@ -466,8 +475,8 @@
           <NavigationProperty Name="direccion" Relationship="Self.codigoDireccion_FK" FromRole="persona" ToRole="direccion" />
           <NavigationProperty Name="doctor" Relationship="Self.codigoPersona_FK" FromRole="persona" ToRole="doctor" />
           <NavigationProperty Name="paciente" Relationship="Self.codigoPersonaPac_FK" FromRole="persona" ToRole="paciente" />
+          <NavigationProperty Name="usuarios" Relationship="Self.codigoPersona_UFK" FromRole="persona" ToRole="usuarios" />
           <NavigationProperty Name="tipoUsuario" Relationship="Self.tipoUsuario_FK" FromRole="persona" ToRole="tipoUsuario" />
-          <NavigationProperty Name="usuarios" Relationship="ClinicaMedicaV1Model.codigoPersona_UFK" FromRole="persona" ToRole="usuarios" />
         </EntityType>
         <EntityType Name="reporteCitas">
           <Key>
@@ -484,6 +493,15 @@
           <Property Name="codigoTipoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="persona" Relationship="Self.tipoUsuario_FK" FromRole="tipoUsuario" ToRole="persona" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="codigoUsuario" />
+          </Key>
+          <Property Name="codigoUsuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contrasena" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="codigoPersonaFK" Type="Int64" />
+          <NavigationProperty Name="persona" Relationship="Self.codigoPersona_UFK" FromRole="usuarios" ToRole="persona" />
         </EntityType>
         <Association Name="codigoCitas_FK">
           <End Role="citas" Type="Self.citas" Multiplicity="1" />
@@ -605,6 +623,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="codigoPersona_UFK">
+          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="codigoPersona" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="codigoPersonaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="tipoUsuario_FK">
           <End Role="tipoUsuario" Type="Self.tipoUsuario" Multiplicity="0..1" />
           <End Role="persona" Type="Self.persona" Multiplicity="*" />
@@ -627,6 +657,7 @@
           <EntitySet Name="persona" EntityType="Self.persona" />
           <EntitySet Name="reporteCitas" EntityType="Self.reporteCitas" />
           <EntitySet Name="tipoUsuario" EntityType="Self.tipoUsuario" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" />
           <AssociationSet Name="codigoCitas_FK" Association="Self.codigoCitas_FK">
             <End Role="citas" EntitySet="citas" />
             <End Role="citasProgramadas" EntitySet="citasProgramadas" />
@@ -667,6 +698,10 @@
             <End Role="persona" EntitySet="persona" />
             <End Role="paciente" EntitySet="paciente" />
           </AssociationSet>
+          <AssociationSet Name="codigoPersona_UFK" Association="Self.codigoPersona_UFK">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
           <AssociationSet Name="tipoUsuario_FK" Association="Self.tipoUsuario_FK">
             <End Role="tipoUsuario" EntitySet="tipoUsuario" />
             <End Role="persona" EntitySet="persona" />
@@ -678,10 +713,28 @@
             <Parameter Name="distrito" Mode="In" Type="String" />
             <Parameter Name="resena" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="consultar_trabajadores" />
+          <FunctionImport Name="actualizaPersona">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="primerApellido" Mode="In" Type="String" />
+            <Parameter Name="segundoApellido" Mode="In" Type="String" />
+            <Parameter Name="identificacion" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="tipoUsuarioFK" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="consultarCita" ReturnType="Collection(ClinicaMedicaV1Model.consultarCita_Result)">
+            <Parameter Name="estado" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="consultarDireccion" ReturnType="Collection(ClinicaMedicaV1Model.consultarDireccion_Result)" />
+          <FunctionImport Name="consultarPersona">
+            <Parameter Name="identificacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="consultarPersonas" />
           <FunctionImport Name="eliminarDireccion">
-          <Parameter Name="codigo" Mode="In" Type="Int64" />
+            <Parameter Name="codigo" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="eliminarPersona">
+            <Parameter Name="identificacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="insertarDireccion">
             <Parameter Name="provincia" Mode="In" Type="String" />
@@ -689,12 +742,16 @@
             <Parameter Name="distrito" Mode="In" Type="String" />
             <Parameter Name="resena" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="ultimaInsercion" ReturnType="Collection(Int64)" />
-          <EntitySet Name="usuarios" EntityType="ClinicaMedicaV1Model.usuarios" />
-          <AssociationSet Name="codigoPersona_UFK" Association="ClinicaMedicaV1Model.codigoPersona_UFK">
-            <End Role="persona" EntitySet="persona" />
-            <End Role="usuarios" EntitySet="usuarios" />
-          </AssociationSet>
+          <FunctionImport Name="insertarPersona">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="PRIMERAPELLIDO" Mode="In" Type="String" />
+            <Parameter Name="segundoApellido" Mode="In" Type="String" />
+            <Parameter Name="identificacion" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="tipoUsuarioFK" Mode="In" Type="Int32" />
+            <Parameter Name="CODIGODIRECCIONFK" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -725,37 +782,19 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="actualizaPersona">
-            <Parameter Name="nombre" Mode="In" Type="String" />
-            <Parameter Name="primerApellido" Mode="In" Type="String" />
-            <Parameter Name="segundoApellido" Mode="In" Type="String" />
-            <Parameter Name="identificacion" Mode="In" Type="String" />
-            <Parameter Name="telefono" Mode="In" Type="String" />
-            <Parameter Name="correo" Mode="In" Type="String" />
-            <Parameter Name="tipoUsuarioFK" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="consultarPersona">
-          <Parameter Name="identificacion" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="consultarPersonas" />
-          <FunctionImport Name="eliminarPersona">
-          <Parameter Name="identificacion" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="insertarPersona">
-            <Parameter Name="nombre" Mode="In" Type="String" />
-            <Parameter Name="PRIMERAPELLIDO" Mode="In" Type="String" />
-            <Parameter Name="segundoApellido" Mode="In" Type="String" />
-            <Parameter Name="identificacion" Mode="In" Type="String" />
-            <Parameter Name="telefono" Mode="In" Type="String" />
-            <Parameter Name="correo" Mode="In" Type="String" />
-            <Parameter Name="tipoUsuarioFK" Mode="In" Type="Int32" />
-            <Parameter Name="CODIGODIRECCIONFK" Mode="In" Type="Int64" />
-          </FunctionImport>
+          <FunctionImport Name="ultimaInsercion" ReturnType="Collection(Int64)" />
           <FunctionImport Name="ultimaInsercionPersona" ReturnType="Collection(Int64)" />
-          <FunctionImport Name="consultarCita" ReturnType="Collection(ClinicaMedicaV1Model.consultarCita_Result)">
-            <Parameter Name="estado" Mode="In" Type="String" />
-          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="consultarCita_Result">
+          <Property Type="Int64" Name="codigoCitas" Nullable="false" />
+          <Property Type="String" Name="asunto" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="descripsion" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="horaInicio" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="horafin" Nullable="true" Precision="23" />
+          <Property Type="String" Name="temaColor" Nullable="true" MaxLength="15" />
+          <Property Type="Boolean" Name="esTodoElDia" Nullable="true" />
+          <Property Type="String" Name="estado" Nullable="true" MaxLength="10" />
+        </ComplexType>
         <ComplexType Name="consultarDireccion_Result">
           <Property Type="Int64" Name="codigoDireccion" Nullable="false" />
           <Property Type="String" Name="provincia" Nullable="false" MaxLength="50" />
@@ -763,27 +802,6 @@
           <Property Type="String" Name="distrito" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="resena" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="usuarios">
-          <Key>
-            <PropertyRef Name="codigoUsuario" />
-          </Key>
-          <Property Name="codigoUsuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="contrasena" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="codigoPersonaFK" Type="Int64" />
-          <NavigationProperty Name="persona" Relationship="ClinicaMedicaV1Model.codigoPersona_UFK" FromRole="usuarios" ToRole="persona" />
-        </EntityType>
-        <Association Name="codigoPersona_UFK">
-          <End Type="ClinicaMedicaV1Model.persona" Role="persona" Multiplicity="0..1" />
-          <End Type="ClinicaMedicaV1Model.usuarios" Role="usuarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="persona">
-              <PropertyRef Name="codigoPersona" />
-            </Principal>
-            <Dependent Role="usuarios">
-              <PropertyRef Name="codigoPersonaFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -795,12 +813,6 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="consultarCita_Result">
-          <Property Type="Int64" Name="codigoCitas" Nullable="false" />
-          <Property Type="DateTime" Name="dia" Nullable="true" />
-          <Property Type="Time" Name="hora" Nullable="true" />
-          <Property Type="String" Name="estado" Nullable="true" MaxLength="10" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -811,8 +823,12 @@
             <EntityTypeMapping TypeName="ClinicaMedicaV1Model.citas">
               <MappingFragment StoreEntitySet="citas">
                 <ScalarProperty Name="codigoCitas" ColumnName="codigoCitas" />
-                <ScalarProperty Name="dia" ColumnName="dia" />
-                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="asunto" ColumnName="asunto" />
+                <ScalarProperty Name="descripsion" ColumnName="descripsion" />
+                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+                <ScalarProperty Name="horafin" ColumnName="horafin" />
+                <ScalarProperty Name="temaColor" ColumnName="temaColor" />
+                <ScalarProperty Name="esTodoElDia" ColumnName="esTodoElDia" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -897,7 +913,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.usuarios">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="codigoUsuario" ColumnName="codigoUsuario" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="codigoPersonaFK" ColumnName="codigoPersonaFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="actualizaDireccion" FunctionName="ClinicaMedicaV1Model.Store.actualizaDireccion" />
+          <FunctionImportMapping FunctionImportName="actualizaPersona" FunctionName="ClinicaMedicaV1Model.Store.actualizaPersona" />
+          <FunctionImportMapping FunctionImportName="consultarCita" FunctionName="ClinicaMedicaV1Model.Store.consultarCita">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClinicaMedicaV1Model.consultarCita_Result">
+                <ScalarProperty Name="codigoCitas" ColumnName="codigoCitas" />
+                <ScalarProperty Name="asunto" ColumnName="asunto" />
+                <ScalarProperty Name="descripsion" ColumnName="descripsion" />
+                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+                <ScalarProperty Name="horafin" ColumnName="horafin" />
+                <ScalarProperty Name="temaColor" ColumnName="temaColor" />
+                <ScalarProperty Name="esTodoElDia" ColumnName="esTodoElDia" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="consultarDireccion" FunctionName="ClinicaMedicaV1Model.Store.consultarDireccion">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ClinicaMedicaV1Model.consultarDireccion_Result">
@@ -909,18 +949,12 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="consultarPersona" FunctionName="ClinicaMedicaV1Model.Store.consultarPersona" />
+          <FunctionImportMapping FunctionImportName="consultarPersonas" FunctionName="ClinicaMedicaV1Model.Store.consultarPersonas" />
           <FunctionImportMapping FunctionImportName="eliminarDireccion" FunctionName="ClinicaMedicaV1Model.Store.eliminarDireccion" />
+          <FunctionImportMapping FunctionImportName="eliminarPersona" FunctionName="ClinicaMedicaV1Model.Store.eliminarPersona" />
           <FunctionImportMapping FunctionImportName="insertarDireccion" FunctionName="ClinicaMedicaV1Model.Store.insertarDireccion" />
-          <FunctionImportMapping FunctionImportName="ultimaInsercion" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercion" />
-          <EntitySetMapping Name="usuarios">
-            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.usuarios">
-              <MappingFragment StoreEntitySet="usuarios">
-                <ScalarProperty Name="codigoPersonaFK" ColumnName="codigoPersonaFK" />
-                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-                <ScalarProperty Name="codigoUsuario" ColumnName="codigoUsuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="insertarPersona" FunctionName="ClinicaMedicaV1Model.Store.insertarPersona" />
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ClinicaMedicaV1Model.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ClinicaMedicaV1Model.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ClinicaMedicaV1Model.Store.sp_dropdiagram" />
@@ -945,22 +979,8 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ClinicaMedicaV1Model.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ClinicaMedicaV1Model.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="actualizaPersona" FunctionName="ClinicaMedicaV1Model.Store.actualizaPersona" />
-          <FunctionImportMapping FunctionImportName="consultarPersona" FunctionName="ClinicaMedicaV1Model.Store.consultarPersona" />
-          <FunctionImportMapping FunctionImportName="consultarPersonas" FunctionName="ClinicaMedicaV1Model.Store.consultarPersonas" />
-          <FunctionImportMapping FunctionImportName="eliminarPersona" FunctionName="ClinicaMedicaV1Model.Store.eliminarPersona" />
-          <FunctionImportMapping FunctionImportName="insertarPersona" FunctionName="ClinicaMedicaV1Model.Store.insertarPersona" />
+          <FunctionImportMapping FunctionImportName="ultimaInsercion" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercion" />
           <FunctionImportMapping FunctionImportName="ultimaInsercionPersona" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercionPersona" />
-          <FunctionImportMapping FunctionImportName="consultarCita" FunctionName="ClinicaMedicaV1Model.Store.consultarCita">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ClinicaMedicaV1Model.consultarCita_Result">
-                <ScalarProperty Name="codigoCitas" ColumnName="codigoCitas" />
-                <ScalarProperty Name="dia" ColumnName="dia" />
-                <ScalarProperty Name="hora" ColumnName="hora" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

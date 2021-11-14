@@ -37,8 +37,8 @@ namespace Clinica.DAL
         public virtual ICollection<doctor> doctor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<paciente> paciente { get; set; }
-        public virtual tipoUsuario tipoUsuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuarios> usuarios { get; set; }
+        public virtual tipoUsuario tipoUsuario { get; set; }
     }
 }
