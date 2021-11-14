@@ -1,45 +1,140 @@
 ﻿@{
-    ViewBag.Title = "Promociones";
+    Layout = null;
 }
 
-<h1><u> PROMOCIONES DE TEMPORADA</u></h1>
-<section id="noticias" class="noticias margen-interno">
-    <div class="articulos">
-        <article class="article">
-            <img src="imagenes/PROMO1.jpg" alt="">
-            <p style="text-align: justify; margin-left: 2%; margin-right: 2%; margin-top: 1%;">
-                GRAN
-                PROMOCIÓN!!!
-                20% de descuento en el Tratamiento Láser para Hongos en las Uñas.
-                Promoción válida del 23 al 28 de Agosto.
-                Estamos ubicados en el Centro Médico San Antonio, Heredia Centro.
-                Contáctenos al: 2261-1342 / 6266-3572
-                **El pago debe realizarse en efectivo**.
-            </p>
-        </article>
-        <article class="article">
-            <img src="imagenes/PROMO2.jpg" alt="">
-            <p style="text-align: justify; margin-left: 2%; margin-right: 2%; margin-top: 1%;">
-                GRAN
-                PROMOCIÓN!!!
-                30% de descuento en la Cirugía de Uña Encarnada.
-                Promoción válida del 23 al 28 de Agosto.
-                Estamos ubicados en el Centro Médico San Antonio, Heredia Centro.
-                Contáctenos al: 2261-1342 / 6266-3572
-                **El pago debe realizarse en efectivo**.
-            </p>
-        </article>
-        <article class="article">
-            <img src="imagenes/PROMO3.jpg" alt="">
-            <p style="text-align: justify; margin-left: 2%; margin-right: 2%; margin-top: 1%;">
-                ⚠️BLACK WEEK⚠️
-                GRAN PROMOCIÓN!!!
-                Obtenga un 20% de descuento en los servicios seleccionados.
-                Promoción válida del 23 al 28 de Noviembre.
-                Estamos ubicados en el Centro Médico San Antonio, Heredia Centro.
-                Contáctenos al: 2261-1342 / 6266-3572
-                **El pago debe realizarse en efectivo**.
-            </p>
-        </article>
-    </div>
-</section>
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Clínica Médica del Pie - Promociones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="~/Assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/css/animate.css">
+    <link rel="stylesheet" href="~/Assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Assets/css/aos.css">
+    <link rel="stylesheet" href="~/Assets/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/Assets/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Assets/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="~/Assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/Assets/css/icomoon.css">
+    <link rel="stylesheet" href="~/Assets/css/style.css">
+    <a href="/"><img src="~/Assets/images/Banner.jpg" width="2114"></img></a>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5%">@Html.ActionLink("Nosotros", "Nosotros", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Servicios", "Servicios", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Promociones", "Promociones", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Contacto", "Contacto", "Home", null, new { @style = "color:#000000" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+        @*<section class="home-slider owl-carousel">
+            <div class="slider-item" style="background-image: url('../../Assets/images/pedicura-medica-running-portada2-1556794999.jpg');">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row slider-text align-items-center" data-scrollax-parent="true">
+                        <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" style="margin-left:-25%">¡Medicina moderna en un entorno tranquilo y relajado!</h1>
+                            <p data-scrollax="properties: {translateY: '30%', opacity: 1.6}" style="margin-left:-25%"><b>@Html.ActionLink("LOGIN", "Login", "Login", null, new { @class = "btn btn-primary px-4 py-3" })</b></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slider-item" style="background-image: url('../../Assets/images/bigstock-doctor-dermatologist-examines-74599093_6_928x621.jpeg');">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row slider-text align-items-center" data-scrollax-parent="true">
+                        <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+                            <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" style="margin-left:-25%">¡Un cuidado a sus pies excelente y profesional!</h1>
+                            <p data-scrollax="properties: {translateY: '30%', opacity: 1.6}" style="margin-left:-25%"><b>@Html.ActionLink("LOGIN", "Login", "Login", null, new { @class = "btn btn-primary px-4 py-3" })</b></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br>
+
+        <div class="row d-flex no-gutters">
+            <div class="col-md-6 img" style="background-image: url('../../Assets/images/Muñeca Clínica Médica del Pie.png')">
+            </div>
+            <div class="col-md-6 d-flex">
+                <div class="about-wrap">
+                    <div class="heading-section heading-section-white mb-5 ftco-animate">
+                        <h2 class="mb-2">Atención médica con un toque personal</h2>
+                    </div>
+                    <div class="list-services d-flex ftco-animate">
+                        <div class="icon d-flex justify-content-center align-items-center">
+                            <span class="icon-check2"></span>
+                        </div>
+                        <div class="text">
+                            <h3>Médico con experiencia</h3>
+                            <p>Se cuenta con un médico con más 10 años de experiencia.</p>
+                        </div>
+                    </div>
+                    <div class="list-services d-flex ftco-animate">
+                        <div class="icon d-flex justify-content-center align-items-center">
+                            <span class="icon-check2"></span>
+                        </div>
+                        <div class="text">
+                            <h3>Innovación Tecnológica</h3>
+                            <p>Se cuenta con máquinas de última tecnología.</p>
+                        </div>
+                    </div>
+                    <div class="list-services d-flex ftco-animate">
+                        <div class="icon d-flex justify-content-center align-items-center">
+                            <span class="icon-check2"></span>
+                        </div>
+                        <div class="text">
+                            <h3>Instalaciones agradables</h3>
+                            <p>La clínica cuenta con una infraestructura agradable y que se adecua con las necesidades de los pacientes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <br>
+
+
+
+        <script src="~/Assets/js/login.js"></script>
+        <script src="~/Assets/js/jquery.min.js"></script>
+        <script src="~/Assets/js/jquery-migrate-3.0.1.min.js"></script>
+        <script src="~/Assets/js/popper.min.js"></script>
+        <script src="~/Assets/js/bootstrap.min.js"></script>
+        <script src="~/Assets/js/jquery.easing.1.3.js"></script>
+        <script src="~/Assets/js/jquery.waypoints.min.js"></script>
+        <script src="~/Assets/js/jquery.stellar.min.js"></script>
+        <script src="~/Assets/js/owl.carousel.min.js"></script>
+        <script src="~/Assets/js/jquery.magnific-popup.min.js"></script>
+        <script src="~/Assets/js/aos.js"></script>
+        <script src="~/Assets/js/jquery.animateNumber.min.js"></script>
+        <script src="~/Assets/js/bootstrap-datepicker.js"></script>
+        <script src="~/Assets/js/jquery.timepicker.min.js"></script>
+        <script src="~/Assets/js/scrollax.min.js"></script>
+        <script src="~/Assets/js/google-map.js"></script>
+        <script src="~/Assets/js/main.js"></script>
+
+         <footer class="col-md-12 text-center">
+            <p style="font-family:'Eras ITC'">&copy; @DateTime.Now.Year / Desarrollado por: Jhonsel Josué Díaz Chacón - Kevin Martín Fallas Alfaro - Ana Gabriela Mora Salas</p>
+        </footer>
+</body>
+</html>
