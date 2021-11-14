@@ -357,7 +357,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Promociones.cshtml" />
     <Content Include="Views\Home\Servicios.cshtml" />
-    <Content Include="Views\Home\Registro.cshtml" />
     <Content Include="Views\Home\Nosotros.cshtml" />
     <Content Include="Views\Home\Citas.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
