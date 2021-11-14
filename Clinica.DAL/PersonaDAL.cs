@@ -16,9 +16,8 @@ namespace Clinica.DAL
             using (var contexto = new ClinicaMedicaV1Entities())
             {
                 try
-                {
-                    contexto.insertarPersona(persona.Nombre, persona.PrimerApellido, persona.SegundoApellido,
-                    persona.Identificacion, persona.Telefono, persona.Correo, persona.TipoUsuario, persona.CodigoDireccion);
+                {   
+                    contexto.insertarPersona(persona.Nombre, persona.PrimerApellido, persona.SegundoApellido,persona.Identificacion, persona.Telefono, persona.Correo, (int)persona.TipoUsuario, (long)persona.CodigoDireccion);
                     return true;
                 }
                 catch (Exception)

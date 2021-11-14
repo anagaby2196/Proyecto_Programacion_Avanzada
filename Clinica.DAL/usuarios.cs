@@ -17,7 +17,10 @@ namespace Clinica.DAL
         public long codigoUsuario { get; set; }
         public string contrasena { get; set; }
         public Nullable<long> codigoPersonaFK { get; set; }
+        public Nullable<bool> estado { get; set; }
+        public Nullable<int> tipoUsuarioFK { get; set; }
     
         public virtual persona persona { get; set; }
+        public virtual tipoUsuario tipoUsuario { get; set; }
     }
 }

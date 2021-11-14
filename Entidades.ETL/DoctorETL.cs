@@ -10,5 +10,7 @@ namespace Entidades.ETL
     {
         public long CodigoDoctor { get; set; }
         public long CodigoPersona { get; set; }
+
+        public Boolean Estado { get; set; }
     }
 }

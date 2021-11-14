@@ -27,6 +27,7 @@ namespace Clinica.DAL
         public long codigoDoctorFK { get; set; }
         public string padecimiento { get; set; }
         public string tratamiento { get; set; }
+        public Nullable<bool> estado { get; set; }
     
         public virtual citas citas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

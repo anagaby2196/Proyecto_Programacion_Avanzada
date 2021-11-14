@@ -20,6 +20,6 @@ namespace Clinica.DAL
         public Nullable<System.DateTime> horafin { get; set; }
         public string temaColor { get; set; }
         public Nullable<bool> esTodoElDia { get; set; }
-        public string estado { get; set; }
+        public Nullable<bool> estado { get; set; }
     }
 }

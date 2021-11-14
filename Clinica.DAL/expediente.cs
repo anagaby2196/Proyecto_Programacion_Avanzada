@@ -23,11 +23,13 @@ namespace Clinica.DAL
     
         public long codigoExpediente { get; set; }
         public Nullable<long> codigoCitaProgramadasFK { get; set; }
+        public Nullable<long> codigoPersonaFK { get; set; }
     
         public virtual citasProgramadas citasProgramadas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<paciente> paciente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<reporteCitas> reporteCitas { get; set; }
+        public virtual persona persona { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace Entidades.ETL
         public DateTime HoraFin { get; set; }
         public string TemaColor { get; set; }
         public Boolean esTodoElDia { get; set; }
-        public string Estado { get; set; }
+        public Boolean Estado { get; set; }
     }
 }
 

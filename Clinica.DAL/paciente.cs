@@ -24,6 +24,7 @@ namespace Clinica.DAL
         public Nullable<long> codigoPersonaFK { get; set; }
         public Nullable<long> codigoCitaProgramadaFK { get; set; }
         public Nullable<long> codigoExpedienteFK { get; set; }
+        public Nullable<bool> estado { get; set; }
     
         public virtual citasProgramadas citasProgramadas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
