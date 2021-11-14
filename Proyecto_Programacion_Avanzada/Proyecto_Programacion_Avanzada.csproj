@@ -169,10 +169,14 @@
     <Content Include="Assets\images\bg_2.jpg" />
     <Content Include="Assets\images\bg_3.jpg" />
     <Content Include="Assets\images\bigstock-doctor-dermatologist-examines-74599093_6_928x621.jpeg" />
+    <Content Include="Assets\images\Desintoxicacion.png" />
+    <Content Include="Assets\images\Foot-care.png" />
+    <Content Include="Assets\images\foot-print.png" />
     <Content Include="Assets\images\gallery-1.jpg" />
     <Content Include="Assets\images\gallery-2.jpg" />
     <Content Include="Assets\images\gallery-3.jpg" />
     <Content Include="Assets\images\gallery-4.jpg" />
+    <Content Include="Assets\images\Icono-medicina.png" />
     <Content Include="Assets\images\image_1.jpg" />
     <Content Include="Assets\images\image_2.jpg" />
     <Content Include="Assets\images\image_3.jpg" />
@@ -181,6 +185,7 @@
     <Content Include="Assets\images\image_6.jpg" />
     <Content Include="Assets\images\loc.png" />
     <Content Include="Assets\images\Logo Clínica Médica del Pie-fondo.png" />
+    <Content Include="Assets\images\Muñeca Clínica Médica del Pie.png" />
     <Content Include="Assets\images\pedicura-medica-running-portada2-1556794999.jpg" />
     <Content Include="Assets\images\person_1.jpg" />
     <Content Include="Assets\images\person_2.jpg" />
