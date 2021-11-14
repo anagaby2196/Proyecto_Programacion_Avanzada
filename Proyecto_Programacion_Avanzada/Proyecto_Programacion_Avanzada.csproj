@@ -165,6 +165,7 @@
     <Content Include="Assets\fonts\open-iconic\open-iconic.svg" />
     <Content Include="Assets\images\about-2.jpg" />
     <Content Include="Assets\images\about.jpg" />
+    <Content Include="Assets\images\Banner.jpg" />
     <Content Include="Assets\images\bg_1.jpg" />
     <Content Include="Assets\images\bg_2.jpg" />
     <Content Include="Assets\images\bg_3.jpg" />
