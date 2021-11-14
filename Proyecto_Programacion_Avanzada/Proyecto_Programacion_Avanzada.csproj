@@ -170,6 +170,7 @@
     <Content Include="Assets\images\bg_2.jpg" />
     <Content Include="Assets\images\bg_3.jpg" />
     <Content Include="Assets\images\bigstock-doctor-dermatologist-examines-74599093_6_928x621.jpeg" />
+    <Content Include="Assets\images\Cuidado-de-los-pies-1-650x450.jpg" />
     <Content Include="Assets\images\Desintoxicacion.png" />
     <Content Include="Assets\images\Foot-care.png" />
     <Content Include="Assets\images\foot-print.png" />
@@ -358,7 +359,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Promociones.cshtml" />
     <Content Include="Views\Home\Servicios.cshtml" />
-    <Content Include="Views\Home\Nosotros.cshtml" />
     <Content Include="Views\Home\Citas.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
@@ -367,6 +367,7 @@
     <Content Include="Views\Paciente\_DetallePaciente.cshtml" />
     <Content Include="Views\Shared\_LayoutDoctor.cshtml" />
     <Content Include="Views\Citas\Index.cshtml" />
+    <Content Include="Views\Home\Nosotros.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
