@@ -17,13 +17,13 @@ namespace Clinica.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tipoUsuario()
         {
-            this.persona = new HashSet<persona>();
+            this.usuarios = new HashSet<usuarios>();
         }
     
         public int codigoTipoUsuario { get; set; }
         public string descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<persona> persona { get; set; }
+        public virtual ICollection<usuarios> usuarios { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace Clinica.DAL
         public Nullable<System.DateTime> horafin { get; set; }
         public string temaColor { get; set; }
         public Nullable<bool> esTodoElDia { get; set; }
-        public string estado { get; set; }
+        public Nullable<bool> estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<citasProgramadas> citasProgramadas { get; set; }

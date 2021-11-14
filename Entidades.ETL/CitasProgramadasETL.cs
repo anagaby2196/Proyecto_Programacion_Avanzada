@@ -14,5 +14,6 @@ namespace Entidades.ETL
         public long CodigoDoctor { get; set; }
         public string Padecimiento { get; set; }
         public string Tratamiento { get; set; }
+        public Boolean Estado { get; set; }
     }
 }

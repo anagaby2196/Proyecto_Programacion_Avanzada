@@ -28,7 +28,7 @@ namespace Clinica.DAL
                         HoraFin = (DateTime)item.horafin,
                         TemaColor = item.temaColor,
                         esTodoElDia = (bool)item.esTodoElDia,
-                        Estado = item.estado
+                        Estado = (bool)item.estado
                         //Asunto
                         //Descripcion
                         //HoraInicio

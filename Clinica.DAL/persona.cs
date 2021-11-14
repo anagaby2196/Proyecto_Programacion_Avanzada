@@ -17,7 +17,7 @@ namespace Clinica.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public persona()
         {
-            this.doctor = new HashSet<doctor>();
+            this.expediente = new HashSet<expediente>();
             this.paciente = new HashSet<paciente>();
             this.usuarios = new HashSet<usuarios>();
         }
@@ -31,14 +31,14 @@ namespace Clinica.DAL
         public string correo { get; set; }
         public Nullable<int> tipoUsuarioFK { get; set; }
         public Nullable<long> codigoDireccionFK { get; set; }
+        public Nullable<bool> estado { get; set; }
     
         public virtual direccion direccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<doctor> doctor { get; set; }
+        public virtual ICollection<expediente> expediente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<paciente> paciente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<usuarios> usuarios { get; set; }
-        public virtual tipoUsuario tipoUsuario { get; set; }
     }
 }

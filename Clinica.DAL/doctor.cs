@@ -22,9 +22,9 @@ namespace Clinica.DAL
     
         public long codigoDoctor { get; set; }
         public Nullable<long> codigoPersonaFk { get; set; }
+        public Nullable<bool> estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<citasProgramadas> citasProgramadas { get; set; }
-        public virtual persona persona { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Entidades.ETL
     {
         public long CodigoUsuario { get; set; }
         public long CodigoPersona { get; set; }
-
         public string Contrasena { get; set; }
+        public Boolean Estado { get; set; }
     }
 }
