@@ -63,14 +63,65 @@ namespace Clinica.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("actualizaDireccion", codigoParameter, provinciaParameter, cantonParameter, distritoParameter, resenaParameter);
         }
     
-        public virtual int consultar_trabajadores()
+        public virtual int actualizaPersona(string nombre, string primerApellido, string segundoApellido, string identificacion, string telefono, string correo, Nullable<int> tipoUsuarioFK)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("consultar_trabajadores");
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var primerApellidoParameter = primerApellido != null ?
+                new ObjectParameter("primerApellido", primerApellido) :
+                new ObjectParameter("primerApellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("segundoApellido", segundoApellido) :
+                new ObjectParameter("segundoApellido", typeof(string));
+    
+            var identificacionParameter = identificacion != null ?
+                new ObjectParameter("identificacion", identificacion) :
+                new ObjectParameter("identificacion", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("telefono", telefono) :
+                new ObjectParameter("telefono", typeof(string));
+    
+            var correoParameter = correo != null ?
+                new ObjectParameter("correo", correo) :
+                new ObjectParameter("correo", typeof(string));
+    
+            var tipoUsuarioFKParameter = tipoUsuarioFK.HasValue ?
+                new ObjectParameter("tipoUsuarioFK", tipoUsuarioFK) :
+                new ObjectParameter("tipoUsuarioFK", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("actualizaPersona", nombreParameter, primerApellidoParameter, segundoApellidoParameter, identificacionParameter, telefonoParameter, correoParameter, tipoUsuarioFKParameter);
+        }
+    
+        public virtual ObjectResult<consultarCita_Result> consultarCita(string estado)
+        {
+            var estadoParameter = estado != null ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<consultarCita_Result>("consultarCita", estadoParameter);
         }
     
         public virtual ObjectResult<consultarDireccion_Result> consultarDireccion()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<consultarDireccion_Result>("consultarDireccion");
+        }
+    
+        public virtual int consultarPersona(string identificacion)
+        {
+            var identificacionParameter = identificacion != null ?
+                new ObjectParameter("identificacion", identificacion) :
+                new ObjectParameter("identificacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("consultarPersona", identificacionParameter);
+        }
+    
+        public virtual int consultarPersonas()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("consultarPersonas");
         }
     
         public virtual int eliminarDireccion(Nullable<long> codigo)
@@ -80,6 +131,15 @@ namespace Clinica.DAL
                 new ObjectParameter("codigo", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("eliminarDireccion", codigoParameter);
+        }
+    
+        public virtual int eliminarPersona(string identificacion)
+        {
+            var identificacionParameter = identificacion != null ?
+                new ObjectParameter("identificacion", identificacion) :
+                new ObjectParameter("identificacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("eliminarPersona", identificacionParameter);
         }
     
         public virtual int insertarDireccion(string provincia, string canton, string distrito, string resena)
@@ -103,9 +163,41 @@ namespace Clinica.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarDireccion", provinciaParameter, cantonParameter, distritoParameter, resenaParameter);
         }
     
-        public virtual ObjectResult<Nullable<long>> ultimaInsercion()
+        public virtual int insertarPersona(string nombre, string pRIMERAPELLIDO, string segundoApellido, string identificacion, string telefono, string correo, Nullable<int> tipoUsuarioFK, Nullable<long> cODIGODIRECCIONFK)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("ultimaInsercion");
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var pRIMERAPELLIDOParameter = pRIMERAPELLIDO != null ?
+                new ObjectParameter("PRIMERAPELLIDO", pRIMERAPELLIDO) :
+                new ObjectParameter("PRIMERAPELLIDO", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("segundoApellido", segundoApellido) :
+                new ObjectParameter("segundoApellido", typeof(string));
+    
+            var identificacionParameter = identificacion != null ?
+                new ObjectParameter("identificacion", identificacion) :
+                new ObjectParameter("identificacion", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("telefono", telefono) :
+                new ObjectParameter("telefono", typeof(string));
+    
+            var correoParameter = correo != null ?
+                new ObjectParameter("correo", correo) :
+                new ObjectParameter("correo", typeof(string));
+    
+            var tipoUsuarioFKParameter = tipoUsuarioFK.HasValue ?
+                new ObjectParameter("tipoUsuarioFK", tipoUsuarioFK) :
+                new ObjectParameter("tipoUsuarioFK", typeof(int));
+    
+            var cODIGODIRECCIONFKParameter = cODIGODIRECCIONFK.HasValue ?
+                new ObjectParameter("CODIGODIRECCIONFK", cODIGODIRECCIONFK) :
+                new ObjectParameter("CODIGODIRECCIONFK", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarPersona", nombreParameter, pRIMERAPELLIDOParameter, segundoApellidoParameter, identificacionParameter, telefonoParameter, correoParameter, tipoUsuarioFKParameter, cODIGODIRECCIONFKParameter);
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -211,111 +303,14 @@ namespace Clinica.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual int actualizaPersona(string nombre, string primerApellido, string segundoApellido, string identificacion, string telefono, string correo, Nullable<int> tipoUsuarioFK)
+        public virtual ObjectResult<Nullable<long>> ultimaInsercion()
         {
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("nombre", nombre) :
-                new ObjectParameter("nombre", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("primerApellido", primerApellido) :
-                new ObjectParameter("primerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("segundoApellido", segundoApellido) :
-                new ObjectParameter("segundoApellido", typeof(string));
-    
-            var identificacionParameter = identificacion != null ?
-                new ObjectParameter("identificacion", identificacion) :
-                new ObjectParameter("identificacion", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("telefono", telefono) :
-                new ObjectParameter("telefono", typeof(string));
-    
-            var correoParameter = correo != null ?
-                new ObjectParameter("correo", correo) :
-                new ObjectParameter("correo", typeof(string));
-    
-            var tipoUsuarioFKParameter = tipoUsuarioFK.HasValue ?
-                new ObjectParameter("tipoUsuarioFK", tipoUsuarioFK) :
-                new ObjectParameter("tipoUsuarioFK", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("actualizaPersona", nombreParameter, primerApellidoParameter, segundoApellidoParameter, identificacionParameter, telefonoParameter, correoParameter, tipoUsuarioFKParameter);
-        }
-    
-        public virtual int consultarPersona(string identificacion)
-        {
-            var identificacionParameter = identificacion != null ?
-                new ObjectParameter("identificacion", identificacion) :
-                new ObjectParameter("identificacion", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("consultarPersona", identificacionParameter);
-        }
-    
-        public virtual int consultarPersonas()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("consultarPersonas");
-        }
-    
-        public virtual int eliminarPersona(string identificacion)
-        {
-            var identificacionParameter = identificacion != null ?
-                new ObjectParameter("identificacion", identificacion) :
-                new ObjectParameter("identificacion", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("eliminarPersona", identificacionParameter);
-        }
-    
-        public virtual int insertarPersona(string nombre, string pRIMERAPELLIDO, string segundoApellido, string identificacion, string telefono, string correo, Nullable<int> tipoUsuarioFK, Nullable<long> cODIGODIRECCIONFK)
-        {
-            var nombreParameter = nombre != null ?
-                new ObjectParameter("nombre", nombre) :
-                new ObjectParameter("nombre", typeof(string));
-    
-            var pRIMERAPELLIDOParameter = pRIMERAPELLIDO != null ?
-                new ObjectParameter("PRIMERAPELLIDO", pRIMERAPELLIDO) :
-                new ObjectParameter("PRIMERAPELLIDO", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("segundoApellido", segundoApellido) :
-                new ObjectParameter("segundoApellido", typeof(string));
-    
-            var identificacionParameter = identificacion != null ?
-                new ObjectParameter("identificacion", identificacion) :
-                new ObjectParameter("identificacion", typeof(string));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("telefono", telefono) :
-                new ObjectParameter("telefono", typeof(string));
-    
-            var correoParameter = correo != null ?
-                new ObjectParameter("correo", correo) :
-                new ObjectParameter("correo", typeof(string));
-    
-            var tipoUsuarioFKParameter = tipoUsuarioFK.HasValue ?
-                new ObjectParameter("tipoUsuarioFK", tipoUsuarioFK) :
-                new ObjectParameter("tipoUsuarioFK", typeof(int));
-    
-            var cODIGODIRECCIONFKParameter = cODIGODIRECCIONFK.HasValue ?
-                new ObjectParameter("CODIGODIRECCIONFK", cODIGODIRECCIONFK) :
-                new ObjectParameter("CODIGODIRECCIONFK", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("insertarPersona", nombreParameter, pRIMERAPELLIDOParameter, segundoApellidoParameter, identificacionParameter, telefonoParameter, correoParameter, tipoUsuarioFKParameter, cODIGODIRECCIONFKParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("ultimaInsercion");
         }
     
         public virtual ObjectResult<Nullable<long>> ultimaInsercionPersona()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("ultimaInsercionPersona");
-        }
-    
-        public virtual ObjectResult<consultarCita_Result> consultarCita(string estado)
-        {
-            var estadoParameter = estado != null ?
-                new ObjectParameter("estado", estado) :
-                new ObjectParameter("estado", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<consultarCita_Result>("consultarCita", estadoParameter);
         }
     }
 }

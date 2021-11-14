@@ -21,8 +21,12 @@ namespace Clinica.DAL
         }
     
         public long codigoCitas { get; set; }
-        public Nullable<System.DateTime> dia { get; set; }
-        public Nullable<System.TimeSpan> hora { get; set; }
+        public string asunto { get; set; }
+        public string descripsion { get; set; }
+        public Nullable<System.DateTime> horaInicio { get; set; }
+        public Nullable<System.DateTime> horafin { get; set; }
+        public string temaColor { get; set; }
+        public Nullable<bool> esTodoElDia { get; set; }
         public string estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
