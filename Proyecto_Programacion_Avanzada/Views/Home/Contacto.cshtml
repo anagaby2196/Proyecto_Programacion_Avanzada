@@ -1,35 +1,119 @@
 ﻿@{
-    ViewBag.Title = "Contacto";
+    Layout = null;
 }
 
-<div class="registro margen-interno">
-    <br>
-    <h1><u><b>INFORMACIÓN DE CONTACTO</b></u></h1>
-    <form action="post" action="ingresoCita.php" name="formularioRegistro">
-        <br>
-        <p style="font-weight: normal; font-size: medium; text-align: center;">
-            <u> Dirección</u>
-            <br>
-            De la bodega del Banco Nacional, 150mts sur. Edificio a mano izquierda Centro Médico San
-            Antonio.
-            Heredia Centro.
-            <br>
-            <br>
-            <u> Número Telefónico</u>
-            <br>
-            2261-1345 / 6266-3572
-        </p>
-        <br>
-        <br>
-        <br>
-        <p class="despedida"> <u> ¡GRACIAS POR PREFERIRNOS!</u></p>
+<!DOCTYPE html>
 
-        <p class="despedida" style="color: black; font-weight: normal; font-size: medium;">
-            Para nosotros
-            siempre será un gusto
-            atenderle!
-        </p>
-        <br>
-        <br>
-    </form>
-</div>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Clínica Médica del Pie - Promociones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="~/Assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/css/animate.css">
+    <link rel="stylesheet" href="~/Assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Assets/css/aos.css">
+    <link rel="stylesheet" href="~/Assets/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/Assets/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Assets/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="~/Assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/Assets/css/icomoon.css">
+    <link rel="stylesheet" href="~/Assets/css/style.css">
+    <a href="/"><img src="~/Assets/images/Banner.jpg" width="2114"></img></a>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5%">@Html.ActionLink("Nosotros", "Nosotros", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Servicios", "Servicios", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Promociones", "Promociones", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Contacto", "Contacto", "Home", null, new { @style = "color:#000000" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="row justify-content-center mb-5 pb-5">
+        
+        <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2 class="mb-2">Contáctanos</h2>
+        </div>
+
+        <div class="col-md-12 mb-4">
+            <h2 class="h4" style="margin-left:2%">Información de Contacto</h2>
+            <div class="row d-flex mb-5 contact-info">
+                <div class="w-100"></div>
+                <div class="col-md-3">
+                    <p style="margin-left:8%; font-family:'Eras ITC'">
+                        <span style="font-family:'Eras ITC'">Dirección:</span> De la bodega del Banco Nacional, 150mts sur. Edificio a mano izquierda Centro Médico San
+                        Antonio.
+                        Heredia Centro.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <p style="margin-left:15%; font-family:'Eras ITC'"><span>Número Telefónico:</span> 2261-1345 / 6266-3572</pstyle="margin-left:15%">
+                </div>
+                <div class="col-md-3">
+                    <p>
+                        <span style="font-family:'Eras ITC'">Facebook:</span> <a href="https://www.facebook.com/clinicamedicadelpie">
+                            Clínica Médica del Pie
+                        </a>
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <p>
+                        <span style="font-family:'Eras ITC'">Instagram:</span> <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Fclinicamedica_delpie%2F%3Fhl%3Des-la%26fbclid%3DIwAR0WfeAyqajK6aK-H_3DDIBah_X75VUnxOamWI8JEz1KwPHXg0eV1cFz8zA&h=AT2Of7MMb-kO_i9Z7WWavOIY0RIh5pzTB1cCFHRrve9WNpm1-tqzU1OKCt_RWky03nbt7Puk-p2bLfb_rPNle1Qq0qjdyUaX8jGfthjvbdCTuYt43Qjpu_caEKiaS99cyt5RWA">
+                            Clínica Médica del Pie
+                        </a>
+                    </p>
+                </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d245.57843235405647!2d-84.12170469222919!3d9.995789531270063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0fb4276df6703%3A0xe18f200ec91ec2c2!2sCentro%20Medico%20San%20Antonio!5e0!3m2!1ses!2scr!4v1636871653237!5m2!1ses!2scr" width="2114" height="600" allowfullscreen="" loading="lazy"></iframe>
+
+            </div>
+
+
+        </div>
+        <div class="col-md-7 text-center heading-section">
+            <h2>¡GRACIAS POR PREFERIRNOS!</h2>
+            <br>
+            <h2> Para nosotros siempre será un gusto atenderle!
+            </h2>
+        </div>
+    </div>
+
+    <script src="~/Assets/js/login.js"></script>
+    <script src="~/Assets/js/jquery.min.js"></script>
+    <script src="~/Assets/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/Assets/js/popper.min.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+    <script src="~/Assets/js/jquery.easing.1.3.js"></script>
+    <script src="~/Assets/js/jquery.waypoints.min.js"></script>
+    <script src="~/Assets/js/jquery.stellar.min.js"></script>
+    <script src="~/Assets/js/owl.carousel.min.js"></script>
+    <script src="~/Assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Assets/js/aos.js"></script>
+    <script src="~/Assets/js/jquery.animateNumber.min.js"></script>
+    <script src="~/Assets/js/bootstrap-datepicker.js"></script>
+    <script src="~/Assets/js/jquery.timepicker.min.js"></script>
+    <script src="~/Assets/js/scrollax.min.js"></script>
+    <script src="~/Assets/js/google-map.js"></script>
+    <script src="~/Assets/js/main.js"></script>
+
+    <footer class="col-md-12 text-center">
+        <p style="font-family:'Eras ITC'">&copy; @DateTime.Now.Year / Desarrollado por: Jhonsel Josué Díaz Chacón - Kevin Martín Fallas Alfaro - Ana Gabriela Mora Salas</p>
+    </footer>
+
+</body>
+</html>

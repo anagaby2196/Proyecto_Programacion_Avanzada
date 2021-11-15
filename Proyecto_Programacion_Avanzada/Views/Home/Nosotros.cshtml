@@ -1,53 +1,183 @@
 ﻿@{
-    ViewBag.Title = "Nosotros";
+    Layout = null;
 }
 
-<div class="registro margen-interno">
-    <br>
-    <h1><u><b>NUESTRA HISTORIA</b></u></h1>
-    <form action="post" action="ingresoCita.php" name="formularioRegistro">
-        La Clínica Médica del Pie que surge en el 2008 por la doctora Gabriela Salas. Esta clínica se
-        encuentra ubicada en Heredia Centro y cuenta con fácil acceso de los distintos pacientes a lo
-        largo de las distintas provincias de Costa Rica, ya que se encuentra en un punto bastante
-        estratégico
-        y céntrico. Cuenta con servicios profesionales y una atención al cliente muy agradable. Además,
-        cuenta con una infraestructura adaptada a todas las necesidades de los pacientes que la visitan.
-        <br>
-        <br>
-        La clínica ofrece distintos servicios relacionados con el tratamiento y cuido de los pies,
-        específicamente aquellos tratamientos como:
-        <br>
-        <br>
-        <ul style="margin-left: 5%;">
-            <li>Tratamiento contra hongos.</li>
-            <li>Callosidades.</li>
-            <li>Curación de uñas encarnadas.</li>
-            <li>Cuido del pie diabético y no diabético.</li>
-            <li>Curación de úlceras.</li>
-            <li>Medicina General.</li>
-            <li>Cirugías Podológicas.</li>
-            <li>Pedicura Médica.</li>
-        </ul>
-        <br>
-        Actualmenta, la Clínica optó por incorporar un nuevo departamento de servicios relacionados con la
-        parte estética.
-        Esto con el fin de lograr brindar servicos más amplios y completos en temas de la salud. Este nuevo
-        departamento
-        cuenta con el nombre de Fisio-Estética MOSSA, en donde se brindan servicios tales como:
-        <br>
-        <br>
-        <ul style="margin-left: 5%;">
-            <li>Gimnasia Pasiva.</li>
-            <li>Lifting de Pestañas.</li>
-            <li>Micropigmentación.</li>
-            <li>Microblanding.</li>
-            <li>Masajes Descontracturantes.</li>
-            <li>Desintoxicación Iónica.</li>
-            <li>Mesoterapia.</li>
-        </ul>
-        <br>
-        Gracias a la iniciativa de la doctora Gabriela, los niños, adultos y adultos mayores poseen una
-        opción más para poder cuidar su salud, ya que hay muchas enfermedades y padecimientos que pueden
-        ser prevenidos si se tiene el cuidado adecuado y la correcta higiene en los pies.
-    </form>
-</div>
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Clínica Médica del Pie - Nosotros</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="~/Assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/css/animate.css">
+    <link rel="stylesheet" href="~/Assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Assets/css/aos.css">
+    <link rel="stylesheet" href="~/Assets/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/Assets/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Assets/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="~/Assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/Assets/css/icomoon.css">
+    <link rel="stylesheet" href="~/Assets/css/style.css">
+    <a href="/"><img src="~/Assets/images/Banner.jpg" width="2114"></img></a>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5%">@Html.ActionLink("Nosotros", "Nosotros", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Servicios", "Servicios", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Promociones", "Promociones", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Contacto", "Contacto", "Home", null, new { @style = "color:#000000" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row d-md-flex">
+                <div class="col-md-6 ftco-animate img about-image order-md-last" style="background-image: url('../../Assets/images/Cuidado-de-los-pies-1-650x450.jpg');">
+                </div>
+                <div class="col-md-6 ftco-animate pr-md-5 order-md-first">
+                    <div class="row">
+                        <div class="col-md-12 nav-link-wrap mb-5">
+                            <div class="nav ftco-animate nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link active" id="v-pills-whatwedo-tab" data-toggle="pill" href="#v-pills-whatwedo" role="tab" aria-controls="v-pills-whatwedo" aria-selected="true" style="font-family:'Eras ITC'">¿Quiénes somos?</a>
+
+                                <a class="nav-link" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false" style="font-family:'Eras ITC'">Misión</a>
+
+                                <a class="nav-link" id="v-pills-goal-tab" data-toggle="pill" href="#v-pills-goal" role="tab" aria-controls="v-pills-goal" aria-selected="false" style="font-family:'Eras ITC'">Valores</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12 d-flex align-items-center">
+
+                            <div class="tab-content ftco-animate" id="v-pills-tabContent">
+
+                                <div class="tab-pane fade show active" id="v-pills-whatwedo" role="tabpanel" aria-labelledby="v-pills-whatwedo-tab">
+                                    <div>
+                                        <h2 class="mb-4" style="font-family:'Eras ITC'">Historia</h2>
+                                        <p style="font-family:'Eras ITC'">
+                                            La Clínica Médica del Pie surge en el 2008 por la doctora Gabriela Salas. Esta clínica se
+                                            encuentra ubicada en Heredia Centro y cuenta con fácil acceso de los distintos pacientes a lo
+                                            largo de las distintas provincias de Costa Rica, ya que se encuentra en un punto bastante
+                                            estratégico
+                                            y céntrico. Cuenta con servicios profesionales y una atención al cliente muy agradable. Además,
+                                            cuenta con una infraestructura adaptada a todas las necesidades de los pacientes que la visitan.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="v-pills-mission" role="tabpanel" aria-labelledby="v-pills-mission-tab">
+                                    <div>
+                                        <h2 class="mb-4" style="font-family:'Eras ITC'">Nuestra misión</h2>
+                                        <p style="font-family:'Eras ITC'">
+                                            Brindar atención médica de excelencia, con calidez, a través de un equipo de salud comprometido con la capacitación y la innovación tecnológica,
+                                            cumpliendo con los más altos estándares de calidad y seguridad y logrando la máxima satisfacción de los pacientes.
+                                        </p>
+
+                                        <h2 class="mb-4" style="font-family:'Eras ITC'">Nuestra visión</h2>
+                                        <p style="font-family:'Eras ITC'">
+                                            Ser referentes a nivel nacional por la calidad asistencial, seguridad y satisfacción del paciente.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="v-pills-goal" role="tabpanel" aria-labelledby="v-pills-goal-tab">
+                                    <div>
+                                        <h2 class="mb-4" style="font-family:'Eras ITC'">Nos regimos bajo los valores:</h2>
+                                        <p style="font-family:'Eras ITC'">
+                                            <li>Ética.</li>
+                                            <li>Profesionalismo.</li>
+                                            <li>Calidez.</li>
+                                            <li>Compromiso.</li>
+                                            <li>Excelencia.</li>
+                                            <li>Mejora continua.</li>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section ftco-counter img" id="section-counter" style="background-image: url('../../Assets/images/pedicura-medica-running-portada2-1556794999.jpg');"
+             data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-md-3 aside-stretch py-5">
+                    <div class=" heading-section heading-section-white ftco-animate pr-md-4">
+                        <h2 class="mb-3" style="font-family:'Eras ITC'">Logros</h2>
+                        <p style="font-family:'Eras ITC'">A continucación se muestran algunos datos aproximados de la clínica:</p>
+                    </div>
+                </div>
+                <div class="col-md-9 py-5 pl-md-5">
+                    <div class="row">
+                        <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                            <div class="block-18">
+                                <div class="text">
+                                    <strong class="number" data-number="13" style="font-family:'Eras ITC'">0</strong>
+                                    <span style="font-family:'Eras ITC'">Años de Experiencia</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                            <div class="block-18">
+                                <div class="text">
+                                    <strong class="number" data-number="4500" style="font-family:'Eras ITC'">0</strong>
+                                    <span style="font-family:'Eras ITC'">Clientes Satisfechos</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
+                            <div class="block-18">
+                                <div class="text">
+                                    <strong class="number" data-number="500" style="font-family:'Eras ITC'">0</strong>
+                                    <span style="font-family:'Eras ITC'">Pacientes por Año</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="~/Assets/js/login.js"></script>
+    <script src="~/Assets/js/jquery.min.js"></script>
+    <script src="~/Assets/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/Assets/js/popper.min.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+    <script src="~/Assets/js/jquery.easing.1.3.js"></script>
+    <script src="~/Assets/js/jquery.waypoints.min.js"></script>
+    <script src="~/Assets/js/jquery.stellar.min.js"></script>
+    <script src="~/Assets/js/owl.carousel.min.js"></script>
+    <script src="~/Assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Assets/js/aos.js"></script>
+    <script src="~/Assets/js/jquery.animateNumber.min.js"></script>
+    <script src="~/Assets/js/bootstrap-datepicker.js"></script>
+    <script src="~/Assets/js/jquery.timepicker.min.js"></script>
+    <script src="~/Assets/js/scrollax.min.js"></script>
+    <script src="~/Assets/js/google-map.js"></script>
+    <script src="~/Assets/js/main.js"></script>
+
+    <footer class="col-md-12 text-center">
+        <p style="font-family:'Eras ITC'">&copy; @DateTime.Now.Year / Desarrollado por: Jhonsel Josué Díaz Chacón - Kevin Martín Fallas Alfaro - Ana Gabriela Mora Salas</p>
+    </footer>
+
+
+</body>
+</html>

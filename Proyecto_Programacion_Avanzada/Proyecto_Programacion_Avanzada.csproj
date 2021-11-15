@@ -165,14 +165,21 @@
     <Content Include="Assets\fonts\open-iconic\open-iconic.svg" />
     <Content Include="Assets\images\about-2.jpg" />
     <Content Include="Assets\images\about.jpg" />
+    <Content Include="Assets\images\Banner.jpg" />
     <Content Include="Assets\images\bg_1.jpg" />
     <Content Include="Assets\images\bg_2.jpg" />
     <Content Include="Assets\images\bg_3.jpg" />
     <Content Include="Assets\images\bigstock-doctor-dermatologist-examines-74599093_6_928x621.jpeg" />
+    <Content Include="Assets\images\Callosidades.png" />
+    <Content Include="Assets\images\Cuidado-de-los-pies-1-650x450.jpg" />
+    <Content Include="Assets\images\Desintoxicacion.png" />
+    <Content Include="Assets\images\Foot-care.png" />
+    <Content Include="Assets\images\foot-print.png" />
     <Content Include="Assets\images\gallery-1.jpg" />
     <Content Include="Assets\images\gallery-2.jpg" />
     <Content Include="Assets\images\gallery-3.jpg" />
     <Content Include="Assets\images\gallery-4.jpg" />
+    <Content Include="Assets\images\Icono-medicina.png" />
     <Content Include="Assets\images\image_1.jpg" />
     <Content Include="Assets\images\image_2.jpg" />
     <Content Include="Assets\images\image_3.jpg" />
@@ -181,6 +188,8 @@
     <Content Include="Assets\images\image_6.jpg" />
     <Content Include="Assets\images\loc.png" />
     <Content Include="Assets\images\Logo Clínica Médica del Pie-fondo.png" />
+    <Content Include="Assets\images\masaje.png" />
+    <Content Include="Assets\images\Muñeca Clínica Médica del Pie.png" />
     <Content Include="Assets\images\pedicura-medica-running-portada2-1556794999.jpg" />
     <Content Include="Assets\images\person_1.jpg" />
     <Content Include="Assets\images\person_2.jpg" />
@@ -190,6 +199,8 @@
     <Content Include="Assets\images\person_6.jpg" />
     <Content Include="Assets\images\person_7.jpg" />
     <Content Include="Assets\images\person_8.jpg" />
+    <Content Include="Assets\images\surgery.png" />
+    <Content Include="Assets\images\uña encarnada.png" />
     <Content Include="Assets\js\aos.js" />
     <Content Include="Assets\js\bootstrap-datepicker.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
@@ -353,18 +364,17 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Promociones.cshtml" />
     <Content Include="Views\Home\Servicios.cshtml" />
-    <Content Include="Views\Home\Registro.cshtml" />
-    <Content Include="Views\Home\Nosotros.cshtml" />
     <Content Include="Views\Home\Citas.cshtml" />
-    <Content Include="Views\Home\Contacto.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Paciente\ConsultaPacientes.cshtml" />
     <Content Include="Views\Paciente\_DetallePaciente.cshtml" />
     <Content Include="Views\Shared\_LayoutDoctor.cshtml" />
     <Content Include="Views\Citas\Index.cshtml" />
+    <Content Include="Views\Home\Nosotros.cshtml" />
+    <Content Include="Views\Home\Promociones.cshtml" />
+    <Content Include="Views\Home\Contacto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

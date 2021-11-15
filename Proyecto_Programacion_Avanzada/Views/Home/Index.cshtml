@@ -1,188 +1,117 @@
 ﻿@{
-    ViewBag.Title = "Inicio";
     Layout = null;
 }
-
 
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title Clínica Médica del Pie</title>
-
-    <meta charset="utf-8">
-
+    <title>@ViewBag.Title Clínica Médica del Pie - Inicio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
-
     <link rel="stylesheet" href="~/Assets/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="~/Assets/css/animate.css">
-
     <link rel="stylesheet" href="~/Assets/css/owl.carousel.min.css">
     <link rel="stylesheet" href="~/Assets/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="~/Assets/css/magnific-popup.css">
-
     <link rel="stylesheet" href="~/Assets/css/aos.css">
-
     <link rel="stylesheet" href="~/Assets/css/ionicons.min.css">
-
     <link rel="stylesheet" href="~/Assets/css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="~/Assets/css/jquery.timepicker.css">
-
-
     <link rel="stylesheet" href="~/Assets/css/flaticon.css">
     <link rel="stylesheet" href="~/Assets/css/icomoon.css">
     <link rel="stylesheet" href="~/Assets/css/style.css">
-
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="Index.cshtml"><img src="~/Assets/images/Logo Clínica Médica del Pie-fondo.png" width="425" height="200" style="margin-left:-50%"></a>
+            <a class="navbar-brand" href="/"><img src="~/Assets/images/Logo Clínica Médica del Pie-fondo.png" width="425" height="200" style="margin-left:-50%"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5%">@Html.ActionLink("Nosotros", "Nosotros", "Home", null, new { @style = "color:#FFFFFF" })</li>
-                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Servicios", "Servicios", "Home", null, new { @style = "color:#FFFFFF" })</li>
-                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Promociones", "Promociones", "Home", null, new { @style = "color:#FFFFFF" })</li>
-                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Contacto", "Contacto", "Home", null, new { @style = "color:#FFFFFF" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5%">@Html.ActionLink("Nosotros", "Nosotros", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Servicios", "Servicios", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Promociones", "Promociones", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Contacto", "Contacto", "Home", null, new { @style = "color:#000000" })</li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <section class="home-slider owl-carousel">
-        <div class="slider-item" style="background-image: url('../../Assets/images/pedicura-medica-running-portada2-1556794999.jpg'); ">
+        <div class="slider-item" style="background-image: url('../../Assets/images/pedicura-medica-running-portada2-1556794999.jpg');">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row slider-text align-items-center" data-scrollax-parent="true">
                     <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
                         <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" style="margin-left:-25%">¡Medicina moderna en un entorno tranquilo y relajado!</h1>
-                        <p data-scrollax="properties: {translateY: '30%', opacity: 1.6}" style="margin-left:-25%"><b>@Html.ActionLink("LOGIN", "Login", "Login", null, new { @class = "btn btn-primary px-4 py-3" })</b></p>
+                        <p data-scrollax="properties: {translateY: '30%', opacity: 1.6}" style="margin-left:-25%; font-family:'Eras ITC'"><b>@Html.ActionLink("LOGIN", "Login", "Login", null, new { @class = "btn btn-primary px-4 py-3" })</b></p>
 
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="slider-item" style="background-image: url('../../Assets/images/bigstock-doctor-dermatologist-examines-74599093_6_928x621.jpeg'); ">
+        <div class="slider-item" style="background-image: url('../../Assets/images/bigstock-doctor-dermatologist-examines-74599093_6_928x621.jpeg');">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row slider-text align-items-center" data-scrollax-parent="true">
                     <div class="col-md-6 col-sm-12 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
                         <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" style="margin-left:-25%">¡Un cuidado a sus pies excelente y profesional!</h1>
-                        <p data-scrollax="properties: {translateY: '30%', opacity: 1.6}" style="margin-left:-25%"><b>@Html.ActionLink("LOGIN", "Login", "Login", null, new { @class = "btn btn-primary px-4 py-3" })</b></p>
+                        <p data-scrollax="properties: {translateY: '30%', opacity: 1.6}" style="margin-left:-25%; font-family:'Eras ITC'"><b>@Html.ActionLink("LOGIN", "Login", "Login", null, new { @class = "btn btn-primary px-4 py-3" })</b></p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <br>
 
-    <section class="ftco-section ftco-services">
-    <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-            <div class="col-md-7 text-center heading-section ftco-animate">
-                <h2 class="mb-2">Our Service Keeps you Smile</h2>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-            </div>
+    <div class="row d-flex no-gutters">
+        <div class="col-md-6 img" style="background-image: url('../../Assets/images/Muñeca Clínica Médica del Pie.png')">
         </div>
-        <div class="row">
-            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                <div class="media block-6 services d-block text-center">
+        <div class="col-md-6 d-flex">
+            <div class="about-wrap">
+                <div class="heading-section heading-section-white mb-5 ftco-animate">
+                    <h2 class="mb-2" style="font-family:'Eras ITC'">Atención médica con un toque personal</h2>
+                </div>
+                <div class="list-services d-flex ftco-animate">
                     <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-tooth-1"></span>
+                        <span class="icon-check2"></span>
                     </div>
-                    <div class="media-body p-2 mt-3">
-                        <h3 class="heading">Teeth Whitening</h3>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                    <div class="text">
+                        <h3 style="font-family:'Eras ITC'">Médico con experiencia</h3>
+                        <p style="font-family:'Eras ITC'">Se cuenta con un médico con más 10 años de experiencia.</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                <div class="media block-6 services d-block text-center">
+                <div class="list-services d-flex ftco-animate">
                     <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-dental-care"></span>
+                        <span class="icon-check2"></span>
                     </div>
-                    <div class="media-body p-2 mt-3">
-                        <h3 class="heading">Teeth Cleaning</h3>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                    <div class="text">
+                        <h3 style="font-family:'Eras ITC'">Innovación Tecnológica</h3>
+                        <p style="font-family:'Eras ITC'">Se cuenta con máquinas de última tecnología.</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                <div class="media block-6 services d-block text-center">
+                <div class="list-services d-flex ftco-animate">
                     <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-tooth-with-braces"></span>
+                        <span class="icon-check2"></span>
                     </div>
-                    <div class="media-body p-2 mt-3">
-                        <h3 class="heading">Quality Brackets</h3>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-                <div class="media block-6 services d-block text-center">
-                    <div class="icon d-flex justify-content-center align-items-center">
-                        <span class="flaticon-anesthesia"></span>
-                    </div>
-                    <div class="media-body p-2 mt-3">
-                        <h3 class="heading">Modern Anesthetic</h3>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic.</p>
+                    <div class="text">
+                        <h3 style="font-family:'Eras ITC'">Instalaciones agradables</h3>
+                        <p style="font-family:'Eras ITC'">La clínica cuenta con una infraestructura agradable y que se adecua con las necesidades de los pacientes.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-wrap mt-5">
-        <div class="row d-flex no-gutters">
-            <div class="col-md-6 img" style="background-image: url(images/about-2.jpg);">
-            </div>
-            <div class="col-md-6 d-flex">
-                <div class="about-wrap">
-                    <div class="heading-section heading-section-white mb-5 ftco-animate">
-                        <h2 class="mb-2">Dentacare with a personal touch</h2>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                    </div>
-                    <div class="list-services d-flex ftco-animate">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-check2"></span>
-                        </div>
-                        <div class="text">
-                            <h3>Well Experience Dentist</h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        </div>
-                    </div>
-                    <div class="list-services d-flex ftco-animate">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-check2"></span>
-                        </div>
-                        <div class="text">
-                            <h3>High Technology Facilities</h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        </div>
-                    </div>
-                    <div class="list-services d-flex ftco-animate">
-                        <div class="icon d-flex justify-content-center align-items-center">
-                            <span class="icon-check2"></span>
-                        </div>
-                        <div class="text">
-                            <h3>Comfortable Clinics</h3>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </section>
-
-
-
+    <br>
 
 
 
@@ -201,8 +130,12 @@
     <script src="~/Assets/js/bootstrap-datepicker.js"></script>
     <script src="~/Assets/js/jquery.timepicker.min.js"></script>
     <script src="~/Assets/js/scrollax.min.js"></script>
-    @* <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>*@
     <script src="~/Assets/js/google-map.js"></script>
     <script src="~/Assets/js/main.js"></script>
+
+ 
+    <footer class="col-md-12 text-center">
+        <p style="font-family:'Eras ITC'">&copy; @DateTime.Now.Year / Desarrollado por: Jhonsel Josué Díaz Chacón - Kevin Martín Fallas Alfaro - Ana Gabriela Mora Salas</p>
+    </footer>
 </body>
 </html>
