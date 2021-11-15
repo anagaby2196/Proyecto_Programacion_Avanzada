@@ -9,8 +9,9 @@ namespace Entidades.ETL
     public class DoctorETL : PersonaETL
     {
         public long CodigoDoctor { get; set; }
-        public long CodigoPersona { get; set; }
-
+        public long CodigoPersonaFK { get; set; }
         public Boolean Estado { get; set; }
     }
+
 }
+
