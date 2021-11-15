@@ -204,6 +204,7 @@
     <Content Include="Assets\js\aos.js" />
     <Content Include="Assets\js\bootstrap-datepicker.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\Calendario.js" />
     <Content Include="Assets\js\google-map.js" />
     <Content Include="Assets\js\jquery-3.2.1.min.js" />
     <Content Include="Assets\js\jquery-migrate-3.0.1.min.js" />
@@ -219,6 +220,7 @@
     <Content Include="Assets\js\owl.carousel.min.js" />
     <Content Include="Assets\js\popper.min.js" />
     <Content Include="Assets\js\scrollax.min.js" />
+    <Content Include="Content\bootstrap-datetimepicker.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -340,6 +342,7 @@
     <Content Include="Assets\scss\bootstrap\_variables.scss" />
     <Content Include="Assets\scss\style.scss" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -395,6 +398,10 @@
     <ProjectReference Include="..\Clinica.BLL\Clinica.BLL.csproj">
       <Project>{71ea07ce-7884-4e09-b419-0ffdefb0fa90}</Project>
       <Name>Clinica.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Clinica.DAL\Clinica.DAL.csproj">
+      <Project>{EE7E1385-8C51-471F-B120-BFC6ACB7DC9A}</Project>
+      <Name>Clinica.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entidades.ETL\Entidades.ETL.csproj">
       <Project>{cf9a132d-041d-458a-ab0b-cfa31a4f0b68}</Project>

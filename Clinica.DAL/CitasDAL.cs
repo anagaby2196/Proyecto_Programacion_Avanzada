@@ -43,30 +43,31 @@ namespace Clinica.DAL
             }
         }
 
-        public Boolean ActualizarCita(CitasETL Nuevacita,int codigoCita)
-        {
-            using (var contexto = new ClinicaMedicaV1Entities())
-            {
-                var citaActual = (from x in contexto.citas where x.codigoCitas == codigoCita select x).FirstOrDefault();
+        //public Boolean ActualizarCita(CitasETL Nuevacita,int codigoCita)
+        //{
+        //    using (var contexto = new ClinicaMedicaV1Entities())
+        //    {
+        //        var citaActual = (from x in contexto.citas where x.codigoCitas == codigoCita select x).FirstOrDefault();
 
-                if (citaActual != null)
-                {
-                    citaActual.horaInicio = Nuevacita.HoraInicio;
-                    citaActual.horafin = Nuevacita.HoraFin;
-                    citaActual.estado = Nuevacita.Estado;
-                    citaActual.temaColor = Nuevacita.TemaColor;
-                    citaActual.esTodoElDia = Nuevacita.esTodoElDia;
-                    citaActual.descripsion = Nuevacita.Descripcion;
-                    //citaActual.dia = Nuevacita.Dia;
-                    //citaActual.estado = Nuevacita.Estado;
-                    //citaActual.hora = Nuevacita.Hora;
-                    //contexto.SaveChanges();
-                    //return true;
-                }
+        //        if (citaActual != null)
+        //        {
+        //            citaActual.horaInicio = Nuevacita.HoraInicio;
+        //            citaActual.horafin = Nuevacita.HoraFin;
+        //            citaActual.estado = Nuevacita.Estado;
+        //            citaActual.temaColor = Nuevacita.TemaColor;
+        //            citaActual.esTodoElDia = Nuevacita.esTodoElDia;
+        //            citaActual.descripsion = Nuevacita.Descripcion;
+        //            //citaActual.dia = Nuevacita.Dia;
+        //            //citaActual.estado = Nuevacita.Estado;
+        //            //citaActual.hora = Nuevacita.Hora;
+        //            //contexto.SaveChanges();
+        //            //return true;
+        //        }
 
-            }
-                return false;
-        }
+        //    }
+        //        return false;
+        //}
+
 
         public Boolean SaveEvent(CitasETL e)
         {
@@ -89,14 +90,24 @@ namespace Clinica.DAL
                 }
                 else
                 {
-                    //dc.citas.Add();
+                    Clinica.DAL.citas nuevaCita = new Clinica.DAL.citas();
+                    nuevaCita.asunto = e.Asunto;
+                    nuevaCita.descripsion = e.Descripcion;
+                    nuevaCita.estado = true;
+                    nuevaCita.horaInicio = e.HoraInicio;
+                    nuevaCita.horafin = e.HoraFin;
+                    nuevaCita.esTodoElDia = e.esTodoElDia;
+                    nuevaCita.temaColor = e.TemaColor;
+
+                    dc.citas.Add(nuevaCita);
+                    dc.SaveChanges();
                 }
 
                 dc.SaveChanges();
                 status = true;
 
             }
-            return true;
+            return status;
         }
 
     }
