@@ -17,7 +17,8 @@
                         start: moment(v.HoraInicio),
                         end: v.HoraFin != null ? moment(v.HoraFin) : null,
                         color: v.TemaColor,
-                        allDay: v.esTodoElDia
+                        allDay: v.esTodoElDia,
+                        textColor: 'white'
                     });
                 })
                 GenerateCalender(events);
