@@ -114,7 +114,7 @@
 
 
     $('#dtp1,#dtp2').datetimepicker({
-        format: 'DD/MM/YYYY HH:mm A'
+        format: 'YYYY/MM/DD HH:mm A'
     });
 
     $('#chkIsFullDay').change(function () {
