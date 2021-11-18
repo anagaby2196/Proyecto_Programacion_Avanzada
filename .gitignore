@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+##Excluir archivos
+App.config
+Web.config
+
 # User-specific files
 *.rsuser
 *.suo

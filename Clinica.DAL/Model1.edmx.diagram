@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1508a9be7a2e47f7b8232d7233c9a7ae" Name="Diagram1">
-        <EntityTypeShape EntityType="ClinicaMedicaV1Model.citas" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicaMedicaV1Model.citasProgramadas" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+      <Diagram DiagramId="e8343ea248f04b519380f32b58bbea95" Name="Diagram1">
+        <EntityTypeShape EntityType="ClinicaMedicaV1Model.citas" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaMedicaV1Model.citasProgramadas" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ClinicaMedicaV1Model.direccion" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicaMedicaV1Model.doctor" Width="1.5" PointX="7.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaMedicaV1Model.doctor" Width="1.5" PointX="10.5" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ClinicaMedicaV1Model.expediente" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicaMedicaV1Model.paciente" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaMedicaV1Model.paciente" Width="1.5" PointX="10.5" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="ClinicaMedicaV1Model.persona" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ClinicaMedicaV1Model.reporteCitas" Width="1.5" PointX="7.5" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicaMedicaV1Model.tipoUsuario" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ClinicaMedicaV1Model.usuarios" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaMedicaV1Model.tipoUsuario" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicaMedicaV1Model.usuarios" Width="1.5" PointX="8.25" PointY="5.25" IsExpanded="true" />
         <AssociationConnector Association="ClinicaMedicaV1Model.codigoCitas_FK" ManuallyRouted="false" />
         <AssociationConnector Association="ClinicaMedicaV1Model.codigoCitaProgramada_FK" ManuallyRouted="false" />
         <AssociationConnector Association="ClinicaMedicaV1Model.codigoCitaProgramadas_FK" ManuallyRouted="false" />
@@ -26,7 +26,7 @@
         <AssociationConnector Association="ClinicaMedicaV1Model.codigoPersona_FK" ManuallyRouted="false" />
         <AssociationConnector Association="ClinicaMedicaV1Model.codigoPersonaPac_FK" ManuallyRouted="false" />
         <AssociationConnector Association="ClinicaMedicaV1Model.codigoPersona_UFK" ManuallyRouted="false" />
-        <AssociationConnector Association="ClinicaMedicaV1Model.tipoUsuarioFK_FK" />
+        <AssociationConnector Association="ClinicaMedicaV1Model.tipoUsuarioFK_FK" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

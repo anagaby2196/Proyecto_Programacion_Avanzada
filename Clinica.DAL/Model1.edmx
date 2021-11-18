@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ClinicaMedicaV1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ClinicaMedicaV1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="citas">
           <Key>
             <PropertyRef Name="codigoCitas" />
@@ -357,7 +357,8 @@
             <End Role="usuarios" EntitySet="usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClinicaMedicaV1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -471,7 +472,7 @@
           </Key>
           <Property Name="codigoTipoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="usuarios" Relationship="ClinicaMedicaV1Model.tipoUsuarioFK_FK" FromRole="tipoUsuario" ToRole="usuarios" />
+          <NavigationProperty Name="usuarios" Relationship="Self.tipoUsuarioFK_FK" FromRole="tipoUsuario" ToRole="usuarios" />
         </EntityType>
         <EntityType Name="usuarios">
           <Key>
@@ -481,9 +482,9 @@
           <Property Name="contrasena" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="codigoPersonaFK" Type="Int64" />
           <Property Name="estado" Type="Boolean" />
-          <NavigationProperty Name="persona" Relationship="Self.codigoPersona_UFK" FromRole="usuarios" ToRole="persona" />
           <Property Name="tipoUsuarioFK" Type="Int32" />
-          <NavigationProperty Name="tipoUsuario" Relationship="ClinicaMedicaV1Model.tipoUsuarioFK_FK" FromRole="usuarios" ToRole="tipoUsuario" />
+          <NavigationProperty Name="persona" Relationship="Self.codigoPersona_UFK" FromRole="usuarios" ToRole="persona" />
+          <NavigationProperty Name="tipoUsuario" Relationship="Self.tipoUsuarioFK_FK" FromRole="usuarios" ToRole="tipoUsuario" />
         </EntityType>
         <Association Name="codigoCitas_FK">
           <End Role="citas" Type="Self.citas" Multiplicity="1" />
@@ -617,6 +618,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="tipoUsuarioFK_FK">
+          <End Role="tipoUsuario" Type="Self.tipoUsuario" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoUsuario">
+              <PropertyRef Name="codigoTipoUsuario" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="tipoUsuarioFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ClinicaMedicaV1Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="citas" EntityType="Self.citas" />
           <EntitySet Name="citasProgramadas" EntityType="Self.citasProgramadas" />
@@ -672,6 +685,10 @@
             <End Role="persona" EntitySet="persona" />
             <End Role="usuarios" EntitySet="usuarios" />
           </AssociationSet>
+          <AssociationSet Name="tipoUsuarioFK_FK" Association="Self.tipoUsuarioFK_FK">
+            <End Role="tipoUsuario" EntitySet="tipoUsuario" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
           <FunctionImport Name="actualizaDireccion">
             <Parameter Name="codigo" Mode="In" Type="Int64" />
             <Parameter Name="provincia" Mode="In" Type="String" />
@@ -689,18 +706,18 @@
             <Parameter Name="tipoUsuarioFK" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="consultarCita" ReturnType="Collection(ClinicaMedicaV1Model.consultarCita_Result)">
-          <Parameter Name="estado" Mode="In" Type="String" />
+            <Parameter Name="estado" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="consultarDireccion" ReturnType="Collection(ClinicaMedicaV1Model.consultarDireccion_Result)" />
           <FunctionImport Name="consultarPersona">
-          <Parameter Name="identificacion" Mode="In" Type="String" />
+            <Parameter Name="identificacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="consultarPersonas" />
           <FunctionImport Name="eliminarDireccion">
-          <Parameter Name="codigo" Mode="In" Type="Int64" />
+            <Parameter Name="codigo" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="eliminarPersona">
-          <Parameter Name="identificacion" Mode="In" Type="String" />
+            <Parameter Name="identificacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="insertarDireccion">
             <Parameter Name="provincia" Mode="In" Type="String" />
@@ -720,10 +737,6 @@
           </FunctionImport>
           <FunctionImport Name="ultimaInsercion" ReturnType="Collection(Int64)" />
           <FunctionImport Name="ultimaInsercionPersona" ReturnType="Collection(Int64)" />
-          <AssociationSet Name="tipoUsuarioFK_FK" Association="ClinicaMedicaV1Model.tipoUsuarioFK_FK">
-            <End Role="tipoUsuario" EntitySet="tipoUsuario" />
-            <End Role="usuarios" EntitySet="usuarios" />
-          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="consultarCita_Result">
           <Property Type="Int64" Name="codigoCitas" Nullable="false" />
@@ -742,18 +755,6 @@
           <Property Type="String" Name="distrito" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="resena" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <Association Name="tipoUsuarioFK_FK">
-          <End Type="ClinicaMedicaV1Model.tipoUsuario" Role="tipoUsuario" Multiplicity="0..1" />
-          <End Type="ClinicaMedicaV1Model.usuarios" Role="usuarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tipoUsuario">
-              <PropertyRef Name="codigoTipoUsuario" />
-            </Principal>
-            <Dependent Role="usuarios">
-              <PropertyRef Name="tipoUsuarioFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -862,11 +863,11 @@
           <EntitySetMapping Name="usuarios">
             <EntityTypeMapping TypeName="ClinicaMedicaV1Model.usuarios">
               <MappingFragment StoreEntitySet="usuarios">
-                <ScalarProperty Name="tipoUsuarioFK" ColumnName="tipoUsuarioFK" />
                 <ScalarProperty Name="codigoUsuario" ColumnName="codigoUsuario" />
                 <ScalarProperty Name="contrasena" ColumnName="contrasena" />
                 <ScalarProperty Name="codigoPersonaFK" ColumnName="codigoPersonaFK" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="tipoUsuarioFK" ColumnName="tipoUsuarioFK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -922,7 +923,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

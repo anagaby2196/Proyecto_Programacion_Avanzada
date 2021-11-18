@@ -84,7 +84,7 @@ namespace Clinica.DAL
                     throw;
                 }
 
-                return listaCP;
+                return null;
             }
         }
 
