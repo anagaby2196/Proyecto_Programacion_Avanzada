@@ -30,7 +30,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveEvent(long codigoCitas,string asunto,string descripcion, DateTime horaInicio,DateTime horaFin,string temaColor,Boolean esTodoElDia)
+        public JsonResult SaveEvent(long codigoCitas,string asunto,string descripcion, DateTime horaInicio,DateTime horaFin,Boolean esTodoElDia)
         {
                         CitasETL evento = new CitasETL();
                         evento.CodigoCitas = codigoCitas;
@@ -38,7 +38,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
                         evento.Descripcion = descripcion;
                         evento.HoraInicio = (DateTime)horaInicio;
                         evento.HoraFin = (DateTime)horaFin;
-                        evento.TemaColor = temaColor;
+                        evento.TemaColor = "Blue";
                         evento.esTodoElDia = (bool)esTodoElDia;
 
             var status = false;
@@ -52,19 +52,10 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         }
 
         [HttpPost]
-        public JsonResult DeleteEvent(int eventID)
+        public JsonResult DeleteEvent(int eventoID)
         {
-            var status = false;
-            //using (MyDatabaseEntities dc = new MyDatabaseEntities())
-            //{
-            //    var v = dc.Events.Where(a => a.EventID == eventID).FirstOrDefault();
-            //    if (v != null)
-            //    {
-            //        dc.Events.Remove(v);
-            //        dc.SaveChanges();
-            //        status = true;
-            //    }
-            //}
+            CitasBLL citas = new CitasBLL();
+            var status = citas.CancelarCitaBLL(eventoID);
             return new JsonResult { Data = new { status = status } };
         }
     }
