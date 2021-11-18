@@ -10,13 +10,13 @@
 namespace Clinica.DAL
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class reporteCitas
+    public partial class sp_helpdiagrams_Result
     {
-        public long codigoreporteCitas { get; set; }
-        public Nullable<long> codigoExpedienteFK { get; set; }
-    
-        public virtual expediente expediente { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }
