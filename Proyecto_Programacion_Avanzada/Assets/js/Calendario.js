@@ -34,12 +34,15 @@
         $('#calender').fullCalendar('destroy');
         $('#calender').fullCalendar({
             contentHeight: 400,
+            defaultView: 'agendaWeek',
             defaultDate: new Date(),
+            hiddenDays: [0, 6],
+            themeSystem: 'bootstrap',
             timeFormat: 'h(:mm)a',
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,basicWeek,basicDay,agenda'
+                right: 'agendaWeek,agenda'
             },
             eventLimit: true,
             eventColor: '#378006',
@@ -77,8 +80,8 @@
                 var data = {
                     EventID: event.eventID,
                     Subject: event.title,
-                    Start: event.start.format('DD/MM/YYYY HH:mm A'),
-                    End: event.end != null ? event.end.format('DD/MM/YYYY HH:mm A') : null,
+                    Start: event.start.format('YYYY/MM/DD HH:mm A'),
+                    End: event.end != null ? event.end.format('YYYY/MM/DD HH:mm A') : null,
                     Description: event.description,
                     ThemeColor: event.color,
                     IsFullDay: event.allDay
@@ -97,7 +100,7 @@
             $.ajax({
                 type: "POST",
                 url: '/Citas/DeleteEvent',
-                data: { 'eventID': selectedEvent.CodigoCitas },
+                data: {eventoID: selectedEvent.eventID},
                 success: function (data) {
                     if (data.status) {
                         //Refresh the calender
@@ -117,14 +120,16 @@
         format: 'YYYY/MM/DD HH:mm A'
     });
 
-    $('#chkIsFullDay').change(function () {
-        if ($(this).is(':checked')) {
-            $('#divEndDate').hide();
-        }
-        else {
-            $('#divEndDate').show();
-        }
-    });
+    //$('#chkIsFullDay').change(function () {
+    //    if ($(this).is(':checked')) {
+    //        $('#divEndDate').hide();
+    //    }
+    //    else {
+    //        $('#divEndDate').show();
+    //    }
+    //});
+
+    $('#divEndDate').show();
 
     function openAddEditForm() {
         if (selectedEvent != null) {
@@ -182,7 +187,7 @@
             type: "POST",
             url: '/Citas/SaveEvent',
             //long codigoCitas, string asunto,string descripcion, DateTime horaInicio,DateTime horaFin,string temaColor,Boolean esTodoElDia
-            data: { codigoCitas: data.EventID, asunto: data.Subject, descripcion: data.Description, horaInicio: data.Start, horaFin: data.End, temaColor: data.ThemeColor, esTodoElDia: data.IsFullDay },
+            data: { codigoCitas: data.EventID, asunto: data.Subject, descripcion: data.Description, horaInicio: data.Start, horaFin: data.End,esTodoElDia: data.IsFullDay },
             dataType: 'json',
             success: function (data) {
                 if (data.status) {

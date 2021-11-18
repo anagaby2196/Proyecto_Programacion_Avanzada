@@ -16,13 +16,18 @@ namespace Clinica_BLL
             return clinica.CitasDisponibles();           
         }
 
+        
         public Boolean ActualizarCitaBLL(CitasETL Nuevacita)
         {
             CitasDAL clinica = new CitasDAL();
             return clinica.SaveEvent(Nuevacita);
         }
 
-
+        public Boolean CancelarCitaBLL(int eventoID)
+        {
+            CitasDAL clinica = new CitasDAL();
+            return clinica.CancelarCita(eventoID);
+        }
 
 
     }

@@ -53,8 +53,7 @@
             <PropertyRef Name="codigoExpediente" />
           </Key>
           <Property Name="codigoExpediente" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="codigoCitaProgramadasFK" Type="bigint" />
-          <Property Name="codigoPersonaFK" Type="bigint" />
+          <Property Name="codigoPacienteFK" Type="bigint" />
         </EntityType>
         <EntityType Name="paciente">
           <Key>
@@ -114,18 +113,6 @@
             </Principal>
             <Dependent Role="paciente">
               <PropertyRef Name="codigoCitaProgramadaFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="codigoCitaProgramadas_FK">
-          <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="0..1" />
-          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="citasProgramadas">
-              <PropertyRef Name="codigoCitaProgramadas" />
-            </Principal>
-            <Dependent Role="expediente">
-              <PropertyRef Name="codigoCitaProgramadasFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -201,15 +188,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="codigoPersona_FK">
-          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+        <Association Name="codigoPacienteFK">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="0..1" />
           <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="paciente">
+              <PropertyRef Name="codigoPaciente" />
+            </Principal>
+            <Dependent Role="expediente">
+              <PropertyRef Name="codigoPacienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="codigoPersona_DFK">
+          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+          <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="persona">
               <PropertyRef Name="codigoPersona" />
             </Principal>
-            <Dependent Role="expediente">
-              <PropertyRef Name="codigoPersonaFK" />
+            <Dependent Role="doctor">
+              <PropertyRef Name="codigoPersonaFk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -279,6 +278,7 @@
         <Function Name="eliminarPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="identificacion" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="insertarDireccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="provincia" Type="varchar" Mode="In" />
           <Parameter Name="canton" Type="varchar" Mode="In" />
@@ -295,6 +295,36 @@
           <Parameter Name="tipoUsuarioFK" Type="int" Mode="In" />
           <Parameter Name="codigoDireccionFK" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ultimaInsercion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ultimaInsercionPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="ClinicaMedicaV1ModelStoreContainer">
@@ -311,10 +341,6 @@
           <AssociationSet Name="codigoCitaProgramada_FK" Association="Self.codigoCitaProgramada_FK">
             <End Role="citasProgramadas" EntitySet="citasProgramadas" />
             <End Role="paciente" EntitySet="paciente" />
-          </AssociationSet>
-          <AssociationSet Name="codigoCitaProgramadas_FK" Association="Self.codigoCitaProgramadas_FK">
-            <End Role="citasProgramadas" EntitySet="citasProgramadas" />
-            <End Role="expediente" EntitySet="expediente" />
           </AssociationSet>
           <AssociationSet Name="codigoCitas_FK" Association="Self.codigoCitas_FK">
             <End Role="citas" EntitySet="citas" />
@@ -340,9 +366,13 @@
             <End Role="paciente" EntitySet="paciente" />
             <End Role="citasProgramadas" EntitySet="citasProgramadas" />
           </AssociationSet>
-          <AssociationSet Name="codigoPersona_FK" Association="Self.codigoPersona_FK">
-            <End Role="persona" EntitySet="persona" />
+          <AssociationSet Name="codigoPacienteFK" Association="Self.codigoPacienteFK">
+            <End Role="paciente" EntitySet="paciente" />
             <End Role="expediente" EntitySet="expediente" />
+          </AssociationSet>
+          <AssociationSet Name="codigoPersona_DFK" Association="Self.codigoPersona_DFK">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="doctor" EntitySet="doctor" />
           </AssociationSet>
           <AssociationSet Name="codigoPersona_UFK" Association="Self.codigoPersona_UFK">
             <End Role="persona" EntitySet="persona" />
@@ -389,7 +419,6 @@
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="citas" Relationship="Self.codigoCitas_FK" FromRole="citasProgramadas" ToRole="citas" />
           <NavigationProperty Name="paciente" Relationship="Self.codigoCitaProgramada_FK" FromRole="citasProgramadas" ToRole="paciente" />
-          <NavigationProperty Name="expediente" Relationship="Self.codigoCitaProgramadas_FK" FromRole="citasProgramadas" ToRole="expediente" />
           <NavigationProperty Name="doctor" Relationship="Self.codigoDoctor_FK" FromRole="citasProgramadas" ToRole="doctor" />
           <NavigationProperty Name="paciente1" Relationship="Self.codigoPaciente_FK" FromRole="citasProgramadas" ToRole="paciente" />
         </EntityType>
@@ -412,18 +441,17 @@
           <Property Name="codigoPersonaFk" Type="Int64" />
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="citasProgramadas" Relationship="Self.codigoDoctor_FK" FromRole="doctor" ToRole="citasProgramadas" />
+          <NavigationProperty Name="persona" Relationship="Self.codigoPersona_DFK" FromRole="doctor" ToRole="persona" />
         </EntityType>
         <EntityType Name="expediente">
           <Key>
             <PropertyRef Name="codigoExpediente" />
           </Key>
           <Property Name="codigoExpediente" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigoCitaProgramadasFK" Type="Int64" />
-          <Property Name="codigoPersonaFK" Type="Int64" />
-          <NavigationProperty Name="citasProgramadas" Relationship="Self.codigoCitaProgramadas_FK" FromRole="expediente" ToRole="citasProgramadas" />
+          <Property Name="codigoPacienteFK" Type="Int64" />
           <NavigationProperty Name="paciente" Relationship="Self.codigoExpediente_FK" FromRole="expediente" ToRole="paciente" />
           <NavigationProperty Name="reporteCitas" Relationship="Self.codigoExpedienteFK_FK" FromRole="expediente" ToRole="reporteCitas" />
-          <NavigationProperty Name="persona" Relationship="Self.codigoPersona_FK" FromRole="expediente" ToRole="persona" />
+          <NavigationProperty Name="paciente1" Relationship="Self.codigoPacienteFK" FromRole="expediente" ToRole="paciente" />
         </EntityType>
         <EntityType Name="paciente">
           <Key>
@@ -437,6 +465,7 @@
           <NavigationProperty Name="citasProgramadas" Relationship="Self.codigoCitaProgramada_FK" FromRole="paciente" ToRole="citasProgramadas" />
           <NavigationProperty Name="citasProgramadas1" Relationship="Self.codigoPaciente_FK" FromRole="paciente" ToRole="citasProgramadas" />
           <NavigationProperty Name="expediente" Relationship="Self.codigoExpediente_FK" FromRole="paciente" ToRole="expediente" />
+          <NavigationProperty Name="expediente1" Relationship="Self.codigoPacienteFK" FromRole="paciente" ToRole="expediente" />
           <NavigationProperty Name="persona" Relationship="Self.codigoPersonaPac_FK" FromRole="paciente" ToRole="persona" />
         </EntityType>
         <EntityType Name="persona">
@@ -454,7 +483,7 @@
           <Property Name="codigoDireccionFK" Type="Int64" />
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="direccion" Relationship="Self.codigoDireccion_FK" FromRole="persona" ToRole="direccion" />
-          <NavigationProperty Name="expediente" Relationship="Self.codigoPersona_FK" FromRole="persona" ToRole="expediente" />
+          <NavigationProperty Name="doctor" Relationship="Self.codigoPersona_DFK" FromRole="persona" ToRole="doctor" />
           <NavigationProperty Name="paciente" Relationship="Self.codigoPersonaPac_FK" FromRole="persona" ToRole="paciente" />
           <NavigationProperty Name="usuarios" Relationship="Self.codigoPersona_UFK" FromRole="persona" ToRole="usuarios" />
         </EntityType>
@@ -510,18 +539,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="codigoCitaProgramadas_FK">
-          <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="0..1" />
-          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="citasProgramadas">
-              <PropertyRef Name="codigoCitaProgramadas" />
-            </Principal>
-            <Dependent Role="expediente">
-              <PropertyRef Name="codigoCitaProgramadasFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="codigoDoctor_FK">
           <End Role="doctor" Type="Self.doctor" Multiplicity="1" />
           <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="*" />
@@ -558,6 +575,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="codigoPersona_DFK">
+          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+          <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="codigoPersona" />
+            </Principal>
+            <Dependent Role="doctor">
+              <PropertyRef Name="codigoPersonaFk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="codigoExpediente_FK">
           <End Role="expediente" Type="Self.expediente" Multiplicity="0..1" />
           <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
@@ -582,15 +611,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="codigoPersona_FK">
-          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+        <Association Name="codigoPacienteFK">
+          <End Role="paciente" Type="Self.paciente" Multiplicity="0..1" />
           <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="persona">
-              <PropertyRef Name="codigoPersona" />
+            <Principal Role="paciente">
+              <PropertyRef Name="codigoPaciente" />
             </Principal>
             <Dependent Role="expediente">
-              <PropertyRef Name="codigoPersonaFK" />
+              <PropertyRef Name="codigoPacienteFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -649,10 +678,6 @@
             <End Role="citasProgramadas" EntitySet="citasProgramadas" />
             <End Role="paciente" EntitySet="paciente" />
           </AssociationSet>
-          <AssociationSet Name="codigoCitaProgramadas_FK" Association="Self.codigoCitaProgramadas_FK">
-            <End Role="citasProgramadas" EntitySet="citasProgramadas" />
-            <End Role="expediente" EntitySet="expediente" />
-          </AssociationSet>
           <AssociationSet Name="codigoDoctor_FK" Association="Self.codigoDoctor_FK">
             <End Role="doctor" EntitySet="doctor" />
             <End Role="citasProgramadas" EntitySet="citasProgramadas" />
@@ -665,6 +690,10 @@
             <End Role="direccion" EntitySet="direccion" />
             <End Role="persona" EntitySet="persona" />
           </AssociationSet>
+          <AssociationSet Name="codigoPersona_DFK" Association="Self.codigoPersona_DFK">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="doctor" EntitySet="doctor" />
+          </AssociationSet>
           <AssociationSet Name="codigoExpediente_FK" Association="Self.codigoExpediente_FK">
             <End Role="expediente" EntitySet="expediente" />
             <End Role="paciente" EntitySet="paciente" />
@@ -673,8 +702,8 @@
             <End Role="expediente" EntitySet="expediente" />
             <End Role="reporteCitas" EntitySet="reporteCitas" />
           </AssociationSet>
-          <AssociationSet Name="codigoPersona_FK" Association="Self.codigoPersona_FK">
-            <End Role="persona" EntitySet="persona" />
+          <AssociationSet Name="codigoPacienteFK" Association="Self.codigoPacienteFK">
+            <End Role="paciente" EntitySet="paciente" />
             <End Role="expediente" EntitySet="expediente" />
           </AssociationSet>
           <AssociationSet Name="codigoPersonaPac_FK" Association="Self.codigoPersonaPac_FK">
@@ -735,6 +764,36 @@
             <Parameter Name="tipoUsuarioFK" Mode="In" Type="Int32" />
             <Parameter Name="codigoDireccionFK" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ClinicaMedicaV1Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ClinicaMedicaV1Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="ultimaInsercion" ReturnType="Collection(Int64)" />
           <FunctionImport Name="ultimaInsercionPersona" ReturnType="Collection(Int64)" />
         </EntityContainer>
@@ -754,6 +813,17 @@
           <Property Type="String" Name="canton" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="distrito" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="resena" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -812,8 +882,7 @@
             <EntityTypeMapping TypeName="ClinicaMedicaV1Model.expediente">
               <MappingFragment StoreEntitySet="expediente">
                 <ScalarProperty Name="codigoExpediente" ColumnName="codigoExpediente" />
-                <ScalarProperty Name="codigoCitaProgramadasFK" ColumnName="codigoCitaProgramadasFK" />
-                <ScalarProperty Name="codigoPersonaFK" ColumnName="codigoPersonaFK" />
+                <ScalarProperty Name="codigoPacienteFK" ColumnName="codigoPacienteFK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -904,6 +973,30 @@
           <FunctionImportMapping FunctionImportName="eliminarPersona" FunctionName="ClinicaMedicaV1Model.Store.eliminarPersona" />
           <FunctionImportMapping FunctionImportName="insertarDireccion" FunctionName="ClinicaMedicaV1Model.Store.insertarDireccion" />
           <FunctionImportMapping FunctionImportName="insertarPersona" FunctionName="ClinicaMedicaV1Model.Store.insertarPersona" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ClinicaMedicaV1Model.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ClinicaMedicaV1Model.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ClinicaMedicaV1Model.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ClinicaMedicaV1Model.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClinicaMedicaV1Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ClinicaMedicaV1Model.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClinicaMedicaV1Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ClinicaMedicaV1Model.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ClinicaMedicaV1Model.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="ultimaInsercion" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercion" />
           <FunctionImportMapping FunctionImportName="ultimaInsercionPersona" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercionPersona" />
         </EntityContainerMapping>
@@ -923,7 +1016,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
