@@ -10,5 +10,30 @@ namespace Entidades.ETL
     {
         public long CodigoRporteCita { get; set; }
         public long CodigoExpediente { get; set; }
+        public string Nombre { get; set; }
+        public string PrimerApellido { get; set; }
+        public string SegundoApellido { get; set; }
+        public string Identificacion { get; set; }
+        public string Telefono { get; set; }
+        public string Correo { get; set; }        
+        public string Provincia { get; set; }
+        public string Canton { get; set; }
+        public string Distrito { get; set; }
+        public string padecimiento { get; set; }
+        public string tratamiento { get; set; }
+        public DateTime HoraInicio { get; set; }
+        public string NombreDc { get; set; }
+        public string PrimerApellidoDc { get; set; }
+        public string SegundoApellidoDc { get; set; }
+
+
+        //public PersonaETL personaETL { get; set; }
+
+        //public DireccionETL direccionETL { get; set; }
+        //public ExpedienteETL expedienteETL { get; set; }
+        //public CitasProgramadasETL citasProgramadasETL { get; set; }
+        //public CitasETL citasETL { get; set; }
+
+
     }
 }
