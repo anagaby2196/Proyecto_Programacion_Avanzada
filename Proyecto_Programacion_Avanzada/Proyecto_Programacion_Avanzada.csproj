@@ -130,6 +130,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PacienteController.cs" />
+    <Compile Include="Controllers\ReportesCitasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -353,6 +354,7 @@
     <Content Include="Views\Home\Promociones.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
     <Content Include="Views\Citas\CrearCitas.cshtml" />
+    <Content Include="Views\ReporteCitas\ReportesCitas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
