@@ -164,6 +164,7 @@
     <Content Include="Assets\fonts\ionicons\css\ionicons.min.css" />
     <Content Include="Assets\fonts\ionicons\fonts\ionicons.svg" />
     <Content Include="Assets\fonts\open-iconic\open-iconic.svg" />
+    <Content Include="Assets\images\6fa87ce6-25e8-4c27-887a-2d2eaece0590.jpg" />
     <Content Include="Assets\images\Banner.jpg" />
     <Content Include="Assets\images\bigstock-doctor-dermatologist-examines-74599093_6_928x621.jpeg" />
     <Content Include="Assets\images\Callosidades.png" />
@@ -172,11 +173,17 @@
     <Content Include="Assets\images\Foot-care.png" />
     <Content Include="Assets\images\foot-print.png" />
     <Content Include="Assets\images\Icono-medicina.png" />
+    <Content Include="Assets\images\image_1.jpg" />
+    <Content Include="Assets\images\image_2.jpg" />
+    <Content Include="Assets\images\image_3.jpg" />
     <Content Include="Assets\images\Logo Clínica Médica del Pie-fondo.png" />
     <Content Include="Assets\images\masaje.png" />
+    <Content Include="Assets\images\mujer-pensando-mientras-sonrie-370x247.jpg" />
     <Content Include="Assets\images\Muñeca Clínica Médica del Pie.png" />
     <Content Include="Assets\images\pedicura-medica-running-portada2-1556794999.jpg" />
-    <Content Include="Assets\images\PROMO3.jpg" />
+    <Content Include="Assets\images\person_3.jpg" />
+    <Content Include="Assets\images\PROMO1.jpg" />
+    <Content Include="Assets\images\PROMO2.jpg" />
     <Content Include="Assets\images\surgery.png" />
     <Content Include="Assets\images\uña encarnada.png" />
     <Content Include="Assets\js\aos.js" />
