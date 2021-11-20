@@ -356,12 +356,12 @@
     <Content Include="Views\Paciente\ConsultaPacientes.cshtml" />
     <Content Include="Views\Paciente\_DetallePaciente.cshtml" />
     <Content Include="Views\Shared\_LayoutDoctor.cshtml" />
-    <Content Include="Views\Citas\Index.cshtml" />
     <Content Include="Views\Home\Nosotros.cshtml" />
     <Content Include="Views\Home\Promociones.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
     <Content Include="Views\Citas\CrearCitas.cshtml" />
     <Content Include="Views\ReporteCitas\ReportesCitas.cshtml" />
+    <Content Include="Views\Citas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
