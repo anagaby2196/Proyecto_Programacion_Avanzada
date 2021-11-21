@@ -28,6 +28,10 @@ namespace Proyecto_Programacion_Avanzada.Filtros
                 if (filterContext.Controller is LoginController == true)
                 {
                     filterContext.HttpContext.Response.Redirect("~/Perfil/Perfil");
+                }else 
+                if (filterContext.Controller is CitasController == true && nUsuario.TipoUsuario != 2)
+                {
+                    filterContext.HttpContext.Response.Redirect("~/Perfil/Perfil");
                 }
             }
 
