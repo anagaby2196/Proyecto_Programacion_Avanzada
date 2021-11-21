@@ -27,28 +27,25 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
-    <a href="/"><img src="~/Assets/images/Banner.jpg" width="100%"></img></a>
+    @*<a href="/"><img src="~/Assets/images/Banner.jpg" width="100%"></img></a>*@
 </head>
 <body>
 
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <div class="collapse navbar-collapse navbar-right" id="collapsibleNavbar">
+        <div class="navbar-collapse navbar-right" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="#" style="color:white">Crear Cita</a>
+                <li class="form-inline" style="margin-left: -20%; margin-right: 5%">
+                    @Html.ActionLink("Citas Programadas", "Index", "Citas", null, new { @style = "color:#FFFFFF" })
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" style="color:white">Citas Programadas</a>
+                <li class="form-inline" style="margin-right:5%">
+                  @Html.ActionLink("Pacientes", "ConsultaPacientes", "Paciente", null, new { @style = "color:#FFFFFF" })
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" style="color:white">Pacientes</a>
+                <li class="form-inline" style="margin-right:5%">
+                    @Html.ActionLink("Perfil", "Perfil", "Perfil", null, new { @style = "color:#FFFFFF" })
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" style="color:white">Perfil</a>
-                </li>
-                <form class="form-inline">
-                    <button class="btn btn-outline-danger" type="button">Cerrar Seccion</button>
+                <form class="form-inline" style="margin-right:3%">
+                    <button class="btn btn-outline-light" type="button">@Html.ActionLink("Cerrar Sesión", "CerrarSession", "Login", null, new { @style = "color:#FFFFFF" })</button>
                 </form>
 
             </ul>
@@ -56,7 +53,13 @@
     </nav>
     <!-- END nav -->
 
-    @RenderBody()
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p style="font-family:'Eras ITC'">&copy; @DateTime.Now.Year / Desarrollado por: Jhonsel Josué Díaz Chacón - Kevin Martín Fallas Alfaro - Ana Gabriela Mora Salas</p>
+        </footer>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

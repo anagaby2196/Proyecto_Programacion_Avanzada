@@ -1,7 +1,10 @@
 
-    $(document).ready(function(){
+$(document).ready(function () {
     $('.login-info-box').fadeOut();
-    $('.login-show').addClass('show-log-panel');
+    $('.login-show').addClass('show-log-panel')
+
+
+
 });
 
 
@@ -25,4 +28,4 @@ $('.login-reg-panel input[type="radio"]').on('change', function() {
         $('.register-show').removeClass('show-log-panel');
     }
 });
-  
+

@@ -130,7 +130,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PacienteController.cs" />
+    <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\ReportesCitasController.cs" />
+    <Compile Include="Filtros\VerificarFiltroSession.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,6 +192,7 @@
     <Content Include="Assets\js\bootstrap-datepicker.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
     <Content Include="Assets\js\Calendario.js" />
+    <Content Include="Assets\js\consultaPaciente.js" />
     <Content Include="Assets\js\google-map.js" />
     <Content Include="Assets\js\jquery-3.2.1.min.js" />
     <Content Include="Assets\js\jquery-migrate-3.0.1.min.js" />
@@ -350,7 +353,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Servicios.cshtml" />
-    <Content Include="Views\Home\Citas.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Paciente\ConsultaPacientes.cshtml" />
@@ -359,9 +361,10 @@
     <Content Include="Views\Home\Nosotros.cshtml" />
     <Content Include="Views\Home\Promociones.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
-    <Content Include="Views\Citas\CrearCitas.cshtml" />
     <Content Include="Views\ReporteCitas\ReportesCitas.cshtml" />
     <Content Include="Views\Citas\Index.cshtml" />
+    <Content Include="Views\Perfil\Perfil.cshtml" />
+    <Content Include="Views\Login\OlvidoContrasena.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

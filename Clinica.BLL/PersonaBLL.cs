@@ -13,16 +13,21 @@ namespace Clinica.BLL
     public class PersonaBLL
     {
 
-        public Boolean RegistrarUsuarioBLL(PersonaETL persona)
+        public Boolean RegistrarPersonaBLL(PersonaETL persona)
         {
             PersonaDAL prs = new PersonaDAL();
-            return prs.RegistrarUsuario(persona);
-        }
-        public Boolean AgregarUsuarioBLL(PersonaETL persona, UsuarioETL usuario)
-        {
+            persona.TipoUsuario = 1;
+            if (prs.RegistrarPersona(persona))
+            {
+                return AgregarUsuarioBLL(persona);
+            }
 
+            return false;
+        }
+        public Boolean AgregarUsuarioBLL(PersonaETL persona)
+        {
             PersonaDAL prs = new PersonaDAL();
-            return prs.AgregarUsuario(persona, usuario);
+            return prs.AgregarUsuario(persona);
         }
 
         public Boolean ActualizarPersonaBLL(PersonaETL persona)
@@ -30,5 +35,14 @@ namespace Clinica.BLL
             PersonaDAL prs = new PersonaDAL();
             return prs.ActualizarPersona(persona);
         }
+
+        public PersonaETL VerificarLogin(string correo,string contrasena)
+        {
+            PersonaDAL prs = new PersonaDAL();
+            return prs.VerificarUsuario(correo, contrasena);
+        }
+
+
+
     }
 }
