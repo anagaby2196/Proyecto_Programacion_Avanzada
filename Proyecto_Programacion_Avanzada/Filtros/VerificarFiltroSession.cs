@@ -20,7 +20,6 @@ namespace Proyecto_Programacion_Avanzada.Filtros
                 
                 if (filterContext.Controller is LoginController == false)
                 {
-
                     filterContext.HttpContext.Response.Redirect("~/Login/Login");
                 }
             }

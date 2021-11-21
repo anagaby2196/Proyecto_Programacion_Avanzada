@@ -59,5 +59,12 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             return View();
         }
 
+
+        public ActionResult CerrarSession()
+        {
+            Session["Usuario"] = null;
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }
