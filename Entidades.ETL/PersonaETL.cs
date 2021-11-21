@@ -18,5 +18,9 @@ namespace Entidades.ETL
         public int TipoUsuario { get; set; }
         public long CodigoDireccion { get; set; }
         public Boolean Estado { get; set; }
+        public UsuarioETL usuario { get; set; }
+
+        public string Contrasena { get; set; }
+
     }
 }

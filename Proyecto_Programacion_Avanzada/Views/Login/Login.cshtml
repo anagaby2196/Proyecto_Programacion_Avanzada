@@ -67,37 +67,42 @@
             <input type="radio" name="active-log-panel" id="log-login-show">
         </div>
 
-        <div class="white-panel">
-            <div class="login-show">
-                <h2 style="font-family: 'Eras ITC';">LOGIN</h2>
-                <input type="text" placeholder="Correo">
-                <input type="password" placeholder="Contraseña">
-                <a href="" style="font-family: 'Eras ITC';">¿Olvidó su contraseña?</a>
-                <button type="submit" class="btn btn-primary" style="font-family: 'Eras ITC'; margin-left:65%">Login</button>
-            </div>
 
-            <form method="POST">
-                <div class="register-show container">
-                    <div class="row justify-content-lg-center">
-                        <h2 style="color:black; font-family:'Eras ITC'; font-size:xx-large;" class="align-content-center">REGISTRARSE</h2>
-                    </div>
-                    <div class="row">
-                        <div class="register-show col-6">
-                            @Html.TextBoxFor(model => Model.Nombre, new { @placeholder = "Nombre", @class = "cntrol" })
-                            @Html.TextBoxFor(model => Model.PrimerApellido, new { @placeholder = "Primer Apellido", @class = "cntrol" })
-                            @Html.TextBoxFor(model => Model.SegundoApellido, new { @placeholder = "Segundo Apellido", @class = "cntrol" })
-                            @Html.TextBoxFor(model => Model.Identificacion, new { @placeholder = "Identificación", @class = "cntrol" })
-                        </div>
-                        <div class="register-show col-6">
-                            @Html.TextBoxFor(model => Model.Telefono, new { @placeholder = "Teléfono", @class = "cntrol" })
-                            @Html.TextBoxFor(model => Model.Correo, new { @placeholder = "Correo Electrónico", @class = "cntrol" })
-                            <input type="password" placeholder="Contraseña">
-                            <input type="password" name="Contrasena" placeholder="Confirmar Contraseña">
-                            <button type="submit" class="btn btn-primary" style="font-family: 'Eras ITC';">Registrar</button>
-                        </div>
-                    </div>
+        <div class="white-panel">
+            <form method="POST" id="LoginForm">
+                <div class="login-show">
+                    <h2 style="font-family: 'Eras ITC';">LOGIN</h2>
+                    <input type="text" name="correoLogin" placeholder="Correo">
+                    <input type="password" name="contrasenaLogin" placeholder="Contraseña">
+                    <a href="" style="font-family: 'Eras ITC';">¿Olvidó su contraseña?</a>
+                    <button type="submit" class="btn btn-primary" style="font-family: 'Eras ITC'; margin-left:65%">Login</button>
                 </div>
             </form>
+
+                <form method="POST" id="registrar">
+                    <div class="register-show container">
+                        <div class="row justify-content-lg-center">
+                            <h2 style="color:black; font-family:'Eras ITC'; font-size:xx-large;" class="align-content-center">REGISTRARSE</h2>
+                        </div>
+                        <div class="row">
+                            <div class="register-show col-6">
+
+                                <input type="text" name="nombre" placeholder="Nombre">
+                                <input type="text" name="papellido" placeholder="Primer Apellido">
+                                <input type="text" name="sapellido" placeholder="Segundo Apellido">
+                                <input type="text" name="identificacion" placeholder="Identificacion">
+                            </div>
+                            <div class="register-show col-6">
+
+                                <input type="text" name="telefono" placeholder="Telefono">
+                                <input type="text" name="correo" placeholder="Correo">
+                                <input type="password" name="contrasena1" placeholder="Contraseña">
+                                <input type="password" name="Contrasena" placeholder="Confirmar Contraseña">
+                                <button type="submit" class="btn btn-primary" style="font-family: 'Eras ITC';">Registrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
         </div>
     </div>
 
