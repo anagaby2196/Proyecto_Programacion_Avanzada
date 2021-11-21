@@ -69,7 +69,8 @@
 
 
         <div class="white-panel">
-            <form method="POST" id="LoginForm">
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
                 <div class="login-show">
                     <h2 style="font-family: 'Eras ITC';">LOGIN</h2>
                     <input type="text" name="correoLogin" placeholder="Correo">
@@ -77,32 +78,37 @@
                     <a href="" style="font-family: 'Eras ITC';">¿Olvidó su contraseña?</a>
                     <button type="submit" class="btn btn-primary" style="font-family: 'Eras ITC'; margin-left:60%">Login</button>
                 </div>
-            </form>
+            }
 
-                <form method="POST" id="registrar">
-                    <div class="register-show container">
-                        <div class="row justify-content-lg-center">
-                            <h2 style="color:black; font-family:'Eras ITC'; font-size:xx-large;" class="align-content-center">REGISTRARSE</h2>
+
+
+            @using (Html.BeginForm("Registrar", "Login", FormMethod.Post))
+            {
+                <div class="register-show container">
+                    <div class="row justify-content-lg-center">
+                        <h2 style="color:black; font-family:'Eras ITC'; font-size:xx-large;" class="align-content-center">REGISTRARSE</h2>
+                    </div>
+                    <div class="row">
+                        <div class="register-show col-6">
+
+                            <input type="text" name="nombre" placeholder="Nombre">
+                            <input type="text" name="papellido" placeholder="Primer Apellido">
+                            <input type="text" name="sapellido" placeholder="Segundo Apellido">
+                            <input type="text" name="identificacion" placeholder="Identificacion">
                         </div>
-                        <div class="row">
-                            <div class="register-show col-6">
+                        <div class="register-show col-6">
 
-                                <input type="text" name="nombre" placeholder="Nombre">
-                                <input type="text" name="papellido" placeholder="Primer Apellido">
-                                <input type="text" name="sapellido" placeholder="Segundo Apellido">
-                                <input type="text" name="identificacion" placeholder="Identificacion">
-                            </div>
-                            <div class="register-show col-6">
-
-                                <input type="text" name="telefono" placeholder="Telefono">
-                                <input type="text" name="correo" placeholder="Correo">
-                                <input type="password" name="contrasena1" placeholder="Contraseña">
-                                <input type="password" name="Contrasena" placeholder="Confirmar Contraseña">
-                                <button type="submit" class="btn btn-primary" style="font-family: 'Eras ITC';">Registrar</button>
-                            </div>
+                            <input type="text" name="telefono" placeholder="Telefono">
+                            <input type="text" name="correo" placeholder="Correo">
+                            <input type="password" name="contrasena1" placeholder="Contraseña">
+                            <input type="password" name="Contrasena" placeholder="Confirmar Contraseña">
+                            <button type="submit" class="btn btn-primary" style="font-family: 'Eras ITC';">Registrar</button>
                         </div>
                     </div>
-                </form>
+                </div>
+            }
+
+
         </div>
     </div>
 
