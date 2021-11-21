@@ -3,42 +3,42 @@ $(document).ready(function () {
     $('.login-info-box').fadeOut();
     $('.login-show').addClass('show-log-panel')
 
-    $("#registrar").submit(function (e) {
+    //$("#registrar").submit(function (e) {
         
-        $.ajax({
-            type: "POST",
-            url: '/Login/Registrar',
-            data: { nombre: data.nombre, papellido: data.papellido, sapellido: data.sapellido, indentificacion: data.indentificacion, telefono: data.telefono, correo: data.correo, contrasena: data.contrasena },
-            dataType: 'json',
-            success: function (data) {
-                if (data.status) {
-                    alert("success");
-                }
-            },
-            error: function () {
-                alert('Failed');
-            }
-        });
-    })
+    //    $.ajax({
+    //        type: "POST",
+    //        url: '/Login/Registrar',
+    //        data: { nombre: data.nombre, papellido: data.papellido, sapellido: data.sapellido, indentificacion: data.indentificacion, telefono: data.telefono, correo: data.correo, contrasena: data.contrasena },
+    //        dataType: 'json',
+    //        success: function (data) {
+    //            if (data.status) {
+    //                alert("success");
+    //            }
+    //        },
+    //        error: function () {
+    //            alert('Failed');
+    //        }
+    //    });
+    //})
     
 
-    $("#LoginForm").submit(function (e) {
+    //$("#LoginForm").submit(function (e) {
         
-        $.ajax({
-            type: "POST",
-            url: '/Login/Login',
-            data: { correoLogin: data.correoLogin, contrasenaLogin: data.contrasenaLogin },
-            dataType: 'json',
-            success: function (data) {
-                if (data.status) {
-                    alert("success");
-                }
-            },
-            error: function () {
-                alert('Failed');
-            }
-        })
-    });
+    //    $.ajax({
+    //        type: "POST",
+    //        url: '/Login/Login',
+    //        data: { correoLogin: data.correoLogin, contrasenaLogin: data.contrasenaLogin },
+    //        dataType: 'json',
+    //        success: function (data) {
+    //            if (data.status) {
+    //                alert("success");
+    //            }
+    //        },
+    //        error: function () {
+    //            alert('Failed');
+    //        }
+    //    })
+    //});
     
 
 

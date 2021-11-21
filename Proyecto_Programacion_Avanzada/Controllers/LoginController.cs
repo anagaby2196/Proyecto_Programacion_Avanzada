@@ -28,6 +28,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             if (personabll.RegistrarPersonaBLL(persona))
             {
                 Login(persona.Correo,persona.Contrasena);
+                return RedirectToAction("Index", "Citas");
             }
 
             return View();
