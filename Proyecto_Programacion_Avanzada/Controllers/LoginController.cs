@@ -17,7 +17,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         {
             if (nombre.Length>2 && papellido.Length>2 && sapellido.Length>2 && 
                 identificacion.Length<=12 && telefono.Length>6 && correo.Length>5 
-                && contrasena.Length>6)
+                && contrasena.Length>=6)
             {
                 PersonaETL persona = new PersonaETL();
                 persona.Nombre = nombre;
