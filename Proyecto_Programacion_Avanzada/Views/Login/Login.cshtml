@@ -76,7 +76,7 @@
                 <input type="text" name="correoLogin" placeholder="Correo">
                 <input type="password" name="contrasenaLogin" placeholder="Contraseña">
                 <button type="submit" class="btn btn-primary col-3" style="font-family: 'Eras ITC'; margin-left:auto">Entrar</button>
-                <a href="" style="font-family: 'Eras ITC'; margin-left:40%">¿Olvidó su contraseña?</a>
+                @Html.ActionLink("¿Olvidó su contraseña?", "OlvidoContrasena", "Login", null, new { @style = "color:#000000; font-family: 'Eras ITC'; margin-left:40%" })
             </div>
             }
 
