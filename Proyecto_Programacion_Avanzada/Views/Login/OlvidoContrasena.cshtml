@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Clínica Médica del Pie - Olvidó su Contraseña</title>
+
+    <a href="/"><img src="~/Assets/images/Banner.jpg" width="100%"></img></a>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="~/Assets/css/login.css" rel="stylesheet" id="bootstrap-css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="~/Assets/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/css/animate.css">
+    <link rel="stylesheet" href="~/Assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/Assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Assets/css/aos.css">
+    <link rel="stylesheet" href="~/Assets/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/Assets/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/Assets/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="~/Assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/Assets/css/icomoon.css">
+    <link rel="stylesheet" href="~/Assets/css/style.css">
+    <link rel="stylesheet" href="~/Assets/css/login.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5%">@Html.ActionLink("Nosotros", "Nosotros", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Servicios", "Servicios", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Promociones", "Promociones", "Home", null, new { @style = "color:#000000" })</li>
+                    <li class="nav-item" style="font-family:'Eras ITC'; font-size:large; margin-right:5% ">@Html.ActionLink("Contacto", "Contacto", "Home", null, new { @style = "color:#000000" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>
