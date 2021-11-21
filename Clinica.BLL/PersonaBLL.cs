@@ -36,7 +36,7 @@ namespace Clinica.BLL
             return prs.ActualizarPersona(persona);
         }
 
-        public List<PersonaETL> VerificarLogin(string correo,string contrasena)
+        public PersonaETL VerificarLogin(string correo,string contrasena)
         {
             PersonaDAL prs = new PersonaDAL();
             return prs.VerificarUsuario(correo, contrasena);

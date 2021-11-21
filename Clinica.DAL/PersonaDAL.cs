@@ -11,7 +11,7 @@ namespace Clinica.DAL
 {
     public class PersonaDAL
     {
-        
+
         public Boolean RegistrarPersona(PersonaETL persona)
         {
 
@@ -42,8 +42,9 @@ namespace Clinica.DAL
                         throw;
                     }
                 }
-            }return false;
-            
+            }
+            return false;
+
         }
 
         public Boolean VerificaPersona(PersonaETL persona)
@@ -63,7 +64,8 @@ namespace Clinica.DAL
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
-                try{
+                try
+                {
                     var ultimaPersona = (from x in contexto.persona where x.identificacion == persona.Identificacion && x.correo == persona.Correo select x).FirstOrDefault();
 
                     usuarios usr = new usuarios();
@@ -77,21 +79,21 @@ namespace Clinica.DAL
                 catch (Exception)
                 {
                     throw;
-                }                
-            }                
+                }
+            }
         }
         public Boolean ActualizarPersona(PersonaETL persona)
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
-                contexto.actualizaPersona(persona.Nombre,persona.PrimerApellido,persona.SegundoApellido,
-                                            persona.Identificacion,persona.Telefono,persona.Correo,persona.TipoUsuario);
+                contexto.actualizaPersona(persona.Nombre, persona.PrimerApellido, persona.SegundoApellido,
+                                            persona.Identificacion, persona.Telefono, persona.Correo, persona.TipoUsuario);
                 return true;
             }
         }
 
 
-        public List<PersonaETL> VerificarUsuario(string correo, string contrasena)
+        public PersonaETL VerificarUsuario(string correo, string contrasena)
         {
             try
             {
@@ -99,22 +101,22 @@ namespace Clinica.DAL
                 {
                     var lista = (from x in contexto.usuarios join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona where x.contrasena == contrasena && y.correo == correo select y);
 
-                    List<PersonaETL> listaP = new List<PersonaETL>();
+                    PersonaETL listaP = new PersonaETL();
                     if (lista.Count() > 0)
                     {
                         foreach (var item in lista)
                         {
-                            listaP.Add(new PersonaETL
-                            {
-                                Nombre = item.nombre,
-                                PrimerApellido = item.primerApellido,
-                                SegundoApellido = item.segundoApellido,
-                                Identificacion = item.identificacion,
-                                Telefono = item.telefono,
-                                Correo = item.correo,
-                                TipoUsuario = (int)item.tipoUsuarioFK,
-                                Estado = (bool)item.estado
-                            });
+
+                            listaP.Nombre = item.nombre;
+                            listaP.PrimerApellido = item.primerApellido;
+                            listaP.SegundoApellido = item.segundoApellido;
+                            listaP.Identificacion = item.identificacion;
+                            listaP.Telefono = item.telefono;
+                            listaP.Correo = item.correo;
+                            listaP.TipoUsuario = (int)item.tipoUsuarioFK;
+                            listaP.Estado = (bool)item.estado;
+
+
                         }
 
                         return listaP;
