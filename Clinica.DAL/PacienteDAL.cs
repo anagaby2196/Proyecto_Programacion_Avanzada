@@ -65,8 +65,6 @@ namespace Clinica.DAL
                         });
                     }
                 }
-                {
-                }
                 return listaPacientes;
             }
 
