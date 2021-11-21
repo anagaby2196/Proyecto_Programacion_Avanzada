@@ -15,6 +15,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         [HttpPost]
         public ActionResult Registrar(string nombre, string papellido, string sapellido, string identificacion, string telefono, string correo, string contrasena)
         {
+            
             PersonaETL persona = new PersonaETL();
             persona.Nombre = nombre;
             persona.PrimerApellido = papellido;
@@ -27,8 +28,10 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             PersonaBLL personabll = new PersonaBLL();
             if (personabll.RegistrarPersonaBLL(persona))
             {
-                Login(persona.Correo,persona.Contrasena);
-                return RedirectToAction("Index", "Citas");
+                PersonaBLL personabll2 = new PersonaBLL();
+                var usuario = personabll2.VerificarLogin(persona.Correo, persona.Contrasena);
+                Session["Usuario"] = usuario;
+                return RedirectToAction("Perfil", "Perfil");
             }
 
             return View();
@@ -39,11 +42,19 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         {
             PersonaBLL personabll = new PersonaBLL();
             var usuario = personabll.VerificarLogin(correoLogin, contrasenaLogin);
-            Session["Usuario"] = usuario;
-            return RedirectToAction("Index","Citas");
+            if (usuario!=null)
+            {
+                Session["Usuario"] = usuario;
+                return RedirectToAction("Perfil", "Perfil");
+            }
+
+            return View();
         }
 
-
+        public ActionResult OlvidoContrasena()
+        {
+            return View();
+        }
 
     }
 }
