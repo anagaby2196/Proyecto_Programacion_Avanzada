@@ -71,14 +71,13 @@
         <div class="white-panel">
             @using (Html.BeginForm("Login", "Login", FormMethod.Post))
             {
-                <div class="login-show">
-                    <h2 style="font-family: 'Eras ITC';"></h2>
-                    <input type="text" name="correoLogin" placeholder="Correo">
-                    <input type="password" name="contrasenaLogin" placeholder="Contraseña">
-                    <button type="submit" class="btn btn-primary col-3" style="font-family: 'Eras ITC'; margin-left:auto"></button>
-
-                    <a href="" style="font-family: 'Eras ITC'; margin-left:40%"></a>
-                </div>
+            <div class="login-show">
+                <h2 style="font-family: 'Eras ITC';"></h2>
+                <input type="text" name="correoLogin" placeholder="Correo">
+                <input type="password" name="contrasenaLogin" placeholder="Contraseña">
+                <button type="submit" class="btn btn-primary col-3" style="font-family: 'Eras ITC'; margin-left:auto">Entrar</button>
+                <a href="" style="font-family: 'Eras ITC'; margin-left:40%">¿Olvidó su contraseña?</a>
+            </div>
             }
 
 
