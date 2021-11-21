@@ -9,6 +9,11 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         // GET: Login
         public ActionResult Login()
         {
+            if (TempData["MensajeError"] != null)
+            {
+                ViewBag.Message = TempData["MensajeError"].ToString();
+            }
+            
             return View();
         }
         //POST:
@@ -37,21 +42,26 @@ namespace Proyecto_Programacion_Avanzada.Controllers
                     return RedirectToAction("Perfil", "Perfil");
                 }
             }
-            return View();
+            TempData["MensajeError"] = "Se ha digitado los datos incorrectamente";
+            return RedirectToAction("Login",false);
         }
 
         [HttpPost]
         public ActionResult Login(string correoLogin,string contrasenaLogin)
         {
-            PersonaBLL personabll = new PersonaBLL();
-            var usuario = personabll.VerificarLogin(correoLogin, contrasenaLogin);
-            if (usuario!=null)
+            if (correoLogin.Length > 6 && contrasenaLogin.Length >=6)
             {
-                Session["Usuario"] = usuario;
-                return RedirectToAction("Perfil", "Perfil");
+                PersonaBLL personabll = new PersonaBLL();
+                var usuario = personabll.VerificarLogin(correoLogin, contrasenaLogin);
+                if (usuario != null)
+                {
+                    Session["Usuario"] = usuario;
+                    return RedirectToAction("Perfil", "Perfil");
+                }
             }
 
-            return View();
+            TempData["MensajeError"] = "Usuario o contrasena invalida";
+            return RedirectToAction("Login", false);
         }
 
         public ActionResult OlvidoContrasena()

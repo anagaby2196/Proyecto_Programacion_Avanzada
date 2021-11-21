@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="~/Assets/css/icomoon.css">
     <link rel="stylesheet" href="~/Assets/css/style.css">
     <link rel="stylesheet" href="~/Assets/css/login.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -51,6 +52,18 @@
             </div>
         </div>
     </nav>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <script type="text/javascript">
+            swal(
+                'Oops...',
+                '@ViewBag.Message!',
+                'error'
+            )
+
+        </script>
+    }
 
     <div class="login-reg-panel" style="margin-top:-10%">
         <div class="login-info-box">
@@ -71,13 +84,13 @@
         <div class="white-panel">
             @using (Html.BeginForm("Login", "Login", FormMethod.Post))
             {
-            <div class="login-show">
-                <h2 style="font-family: 'Eras ITC';"></h2>
-                <input type="text" name="correoLogin" placeholder="Correo">
-                <input type="password" name="contrasenaLogin" placeholder="Contraseña">
-                <button type="submit" class="btn btn-primary col-3" style="font-family: 'Eras ITC'; margin-left:auto">Entrar</button>
-                @Html.ActionLink("¿Olvidó su contraseña?", "OlvidoContrasena", "Login", null, new { @style = "color:#000000; font-family: 'Eras ITC'; margin-left:40%" })
-            </div>
+                <div class="login-show">
+                    <h2 style="font-family: 'Eras ITC';"></h2>
+                    <input type="text" name="correoLogin" placeholder="Correo">
+                    <input type="password" name="contrasenaLogin" placeholder="Contraseña">
+                    <button type="submit" class="btn btn-primary col-3" style="font-family: 'Eras ITC'; margin-left:auto">Entrar</button>
+                    @Html.ActionLink("¿Olvidó su contraseña?", "OlvidoContrasena", "Login", null, new { @style = "color:#000000; font-family: 'Eras ITC'; margin-left:40%" })
+                </div>
             }
 
 
