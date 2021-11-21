@@ -15,25 +15,28 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         [HttpPost]
         public ActionResult Registrar(string nombre, string papellido, string sapellido, string identificacion, string telefono, string correo, string contrasena)
         {
-            
-            PersonaETL persona = new PersonaETL();
-            persona.Nombre = nombre;
-            persona.PrimerApellido = papellido;
-            persona.SegundoApellido = sapellido;
-            persona.Identificacion = identificacion;
-            persona.Telefono = telefono;
-            persona.Correo = correo;
-            persona.Contrasena = contrasena;
-
-            PersonaBLL personabll = new PersonaBLL();
-            if (personabll.RegistrarPersonaBLL(persona))
+            if (nombre.Length>2 && papellido.Length>2 && sapellido.Length>2 && 
+                identificacion.Length<=12 && telefono.Length>6 && correo.Length>5 
+                && contrasena.Length>6)
             {
-                PersonaBLL personabll2 = new PersonaBLL();
-                var usuario = personabll2.VerificarLogin(persona.Correo, persona.Contrasena);
-                Session["Usuario"] = usuario;
-                return RedirectToAction("Perfil", "Perfil");
-            }
+                PersonaETL persona = new PersonaETL();
+                persona.Nombre = nombre;
+                persona.PrimerApellido = papellido;
+                persona.SegundoApellido = sapellido;
+                persona.Identificacion = identificacion;
+                persona.Telefono = telefono;
+                persona.Correo = correo;
+                persona.Contrasena = contrasena;
 
+                PersonaBLL personabll = new PersonaBLL();
+                if (personabll.RegistrarPersonaBLL(persona))
+                {
+                    PersonaBLL personabll2 = new PersonaBLL();
+                    var usuario = personabll2.VerificarLogin(persona.Correo, persona.Contrasena);
+                    Session["Usuario"] = usuario;
+                    return RedirectToAction("Perfil", "Perfil");
+                }
+            }
             return View();
         }
 
