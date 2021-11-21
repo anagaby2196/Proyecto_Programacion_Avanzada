@@ -32,7 +32,7 @@
 <body>
 
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <div class="collapse navbar-collapse navbar-right" id="collapsibleNavbar">
+        <div class="navbar-collapse navbar-right" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
 
                 <li class="form-inline" style="margin-left: -20%; margin-right: 5%">
@@ -53,7 +53,13 @@
     </nav>
     <!-- END nav -->
 
-    @RenderBody()
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p style="font-family:'Eras ITC'">&copy; @DateTime.Now.Year / Desarrollado por: Jhonsel Josué Díaz Chacón - Kevin Martín Fallas Alfaro - Ana Gabriela Mora Salas</p>
+        </footer>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
