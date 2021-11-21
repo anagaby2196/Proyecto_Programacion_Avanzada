@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Entidades.ETL.PacienteETL>
 @{
     ViewBag.Title = "ConsultaPacientes";
     Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
@@ -12,35 +12,40 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
+                    <th></th>
+                    <th scope="col">Identificacion</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Sº Apellido</th>
+                    <th scope="col">Doctor</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
+                @foreach (var item in Model)
+                {
+                    <tr>
 
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
+                        <td><input type="radio" value="Detalles..." class="btn btn-default" @*onclick="MostrarDatos(@item.Consecutivo);"*@></td>
+                        <td>1111111</td>
+                        <td>Otto</td>
+                        <td>Otto</td>
+                        <td>Otto</td>
+                        <td>Otto</td>
 
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
+                    </tr>
+                }
 
-                </tr>
+
             </tbody>
         </table>
     </div>
 </div>
 
 <br />
+@section scripts
+{
+    @Scripts.Render("/Assets/js/consultaPaciente.js")
+}
+
 
 @Html.Partial("/Views/Paciente/_DetallePaciente.cshtml")

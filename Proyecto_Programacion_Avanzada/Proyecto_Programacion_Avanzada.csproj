@@ -192,6 +192,7 @@
     <Content Include="Assets\js\bootstrap-datepicker.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
     <Content Include="Assets\js\Calendario.js" />
+    <Content Include="Assets\js\consultaPaciente.js" />
     <Content Include="Assets\js\google-map.js" />
     <Content Include="Assets\js\jquery-3.2.1.min.js" />
     <Content Include="Assets\js\jquery-migrate-3.0.1.min.js" />
