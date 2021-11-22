@@ -6,9 +6,21 @@ using System.Threading.Tasks;
 
 namespace Entidades.ETL
 {
-    public class ExpedienteETL : CitasProgramadasETL
+    public class ExpedienteETL : PacienteETL 
     {
         public long CodigoExpediente { get; set; }
-        public long CodigoCitaProgramada { get; set; }
+        public long CodigoPaciente { get; set; }
+
+        PersonaETL pETL { get; set; }  
+
+        CitasProgramadasETL cpETL { get; set; } 
+
+        DoctorETL doctorETL { get; set; } 
+        
+        CitasETL cETL { get; set; }    
+
+        
+
+
     }
 }

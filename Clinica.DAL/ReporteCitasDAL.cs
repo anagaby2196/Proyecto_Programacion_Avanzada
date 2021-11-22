@@ -82,20 +82,19 @@ namespace Clinica.DAL
 
         }
 
-        public Boolean RegristrarDoctor(DoctorETL doctor)
+        public Boolean RegristrarReporteCita()
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
                 try
                 {
-                    var ultimaPersona = (from x in contexto.persona select x).LastOrDefault();
+                    var ultimoExpediente = (from x in contexto.expediente select x).LastOrDefault();
 
 
-                    doctor doc = new doctor();
-                    doc.codigoPersonaFk = ultimaPersona.codigoPersona;
-                    doc.estado = true;
+                    reporteCitas rc = new reporteCitas();
+                    rc.codigoExpedienteFK = ultimoExpediente.codigoExpediente;
 
-                    contexto.doctor.Add(doc);
+                    contexto.reporteCitas.Add(rc);
                     contexto.SaveChanges();
 
                 }
