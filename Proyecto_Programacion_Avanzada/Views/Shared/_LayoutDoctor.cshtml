@@ -35,18 +35,35 @@
         <div class="navbar-collapse navbar-right" id="collapsibleNavbar">
             <ul class="navbar-nav ml-auto">
 
-                <li class="form-inline" style="margin-left: -20%; margin-right: 5%">
-                    @Html.ActionLink("Citas Programadas", "Index", "Citas", null, new { @style = "color:#FFFFFF" })
-                </li>
-                <li class="form-inline" style="margin-right:5%">
-                  @Html.ActionLink("Pacientes", "ConsultaPacientes", "Paciente", null, new { @style = "color:#FFFFFF" })
-                </li>
-                <li class="form-inline" style="margin-right:5%">
-                    @Html.ActionLink("Perfil", "Perfil", "Perfil", null, new { @style = "color:#FFFFFF" })
-                </li>
-                <form class="form-inline" style="margin-right:3%">
-                    <button class="btn btn-outline-light" type="button">@Html.ActionLink("Cerrar Sesión", "CerrarSession", "Login", null, new { @style = "color:#FFFFFF" })</button>
-                </form>
+                @if (Session["TipoUsuario"].ToString() == "1")
+                {
+
+                    <li class="form-inline" style="margin-left: -20%; margin-right: 5%">
+                        @Html.ActionLink("Crear Cita", "Index", "Citas", null, new { @style = "color:#FFFFFF" })
+                    </li>
+                    <li class="form-inline" style="margin-right:5%">
+                        @Html.ActionLink("Perfil", "Perfil", "Perfil", null, new { @style = "color:#FFFFFF" })
+                    </li>
+                    <form class="form-inline" style="margin-right:3%">
+                        <button class="btn btn-outline-light" type="button">@Html.ActionLink("Cerrar Sesión", "CerrarSession", "Login", null, new { @style = "color:#FFFFFF" })</button>
+                    </form>
+
+                }
+                else
+                {
+                    <li class="form-inline" style="margin-left: -20%; margin-right: 5%">
+                        @Html.ActionLink("Citas", "Index", "Citas", null, new { @style = "color:#FFFFFF" })
+                    </li>
+                    <li class="form-inline" style="margin-right:5%">
+                        @Html.ActionLink("Pacientes", "ConsultaPacientes", "Paciente", null, new { @style = "color:#FFFFFF" })
+                    </li>
+                    <li class="form-inline" style="margin-right:5%">
+                        @Html.ActionLink("Perfil", "Perfil", "Perfil", null, new { @style = "color:#FFFFFF" })
+                    </li>
+                    <form class="form-inline" style="margin-right:3%">
+                        <button class="btn btn-outline-light" type="button">@Html.ActionLink("Cerrar Sesión", "CerrarSession", "Login", null, new { @style = "color:#FFFFFF" })</button>
+                    </form>
+                }
 
             </ul>
         </div>

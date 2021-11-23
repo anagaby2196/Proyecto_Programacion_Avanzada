@@ -56,6 +56,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
                 if (usuario != null)
                 {
                     Session["Usuario"] = usuario;
+                    Session["TipoUsuario"] = usuario.TipoUsuario;
                     return RedirectToAction("Perfil", "Perfil");
                 }
             }

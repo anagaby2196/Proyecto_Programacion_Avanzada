@@ -16,6 +16,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
 
         public ActionResult Perfil()
         {
+            ViewBag.Message = "Your application description page.";
             return View();
         }
     }
