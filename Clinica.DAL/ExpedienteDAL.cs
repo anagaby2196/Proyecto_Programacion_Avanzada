@@ -16,11 +16,11 @@ namespace Clinica.DAL
             {
                 try
                 {
-                    var ultimoPaciente = (from x in contexto.paciente select x).LastOrDefault();
+                    var ultimoCP = (from x in contexto.citasProgramadas select x).LastOrDefault();
 
 
                     expediente exp = new expediente();
-                    exp.codigoPacienteFK = ultimoPaciente.codigoPersonaFK;
+                    exp.codigoCitaProgramadasFK = ultimoCP.codigoCitaProgramadas;
 
                     contexto.expediente.Add(exp);
                     contexto.SaveChanges();
@@ -50,11 +50,10 @@ namespace Clinica.DAL
                 {
 
                     
-                       var listaExpedientes = (from x in contexto.expediente
-                                join pt in contexto.paciente on x.codigoPacienteFK equals pt.codigoPaciente
-                                join cp in contexto.citasProgramadas on pt.codigoCitaProgramadaFK equals cp.codigoCitaProgramadas
+                       var listaExpedientes = (from x in contexto.expediente                                
+                                join cp in contexto.citasProgramadas on x.codigoCitaProgramadasFK equals cp.codigoCitaProgramadas
                                 join c in contexto.citas on cp.codigoCitasFK equals c.codigoCitas
-                                join p in contexto.persona on pt.codigoPersonaFK equals p.codigoPersona
+                                join p in contexto.persona on cp.codigoPacienteFK equals p.codigoPersona
                                 join d in contexto.direccion on p.codigoDireccionFK equals d.codigoDireccion
                                 join dc in contexto.doctor on cp.codigoDoctorFK equals dc.codigoDoctor
                                 join pdc in contexto.persona on dc.codigoPersonaFk equals pdc.codigoPersona
@@ -78,11 +77,11 @@ namespace Clinica.DAL
                                 //nombreDc = pdc.nombre,
                                 //primerApellidoDc = pdc.primerApellido,
                                 //segundoApellidoDc = pdc.segundoApellido
-                            }).ToList(); 
+                            }).ToList();
 
 
 
-
+                    return null;
                 }
                 catch (Exception)
                 {
@@ -103,17 +102,16 @@ namespace Clinica.DAL
                     List<ExpedienteETL> listaEexpedientes = new List<ExpedienteETL>();
 
                     var listaExpedientesDB = (from x in contexto.expediente
-                            join pt in contexto.paciente on x.codigoPacienteFK equals pt.codigoPersonaFK
-                            join p in contexto.persona on pt.codigoPersonaFK equals p.codigoPersona
-                            join cp in contexto.citasProgramadas on pt.codigoCitaProgramadaFK equals cp.codigoCitaProgramadas
-                            join c in contexto.citas on pt.codigoCitaProgramadaFK equals c.codigoCitas
+                            join cp in contexto.citasProgramadas on x.codigoCitaProgramadasFK equals cp.codigoCitaProgramadas
+                            join p in contexto.persona on cp.codigoPacienteFK equals p.codigoPersona                            
+                            join c in contexto.citas on cp.codigoCitasFK equals c.codigoCitas
                             join d in contexto.direccion on p.direccion.codigoDireccion equals d.codigoDireccion
                             join dc in contexto.doctor on cp.codigoDoctorFK equals dc.codigoDoctor
                             join pdc in contexto.persona on dc.codigoPersonaFk equals pdc.codigoPersona                            
                             select new
                             {
                                 codigoExpediente = x.codigoExpediente,
-                                codigoPaciente = x.codigoPacienteFK,
+                                CodigoCitaExpendiente = x.codigoExpediente,
                                 nombre = p.nombre,
                                 primerApellido = p.primerApellido,
                                 segundoApellido = p.segundoApellido,
@@ -138,7 +136,7 @@ namespace Clinica.DAL
                             listaEexpedientes.Add(new ExpedienteETL
                             {
                                 CodigoExpediente = item.codigoExpediente,
-                                CodigoPaciente = (long)item.codigoPaciente
+                                CodigoCitaExpendiente = (long)item.CodigoCitaExpendiente
 
                             });
                         }                         
