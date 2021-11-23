@@ -191,6 +191,7 @@
     <Content Include="Assets\js\aos.js" />
     <Content Include="Assets\js\bootstrap-datepicker.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\CalendarioUsuario.js" />
     <Content Include="Assets\js\Calendario.js" />
     <Content Include="Assets\js\consultaPaciente.js" />
     <Content Include="Assets\js\google-map.js" />
