@@ -43,7 +43,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
                     return RedirectToAction("Perfil", "Perfil");
                 }
             }
-            TempData["MensajeError"] = "Se ha digitado los datos incorrectamente";
+            TempData["MensajeError"] = "Se ha digitado los datos incorrectamente!";
             return RedirectToAction("Login",false);
         }
 
@@ -62,7 +62,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
                 }
             }
 
-            TempData["MensajeError"] = "Usuario o contrasena invalida";
+            TempData["MensajeError"] = "Usuario o contrasena invalida!";
             return RedirectToAction("Login", false);
         }
 
