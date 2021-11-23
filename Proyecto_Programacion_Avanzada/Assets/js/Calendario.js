@@ -140,7 +140,7 @@
             $('#chkIsFullDay').change();
             $('#txtEnd').val(selectedEvent.end != null ? selectedEvent.end.format('YYYY/MM/DD HH:mm A') : '');
             $('#txtDescription').val(selectedEvent.description);
-            $('#ddThemeColor').val(selectedEvent.color);
+            $('#SelectDoctor').val(selectedEvent.color);
         }
         $('#myModal').modal('hide');
         $('#myModalSave').modal();
@@ -175,7 +175,7 @@
             Start: $('#txtStart').val().trim(),
             End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
             Description: $('#txtDescription').val(),
-            ThemeColor: $('#ddThemeColor').val(),
+            Doctor: $('#SelectDoctor').val(),
             IsFullDay: $('#chkIsFullDay').is(':checked')
         }
         SaveEvent(data);
@@ -187,7 +187,7 @@
             type: "POST",
             url: '/Citas/SaveEvent',
             //long codigoCitas, string asunto,string descripcion, DateTime horaInicio,DateTime horaFin,string temaColor,Boolean esTodoElDia
-            data: { codigoCitas: data.EventID, asunto: data.Subject, descripcion: data.Description, horaInicio: data.Start, horaFin: data.End,esTodoElDia: data.IsFullDay },
+            data: { codigoCitas: data.EventID, asunto: data.Subject, descripcion: data.Description, horaInicio: data.Start, horaFin: data.End, esTodoElDia: data.IsFullDay, codDoctor: data.Doctor},
             dataType: 'json',
             success: function (data) {
                 if (data.status) {

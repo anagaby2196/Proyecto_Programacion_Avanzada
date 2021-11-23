@@ -30,7 +30,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveEvent(long codigoCitas,string asunto,string descripcion, DateTime horaInicio,DateTime horaFin,Boolean esTodoElDia)
+        public JsonResult SaveEvent(long codigoCitas,string asunto,string descripcion, DateTime horaInicio,DateTime horaFin,Boolean esTodoElDia,long codDoctor)
         {
                         CitasETL evento = new CitasETL();
                         evento.CodigoCitas = codigoCitas;
