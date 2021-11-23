@@ -39,6 +39,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
                     PersonaBLL personabll2 = new PersonaBLL();
                     var usuario = personabll2.VerificarLogin(persona.Correo, persona.Contrasena);
                     Session["Usuario"] = usuario;
+                    Session["TipoUsuario"] = usuario.TipoUsuario;
                     return RedirectToAction("Perfil", "Perfil");
                 }
             }

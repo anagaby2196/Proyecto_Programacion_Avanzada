@@ -21,18 +21,7 @@ namespace Clinica.DAL
                 {
                     try
                     {
-                        contexto.insertarPersona(persona.Nombre, persona.PrimerApellido, persona.SegundoApellido, persona.Identificacion, persona.Telefono, persona.Correo, (int)persona.TipoUsuario);
-                        //persona nuevaPersona = new persona();
-                        //nuevaPersona.nombre = persona.Nombre;
-                        //nuevaPersona.primerApellido = persona.PrimerApellido;
-                        //nuevaPersona.segundoApellido = persona.SegundoApellido;
-                        //nuevaPersona.identificacion = persona.Identificacion;
-                        //nuevaPersona.telefono = persona.Telefono;
-                        //nuevaPersona.correo = persona.Correo;
-                        //nuevaPersona.tipoUsuarioFK = persona.TipoUsuario;
-
-                        //contexto.persona.Add(nuevaPersona);
-                        //contexto.SaveChanges();
+                        contexto.insertarPersona(persona.Nombre, persona.PrimerApellido, persona.SegundoApellido, persona.Identificacion, persona.Telefono, persona.Correo);
 
                         return true;
                     }
@@ -71,6 +60,8 @@ namespace Clinica.DAL
                     usuarios usr = new usuarios();
                     usr.codigoPersonaFK = ultimaPersona.codigoPersona;
                     usr.contrasena = persona.Contrasena;
+                    usr.tipoUsuarioFK = 1;
+                    usr.estado = true;
 
                     contexto.usuarios.Add(usr);
                     contexto.SaveChanges();
@@ -99,7 +90,16 @@ namespace Clinica.DAL
             {
                 using (var contexto = new ClinicaMedicaV1Entities())
                 {
-                    var lista = (from x in contexto.usuarios join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona where x.contrasena == contrasena && y.correo == correo select y);
+                    var lista = (from x in contexto.usuarios join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona where x.contrasena == contrasena && y.correo == correo select new {
+                        nombre = y.nombre,
+                        primerApellido = y.primerApellido,
+                        segundoApellido = y.segundoApellido,
+                        identificacion = y.identificacion,
+                        telefono = y.telefono,
+                        correo = y.correo,
+                        estado = x.estado,
+                        tipoUsuario = x.tipoUsuarioFK
+                    });
 
                     PersonaETL listaP = new PersonaETL();
                     if (lista.Count() > 0)
@@ -113,7 +113,7 @@ namespace Clinica.DAL
                             listaP.Identificacion = item.identificacion;
                             listaP.Telefono = item.telefono;
                             listaP.Correo = item.correo;
-                            listaP.TipoUsuario = (int)item.tipoUsuarioFK;
+                            listaP.TipoUsuario = (int)item.tipoUsuario;
                             listaP.Estado = (bool)item.estado;
 
 
