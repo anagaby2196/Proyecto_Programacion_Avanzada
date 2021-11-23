@@ -9,7 +9,7 @@ namespace Entidades.ETL
     public class ExpedienteETL : PacienteETL 
     {
         public long CodigoExpediente { get; set; }
-        public long CodigoPaciente { get; set; }
+        public long CodigoCitaExpendiente { get; set; }
 
         PersonaETL pETL { get; set; }  
 

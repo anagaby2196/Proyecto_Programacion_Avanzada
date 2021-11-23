@@ -16,11 +16,10 @@ namespace Clinica.DAL
             using (var contexto = new ClinicaMedicaV1Entities())
             {
                 var listaReporteCitasDB =(from x in contexto.reporteCitas
-                 join e in contexto.expediente on x.codigoExpedienteFK equals e.codigoExpediente
-                 join pt in contexto.paciente on e.codigoPacienteFK equals pt.codigoPaciente
-                 join cp in contexto.citasProgramadas on pt.codigoCitaProgramadaFK equals cp.codigoCitaProgramadas
+                 join e in contexto.expediente on x.codigoExpedienteFK equals e.codigoExpediente                 
+                 join cp in contexto.citasProgramadas on e.codigoCitaProgramadasFK equals cp.codigoCitaProgramadas
                  join c in contexto.citas on cp.codigoCitasFK equals c.codigoCitas
-                 join p in contexto.persona on pt.codigoPersonaFK equals p.codigoPersona
+                 join p in contexto.persona on cp.codigoPacienteFK equals p.codigoPersona
                  join d in contexto.direccion on p.codigoDireccionFK equals d.codigoDireccion
                  join dc in contexto.doctor on cp.codigoDoctorFK equals dc.codigoDoctor
                  join pdc in contexto.persona on dc.codigoPersonaFk equals pdc.codigoPersona

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ClinicaMedicaV1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ClinicaMedicaV1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="citas">
           <Key>
             <PropertyRef Name="codigoCitas" />
@@ -53,7 +53,7 @@
             <PropertyRef Name="codigoExpediente" />
           </Key>
           <Property Name="codigoExpediente" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="codigoPacienteFK" Type="bigint" />
+          <Property Name="codigoCitaProgramadasFK" Type="bigint" />
         </EntityType>
         <EntityType Name="paciente">
           <Key>
@@ -61,8 +61,6 @@
           </Key>
           <Property Name="codigoPaciente" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="codigoPersonaFK" Type="bigint" />
-          <Property Name="codigoCitaProgramadaFK" Type="bigint" />
-          <Property Name="codigoExpedienteFK" Type="bigint" />
           <Property Name="estado" Type="bit" />
         </EntityType>
         <EntityType Name="persona">
@@ -87,6 +85,16 @@
           <Property Name="codigoreporteCitas" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="codigoExpedienteFK" Type="bigint" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="tipoUsuario">
           <Key>
             <PropertyRef Name="codigoTipoUsuario" />
@@ -104,15 +112,15 @@
           <Property Name="estado" Type="bit" />
           <Property Name="tipoUsuarioFK" Type="int" />
         </EntityType>
-        <Association Name="codigoCitaProgramada_FK">
+        <Association Name="codigoCitaProgramadas_FK">
           <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="0..1" />
-          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="citasProgramadas">
               <PropertyRef Name="codigoCitaProgramadas" />
             </Principal>
-            <Dependent Role="paciente">
-              <PropertyRef Name="codigoCitaProgramadaFK" />
+            <Dependent Role="expediente">
+              <PropertyRef Name="codigoCitaProgramadasFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -152,18 +160,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="codigoExpediente_FK">
-          <End Role="expediente" Type="Self.expediente" Multiplicity="0..1" />
-          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="expediente">
-              <PropertyRef Name="codigoExpediente" />
-            </Principal>
-            <Dependent Role="paciente">
-              <PropertyRef Name="codigoExpedienteFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="codigoExpedienteFK_FK">
           <End Role="expediente" Type="Self.expediente" Multiplicity="0..1" />
           <End Role="reporteCitas" Type="Self.reporteCitas" Multiplicity="*" />
@@ -188,18 +184,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="codigoPacienteFK">
-          <End Role="paciente" Type="Self.paciente" Multiplicity="0..1" />
-          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="paciente">
-              <PropertyRef Name="codigoPaciente" />
-            </Principal>
-            <Dependent Role="expediente">
-              <PropertyRef Name="codigoPacienteFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="codigoPersona_DFK">
           <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
           <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
@@ -212,6 +196,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="codigoPersona_FK">
+          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="codigoPersona" />
+            </Principal>
+            <Dependent Role="paciente">
+              <PropertyRef Name="codigoPersonaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="codigoPersona_UFK">
           <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
           <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
@@ -220,18 +216,6 @@
               <PropertyRef Name="codigoPersona" />
             </Principal>
             <Dependent Role="usuarios">
-              <PropertyRef Name="codigoPersonaFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="codigoPersonaPac_FK">
-          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
-          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="persona">
-              <PropertyRef Name="codigoPersona" />
-            </Principal>
-            <Dependent Role="paciente">
               <PropertyRef Name="codigoPersonaFK" />
             </Dependent>
           </ReferentialConstraint>
@@ -335,11 +319,12 @@
           <EntitySet Name="paciente" EntityType="Self.paciente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="persona" EntityType="Self.persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="reporteCitas" EntityType="Self.reporteCitas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tipoUsuario" EntityType="Self.tipoUsuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="codigoCitaProgramada_FK" Association="Self.codigoCitaProgramada_FK">
+          <AssociationSet Name="codigoCitaProgramadas_FK" Association="Self.codigoCitaProgramadas_FK">
             <End Role="citasProgramadas" EntitySet="citasProgramadas" />
-            <End Role="paciente" EntitySet="paciente" />
+            <End Role="expediente" EntitySet="expediente" />
           </AssociationSet>
           <AssociationSet Name="codigoCitas_FK" Association="Self.codigoCitas_FK">
             <End Role="citas" EntitySet="citas" />
@@ -353,10 +338,6 @@
             <End Role="doctor" EntitySet="doctor" />
             <End Role="citasProgramadas" EntitySet="citasProgramadas" />
           </AssociationSet>
-          <AssociationSet Name="codigoExpediente_FK" Association="Self.codigoExpediente_FK">
-            <End Role="expediente" EntitySet="expediente" />
-            <End Role="paciente" EntitySet="paciente" />
-          </AssociationSet>
           <AssociationSet Name="codigoExpedienteFK_FK" Association="Self.codigoExpedienteFK_FK">
             <End Role="expediente" EntitySet="expediente" />
             <End Role="reporteCitas" EntitySet="reporteCitas" />
@@ -365,28 +346,25 @@
             <End Role="paciente" EntitySet="paciente" />
             <End Role="citasProgramadas" EntitySet="citasProgramadas" />
           </AssociationSet>
-          <AssociationSet Name="codigoPacienteFK" Association="Self.codigoPacienteFK">
-            <End Role="paciente" EntitySet="paciente" />
-            <End Role="expediente" EntitySet="expediente" />
-          </AssociationSet>
           <AssociationSet Name="codigoPersona_DFK" Association="Self.codigoPersona_DFK">
             <End Role="persona" EntitySet="persona" />
             <End Role="doctor" EntitySet="doctor" />
           </AssociationSet>
+          <AssociationSet Name="codigoPersona_FK" Association="Self.codigoPersona_FK">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="paciente" EntitySet="paciente" />
+          </AssociationSet>
           <AssociationSet Name="codigoPersona_UFK" Association="Self.codigoPersona_UFK">
             <End Role="persona" EntitySet="persona" />
             <End Role="usuarios" EntitySet="usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="codigoPersonaPac_FK" Association="Self.codigoPersonaPac_FK">
-            <End Role="persona" EntitySet="persona" />
-            <End Role="paciente" EntitySet="paciente" />
           </AssociationSet>
           <AssociationSet Name="tipoUsuarioFK_FK" Association="Self.tipoUsuarioFK_FK">
             <End Role="tipoUsuario" EntitySet="tipoUsuario" />
             <End Role="usuarios" EntitySet="usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClinicaMedicaV1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -416,9 +394,9 @@
           <Property Name="tratamiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="citas" Relationship="Self.codigoCitas_FK" FromRole="citasProgramadas" ToRole="citas" />
-          <NavigationProperty Name="paciente" Relationship="Self.codigoCitaProgramada_FK" FromRole="citasProgramadas" ToRole="paciente" />
+          <NavigationProperty Name="expediente" Relationship="Self.codigoCitaProgramadas_FK" FromRole="citasProgramadas" ToRole="expediente" />
           <NavigationProperty Name="doctor" Relationship="Self.codigoDoctor_FK" FromRole="citasProgramadas" ToRole="doctor" />
-          <NavigationProperty Name="paciente1" Relationship="Self.codigoPaciente_FK" FromRole="citasProgramadas" ToRole="paciente" />
+          <NavigationProperty Name="paciente" Relationship="Self.codigoPaciente_FK" FromRole="citasProgramadas" ToRole="paciente" />
         </EntityType>
         <EntityType Name="direccion">
           <Key>
@@ -446,10 +424,9 @@
             <PropertyRef Name="codigoExpediente" />
           </Key>
           <Property Name="codigoExpediente" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigoPacienteFK" Type="Int64" />
-          <NavigationProperty Name="paciente" Relationship="Self.codigoExpediente_FK" FromRole="expediente" ToRole="paciente" />
+          <Property Name="codigoCitaProgramadasFK" Type="Int64" />
+          <NavigationProperty Name="citasProgramadas" Relationship="Self.codigoCitaProgramadas_FK" FromRole="expediente" ToRole="citasProgramadas" />
           <NavigationProperty Name="reporteCitas" Relationship="Self.codigoExpedienteFK_FK" FromRole="expediente" ToRole="reporteCitas" />
-          <NavigationProperty Name="paciente1" Relationship="Self.codigoPacienteFK" FromRole="expediente" ToRole="paciente" />
         </EntityType>
         <EntityType Name="paciente">
           <Key>
@@ -457,14 +434,9 @@
           </Key>
           <Property Name="codigoPaciente" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="codigoPersonaFK" Type="Int64" />
-          <Property Name="codigoCitaProgramadaFK" Type="Int64" />
-          <Property Name="codigoExpedienteFK" Type="Int64" />
           <Property Name="estado" Type="Boolean" />
-          <NavigationProperty Name="citasProgramadas" Relationship="Self.codigoCitaProgramada_FK" FromRole="paciente" ToRole="citasProgramadas" />
-          <NavigationProperty Name="citasProgramadas1" Relationship="Self.codigoPaciente_FK" FromRole="paciente" ToRole="citasProgramadas" />
-          <NavigationProperty Name="expediente" Relationship="Self.codigoExpediente_FK" FromRole="paciente" ToRole="expediente" />
-          <NavigationProperty Name="expediente1" Relationship="Self.codigoPacienteFK" FromRole="paciente" ToRole="expediente" />
-          <NavigationProperty Name="persona" Relationship="Self.codigoPersonaPac_FK" FromRole="paciente" ToRole="persona" />
+          <NavigationProperty Name="citasProgramadas" Relationship="Self.codigoPaciente_FK" FromRole="paciente" ToRole="citasProgramadas" />
+          <NavigationProperty Name="persona" Relationship="Self.codigoPersona_FK" FromRole="paciente" ToRole="persona" />
         </EntityType>
         <EntityType Name="persona">
           <Key>
@@ -482,7 +454,7 @@
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="direccion" Relationship="Self.codigoDireccion_FK" FromRole="persona" ToRole="direccion" />
           <NavigationProperty Name="doctor" Relationship="Self.codigoPersona_DFK" FromRole="persona" ToRole="doctor" />
-          <NavigationProperty Name="paciente" Relationship="Self.codigoPersonaPac_FK" FromRole="persona" ToRole="paciente" />
+          <NavigationProperty Name="paciente" Relationship="Self.codigoPersona_FK" FromRole="persona" ToRole="paciente" />
           <NavigationProperty Name="usuarios" Relationship="Self.codigoPersona_UFK" FromRole="persona" ToRole="usuarios" />
         </EntityType>
         <EntityType Name="reporteCitas">
@@ -492,6 +464,16 @@
           <Property Name="codigoreporteCitas" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="codigoExpedienteFK" Type="Int64" />
           <NavigationProperty Name="expediente" Relationship="Self.codigoExpedienteFK_FK" FromRole="reporteCitas" ToRole="expediente" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="tipoUsuario">
           <Key>
@@ -525,15 +507,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="codigoCitaProgramada_FK">
+        <Association Name="codigoCitaProgramadas_FK">
           <End Role="citasProgramadas" Type="Self.citasProgramadas" Multiplicity="0..1" />
-          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
+          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="citasProgramadas">
               <PropertyRef Name="codigoCitaProgramadas" />
             </Principal>
-            <Dependent Role="paciente">
-              <PropertyRef Name="codigoCitaProgramadaFK" />
+            <Dependent Role="expediente">
+              <PropertyRef Name="codigoCitaProgramadasFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -585,18 +567,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="codigoExpediente_FK">
-          <End Role="expediente" Type="Self.expediente" Multiplicity="0..1" />
-          <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="expediente">
-              <PropertyRef Name="codigoExpediente" />
-            </Principal>
-            <Dependent Role="paciente">
-              <PropertyRef Name="codigoExpedienteFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="codigoExpedienteFK_FK">
           <End Role="expediente" Type="Self.expediente" Multiplicity="0..1" />
           <End Role="reporteCitas" Type="Self.reporteCitas" Multiplicity="*" />
@@ -609,19 +579,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="codigoPacienteFK">
-          <End Role="paciente" Type="Self.paciente" Multiplicity="0..1" />
-          <End Role="expediente" Type="Self.expediente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="paciente">
-              <PropertyRef Name="codigoPaciente" />
-            </Principal>
-            <Dependent Role="expediente">
-              <PropertyRef Name="codigoPacienteFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="codigoPersonaPac_FK">
+        <Association Name="codigoPersona_FK">
           <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
           <End Role="paciente" Type="Self.paciente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -666,15 +624,16 @@
           <EntitySet Name="paciente" EntityType="Self.paciente" />
           <EntitySet Name="persona" EntityType="Self.persona" />
           <EntitySet Name="reporteCitas" EntityType="Self.reporteCitas" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="tipoUsuario" EntityType="Self.tipoUsuario" />
           <EntitySet Name="usuarios" EntityType="Self.usuarios" />
           <AssociationSet Name="codigoCitas_FK" Association="Self.codigoCitas_FK">
             <End Role="citas" EntitySet="citas" />
             <End Role="citasProgramadas" EntitySet="citasProgramadas" />
           </AssociationSet>
-          <AssociationSet Name="codigoCitaProgramada_FK" Association="Self.codigoCitaProgramada_FK">
+          <AssociationSet Name="codigoCitaProgramadas_FK" Association="Self.codigoCitaProgramadas_FK">
             <End Role="citasProgramadas" EntitySet="citasProgramadas" />
-            <End Role="paciente" EntitySet="paciente" />
+            <End Role="expediente" EntitySet="expediente" />
           </AssociationSet>
           <AssociationSet Name="codigoDoctor_FK" Association="Self.codigoDoctor_FK">
             <End Role="doctor" EntitySet="doctor" />
@@ -692,19 +651,11 @@
             <End Role="persona" EntitySet="persona" />
             <End Role="doctor" EntitySet="doctor" />
           </AssociationSet>
-          <AssociationSet Name="codigoExpediente_FK" Association="Self.codigoExpediente_FK">
-            <End Role="expediente" EntitySet="expediente" />
-            <End Role="paciente" EntitySet="paciente" />
-          </AssociationSet>
           <AssociationSet Name="codigoExpedienteFK_FK" Association="Self.codigoExpedienteFK_FK">
             <End Role="expediente" EntitySet="expediente" />
             <End Role="reporteCitas" EntitySet="reporteCitas" />
           </AssociationSet>
-          <AssociationSet Name="codigoPacienteFK" Association="Self.codigoPacienteFK">
-            <End Role="paciente" EntitySet="paciente" />
-            <End Role="expediente" EntitySet="expediente" />
-          </AssociationSet>
-          <AssociationSet Name="codigoPersonaPac_FK" Association="Self.codigoPersonaPac_FK">
+          <AssociationSet Name="codigoPersona_FK" Association="Self.codigoPersona_FK">
             <End Role="persona" EntitySet="persona" />
             <End Role="paciente" EntitySet="paciente" />
           </AssociationSet>
@@ -733,18 +684,18 @@
             <Parameter Name="tipoUsuarioFK" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="consultarCita" ReturnType="Collection(ClinicaMedicaV1Model.consultarCita_Result)">
-          <Parameter Name="estado" Mode="In" Type="String" />
+            <Parameter Name="estado" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="consultarDireccion" ReturnType="Collection(ClinicaMedicaV1Model.consultarDireccion_Result)" />
           <FunctionImport Name="consultarPersona">
-          <Parameter Name="identificacion" Mode="In" Type="String" />
+            <Parameter Name="identificacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="consultarPersonas" />
           <FunctionImport Name="eliminarDireccion">
-          <Parameter Name="codigo" Mode="In" Type="Int64" />
+            <Parameter Name="codigo" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="eliminarPersona">
-          <Parameter Name="identificacion" Mode="In" Type="String" />
+            <Parameter Name="identificacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="insertarDireccion">
             <Parameter Name="provincia" Mode="In" Type="String" />
@@ -761,8 +712,6 @@
             <Parameter Name="correo" Mode="In" Type="String" />
             <Parameter Name="tipoUsuarioFK" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ultimaInsercion" ReturnType="Collection(Int64)" />
-          <FunctionImport Name="ultimaInsercionPersona" ReturnType="Collection(Int64)" />
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -793,6 +742,8 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="ultimaInsercion" ReturnType="Collection(Int64)" />
+          <FunctionImport Name="ultimaInsercionPersona" ReturnType="Collection(Int64)" />
         </EntityContainer>
         <ComplexType Name="consultarCita_Result">
           <Property Type="Int64" Name="codigoCitas" Nullable="false" />
@@ -879,7 +830,7 @@
             <EntityTypeMapping TypeName="ClinicaMedicaV1Model.expediente">
               <MappingFragment StoreEntitySet="expediente">
                 <ScalarProperty Name="codigoExpediente" ColumnName="codigoExpediente" />
-                <ScalarProperty Name="codigoPacienteFK" ColumnName="codigoPacienteFK" />
+                <ScalarProperty Name="codigoCitaProgramadasFK" ColumnName="codigoCitaProgramadasFK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -888,8 +839,6 @@
               <MappingFragment StoreEntitySet="paciente">
                 <ScalarProperty Name="codigoPaciente" ColumnName="codigoPaciente" />
                 <ScalarProperty Name="codigoPersonaFK" ColumnName="codigoPersonaFK" />
-                <ScalarProperty Name="codigoCitaProgramadaFK" ColumnName="codigoCitaProgramadaFK" />
-                <ScalarProperty Name="codigoExpedienteFK" ColumnName="codigoExpedienteFK" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -915,6 +864,17 @@
               <MappingFragment StoreEntitySet="reporteCitas">
                 <ScalarProperty Name="codigoreporteCitas" ColumnName="codigoreporteCitas" />
                 <ScalarProperty Name="codigoExpedienteFK" ColumnName="codigoExpedienteFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ClinicaMedicaV1Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -970,8 +930,6 @@
           <FunctionImportMapping FunctionImportName="eliminarPersona" FunctionName="ClinicaMedicaV1Model.Store.eliminarPersona" />
           <FunctionImportMapping FunctionImportName="insertarDireccion" FunctionName="ClinicaMedicaV1Model.Store.insertarDireccion" />
           <FunctionImportMapping FunctionImportName="insertarPersona" FunctionName="ClinicaMedicaV1Model.Store.insertarPersona" />
-          <FunctionImportMapping FunctionImportName="ultimaInsercion" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercion" />
-          <FunctionImportMapping FunctionImportName="ultimaInsercionPersona" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercionPersona" />
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ClinicaMedicaV1Model.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ClinicaMedicaV1Model.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ClinicaMedicaV1Model.Store.sp_dropdiagram" />
@@ -996,6 +954,8 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ClinicaMedicaV1Model.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ClinicaMedicaV1Model.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="ultimaInsercion" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercion" />
+          <FunctionImportMapping FunctionImportName="ultimaInsercionPersona" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercionPersona" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

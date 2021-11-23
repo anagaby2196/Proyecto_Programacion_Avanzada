@@ -18,12 +18,10 @@ namespace Clinica.DAL
                 {
                     var ultimaPersona = (from x in contexto.persona select x).LastOrDefault();
                     var ultimaCitaProgramada = (from x in contexto.citasProgramadas select x).LastOrDefault();
-                    var ultimaExpediente = (from x in contexto.expediente select x).LastOrDefault();
+                    
 
                     paciente nuevoPaciente = new paciente();
                     nuevoPaciente.codigoPersonaFK = ultimaPersona.codigoPersona;
-                    nuevoPaciente.codigoCitaProgramadaFK = ultimaCitaProgramada.codigoCitaProgramadas;
-                    nuevoPaciente.codigoExpedienteFK = ultimaExpediente.codigoExpediente;
                     nuevoPaciente.estado = true;
 
                     contexto.paciente.Add(nuevoPaciente);
@@ -57,9 +55,7 @@ namespace Clinica.DAL
                         listaPacientes.Add(new PacienteETL
                         {
                           CodigoPaciente = item.codigoPaciente,
-                          CodigoPersona = (long)item.codigoPersonaFK,
-                          CodigoCitaProgramada = (long)item.codigoCitaProgramadaFK,
-                          CodigoExpediente = (long)item.codigoExpedienteFK,
+                          CodigoPersona = (long)item.codigoPersonaFK,                          
                           Estado = (bool)item.estado
                                                       
                         });
