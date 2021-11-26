@@ -30,16 +30,16 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveEvent(long codigoCitas,string asunto,string descripcion, DateTime horaInicio,DateTime horaFin,Boolean esTodoElDia,long codDoctor)
+        public JsonResult SaveEvent(long codigoCitas, string asunto, string descripcion, DateTime horaInicio, DateTime horaFin, Boolean esTodoElDia, long codDoctor)
         {
-                        CitasETL evento = new CitasETL();
-                        evento.CodigoCitas = codigoCitas;
-                        evento.Asunto = asunto;
-                        evento.Descripcion = descripcion;
-                        evento.HoraInicio = (DateTime)horaInicio;
-                        evento.HoraFin = (DateTime)horaFin;
-                        evento.TemaColor = "Blue";
-                        evento.esTodoElDia = (bool)esTodoElDia;
+            CitasETL evento = new CitasETL();
+            evento.CodigoCitas = codigoCitas;
+            evento.Asunto = asunto;
+            evento.Descripcion = descripcion;
+            evento.HoraInicio = (DateTime)horaInicio;
+            evento.HoraFin = (DateTime)horaFin;
+            evento.TemaColor = "Blue";
+            evento.esTodoElDia = (bool)esTodoElDia;
 
             var status = false;
             CitasBLL citas = new CitasBLL();
@@ -49,6 +49,14 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             }
 
             return new JsonResult { Data = new { status = status } };
+        }
+
+        [HttpPost]
+        public JsonResult SaveEventUsuario(long codigoCitas,string descripcion, DateTime horaInicio,DateTime horaFin,Boolean esTodoElDia,long codDoctor)
+        {
+            var nUsuario = (PersonaETL)Session["Usuario"];
+            var nombreCompleto = nUsuario.Nombre + " " + nUsuario.PrimerApellido + " " + nUsuario.SegundoApellido;
+            return SaveEvent(codigoCitas, nombreCompleto, descripcion, horaInicio, horaFin, esTodoElDia, codDoctor);
         }
 
         [HttpPost]

@@ -47,33 +47,34 @@
             eventLimit: true,
             eventColor: '#378006',
             events: events
-            //,eventClick: function (calEvent, jsEvent, view) {
-            //    selectedEvent = calEvent;
-            //    $('#ModalEventos #eventTitle').text(calEvent.title);
-            //    var $description = $('<div/>');
-            //    $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("YYYY-MMM-DD HH:mm a")));
-            //    if (calEvent.end != null) {
-            //        $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("YYYY-MMM-DD HH:mm a")));
-            //    }
-            //    $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
-            //    $('#ModalEventos #pDetails').empty().html($description);
+            ,eventClick: function (calEvent, jsEvent, view) {
+                selectedEvent = calEvent;
+                $('#ModalEventos #eventTitle').text(calEvent.title);
+                var $description = $('<div/>');
+                $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("YYYY-MMM-DD HH:mm a")));
+                if (calEvent.end != null) {
+                    $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("YYYY-MMM-DD HH:mm a")));
+                }
+                $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
+                $('#ModalEventos #pDetails').empty().html($description);
 
-            //    $('#ModalEventos').modal();
-            //},
-            //selectable: true,
-            //select: function (start, end) {
-            //    selectedEvent = {
-            //        eventID: 0,
-            //        title: '',
-            //        description: '',
-            //        start: start,
-            //        end: end,
-            //        allDay: false,
-            //        color: ''
-            //    };
-            //    openAddEditForm();
-            //    $('#calendar').fullCalendar('unselect');
-            //}
+                $('#ModalEventos').modal();
+            }
+            ,
+            selectable: true,
+            select: function (start, end) {
+                selectedEvent = {
+                    eventID: 0,
+                    title: '',
+                    description: '',
+                    start: start,
+                    end: end,
+                    allDay: false,
+                    color: ''
+                };
+                openAddEditForm();
+                $('#calendar').fullCalendar('unselect');
+            }
             //,
             //editable: true,
             //eventDrop: function (event) {
@@ -110,6 +111,7 @@
                 },
                 error: function () {
                     alert('Failed');
+                    FetchEventAndRenderCalendar();
                 }
             })
         }
@@ -120,14 +122,6 @@
         format: 'YYYY/MM/DD HH:mm A'
     });
 
-    //$('#chkIsFullDay').change(function () {
-    //    if ($(this).is(':checked')) {
-    //        $('#divEndDate').hide();
-    //    }
-    //    else {
-    //        $('#divEndDate').show();
-    //    }
-    //});
 
     $('#divEndDate').show();
 
@@ -148,10 +142,10 @@
 
     $('#btnSave').click(function () {
         //Validation/
-        if ($('#txtSubject').val().trim() == "") {
-            alert('Subject required');
-            return;
-        }
+        //if ($('#txtSubject').val().trim() == "") {
+        //    alert('Subject required');
+        //    return;
+        //}
         if ($('#txtStart').val().trim() == "") {
             alert('Start date required');
             return;
@@ -171,23 +165,29 @@
 
         var data = {
             EventID: $('#hdEventID').val(),
-            Subject: $('#txtSubject').val().trim(),
             Start: $('#txtStart').val().trim(),
             End: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
             Description: $('#txtDescription').val(),
             Doctor: $('#SelectDoctor').val(),
             IsFullDay: $('#chkIsFullDay').is(':checked')
         }
-        SaveEvent(data);
+
+        if (data.Subject == "") {
+            SaveEvent2(data);
+        } else {
+            SaveEvent(data);
+        }
+        
         // call function for submit data to the server
     })
 
+    
     function SaveEvent(data) {
         $.ajax({
             type: "POST",
-            url: '/Citas/SaveEvent',
+            url: '/Citas/SaveEventUsuario',
             //long codigoCitas, string asunto,string descripcion, DateTime horaInicio,DateTime horaFin,string temaColor,Boolean esTodoElDia
-            data: { codigoCitas: data.EventID, asunto: data.Subject, descripcion: data.Description, horaInicio: data.Start, horaFin: data.End, esTodoElDia: data.IsFullDay, codDoctor: data.Doctor},
+            data: { codigoCitas: data.EventID, descripcion: data.Description, horaInicio: data.Start, horaFin: data.End, esTodoElDia: data.IsFullDay, codDoctor: data.Doctor},
             dataType: 'json',
             success: function (data) {
                 if (data.status) {
@@ -198,6 +198,7 @@
             },
             error: function () {
                 alert('Failed');
+                FetchEventAndRenderCalendar();
             }
         })
     }

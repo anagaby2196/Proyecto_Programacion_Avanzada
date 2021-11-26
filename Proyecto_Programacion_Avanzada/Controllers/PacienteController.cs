@@ -14,7 +14,14 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         {
             PacienteBLL paciente = new PacienteBLL();
             paciente.ConsultarPacientesBLL();
-            return View();
+            return View(paciente.ConsultarPacientesBLL());
+        }
+
+        public Boolean AgregarPaciente(long CodigoPersona)
+        {
+
+            PacienteBLL paciente = new PacienteBLL();
+            return paciente.RegristrarPacienteBLL(CodigoPersona);
         }
     }
 }

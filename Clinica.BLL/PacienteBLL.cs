@@ -10,10 +10,10 @@ namespace Clinica.BLL
 {
     public class PacienteBLL
     {
-        public Boolean RegristrarPacienteBLL()
+        public Boolean RegristrarPacienteBLL(long CodigoPersona)
         {
             PacienteDAL prs = new PacienteDAL();
-            return prs.RegristrarPaciente();
+            return prs.RegristrarPaciente(CodigoPersona);
         }
 
         public paciente ConsultarPacienteBLL(string identificacion)

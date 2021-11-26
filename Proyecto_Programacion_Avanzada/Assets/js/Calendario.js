@@ -110,6 +110,7 @@
                 },
                 error: function () {
                     alert('Failed');
+                    FetchEventAndRenderCalendar();
                 }
             })
         }
@@ -198,6 +199,7 @@
             },
             error: function () {
                 alert('Failed');
+                FetchEventAndRenderCalendar();
             }
         })
     }

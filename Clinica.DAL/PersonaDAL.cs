@@ -91,6 +91,7 @@ namespace Clinica.DAL
                 using (var contexto = new ClinicaMedicaV1Entities())
                 {
                     var lista = (from x in contexto.usuarios join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona where x.contrasena == contrasena && y.correo == correo select new {
+                        CodigoPersona = y.codigoPersona,
                         nombre = y.nombre,
                         primerApellido = y.primerApellido,
                         segundoApellido = y.segundoApellido,
@@ -106,7 +107,7 @@ namespace Clinica.DAL
                     {
                         foreach (var item in lista)
                         {
-
+                            listaP.CodigoPersona = item.CodigoPersona;
                             listaP.Nombre = item.nombre;
                             listaP.PrimerApellido = item.primerApellido;
                             listaP.SegundoApellido = item.segundoApellido;

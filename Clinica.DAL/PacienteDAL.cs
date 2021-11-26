@@ -10,18 +10,14 @@ namespace Clinica.DAL
     public class PacienteDAL
     {
 
-        public Boolean RegristrarPaciente()
+        public Boolean RegristrarPaciente(long CodigoPersona)
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
                 try
-                {
-                    var ultimaPersona = (from x in contexto.persona select x).LastOrDefault();
-                    var ultimaCitaProgramada = (from x in contexto.citasProgramadas select x).LastOrDefault();
-                    
-
+                {  
                     paciente nuevoPaciente = new paciente();
-                    nuevoPaciente.codigoPersonaFK = ultimaPersona.codigoPersona;
+                    nuevoPaciente.codigoPersonaFK = CodigoPersona;
                     nuevoPaciente.estado = true;
 
                     contexto.paciente.Add(nuevoPaciente);

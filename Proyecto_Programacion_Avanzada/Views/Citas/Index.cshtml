@@ -19,13 +19,24 @@
                     <h4 class="modal-title"><span id="eventTitle"></span></h4>
                 </div>
                 <div class="modal-body">
-                    <button id="btnDelete" class="btn btn-default btn-sm pull-right">
-                        <span class="glyphicon glyphicon-remove"></span> Cancelar
-                    </button>
-                    <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
-                        <span class="glyphicon glyphicon-pencil"></span> Edit
-                    </button>
-                    <p id="pDetails"></p>
+                    @if (Session["TipoUsuario"].ToString() == "1")
+                    {
+                        <button id="btnDelete" class="btn btn-default btn-sm pull-right">
+                            <span class="glyphicon glyphicon-remove"></span> Cancelar
+                        </button>
+                        <p id="pDetails"></p>
+                    }
+                    else
+                    {
+                        <button id="btnDelete" class="btn btn-default btn-sm pull-right">
+                            <span class="glyphicon glyphicon-remove"></span> Cancelar
+                        </button>
+                        <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
+                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                        </button>
+                        <p id="pDetails"></p>
+                    }
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -40,17 +51,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Save Event</h4>
+                    <h4 class="modal-title">Agendar Cita</h4>
                 </div>
                 <div class="modal-body">
                     <form class="col-md-12 form-horizontal">
                         <input type="hidden" id="hdEventID" value="0" />
+                        @if (Session["TipoUsuario"].ToString() == "2")
+                        {
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input type="text" id="txtSubject" class="form-control" />
+                            </div>
+                        }
+
                         <div class="form-group">
-                            <label>Subject</label>
-                            <input type="text" id="txtSubject" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>Start</label>
+                            <label>Hora inicio de la Cita</label>
                             <div class='input-group date' id="dtp1">
                                 <input type="text" id="txtStart" class="form-control" />
                                 <span class="input-group-addon">
@@ -58,13 +73,9 @@
                                 </span>
                             </div>
                         </div>
-                        @*<div class="form-group">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" id="chkIsFullDay" checked="checked" />  Is Full Day event</label>
-                                </div>
-                            </div>*@
+
                         <div class="form-group" id="divEndDate" style="display:none">
-                            <label>End</label>
+                            <label>Hora final de la Cita</label>
                             <div class="input-group date" id="dtp2">
                                 <input type="text" id="txtEnd" class="form-control" />
                                 <span class="input-group-addon">
@@ -90,7 +101,6 @@
                             </div>
                         </div>
 
-
                     </form>
                 </div>
             </div>
@@ -113,6 +123,7 @@
 
     @if (Session["TipoUsuario"].ToString() == "1")
     {
+
         <script type="text/javascript" src="~/Assets/js/CalendarioUsuario.js"></script>
     }
     else
