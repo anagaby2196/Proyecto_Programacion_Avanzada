@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $("#tablaAjustes").hide();
+    $("#tablaAjustes").show();
 });
 
 function MostrarAjustes(ConsecutivoSeleccionado) {

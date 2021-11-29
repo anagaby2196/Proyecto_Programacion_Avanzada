@@ -11,6 +11,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
     {
         // GET: Paciente
         public ActionResult ConsultaPacientes()
+        
         {
             PacienteBLL paciente = new PacienteBLL();
             paciente.ConsultarPacientesBLL();

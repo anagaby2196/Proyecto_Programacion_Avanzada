@@ -22,7 +22,7 @@ namespace Clinica.BLL
             return prs.ConsultarPaciente(identificacion);
         }
 
-        public List<PacienteETL> ConsultarPacientesBLL()
+        public List<PersonaETL> ConsultarPacientesBLL()
         {
             PacienteDAL prs = new PacienteDAL();
             return prs.ConsultarPacientes();

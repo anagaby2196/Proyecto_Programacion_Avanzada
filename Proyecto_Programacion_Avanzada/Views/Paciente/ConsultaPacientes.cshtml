@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Entidades.ETL.PersonaETL>
 
 @{
     ViewBag.Title = "ConsultaPacientes";
@@ -18,7 +18,6 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Sº Apellido</th>
-                    <th scope="col">Doctor</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,13 +25,14 @@
                 {
                     <tr>
 
+
+                        <td><input type="radio" name="options" value="Detalles..." class="btn btn-default" onclick="MostrarDatos(@item.Identificacion);"></td>
+                        <td>@item.Identificacion</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.PrimerApellido</td>
+                        <td>@item.SegundoApellido</td>
                         
-                        <td><input type="radio" value="Detalles..." class="btn btn-default" onclick="MostrarDatos(@item.Consecutivo);"></td>
-                        <td>1111111</td>
-                        <td>Otto</td>
-                        <td>Otto</td>
-                        <td>Otto</td>
-                        <td>Otto</td>
+                        
 
                     </tr>
                 }

@@ -22,37 +22,39 @@ namespace Clinica.DAL
 
                     contexto.paciente.Add(nuevoPaciente);
                     contexto.SaveChanges();
-
+                    return true;
                 }
                 catch (Exception)
                 {
                     throw;
                 }
-                return true;
+                
             }
         }
 
 
-        public List<PacienteETL> ConsultarPacientes()
+        public List<PersonaETL> ConsultarPacientes()
         {
 
-            List<PacienteETL> listaPacientes = new List<PacienteETL>();
+            List<PersonaETL> listaPacientes = new List<PersonaETL>();
 
             using (var contexto = new ClinicaMedicaV1Entities())
             {
                 var listaPacientesDB = (from x in contexto.paciente
-                                       where x.estado == true
-                                       select x).ToList();
-                
+                                        join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona
+                                        join dc in contexto.usuarios on y.codigoPersona equals dc.codigoPersonaFK
+                                        where x.estado == true & dc.tipoUsuarioFK == 1 select x).ToList();
+                   
                 if (listaPacientesDB.Count > 0)
                 {
                     foreach (var item in listaPacientesDB)
                     {
-                        listaPacientes.Add(new PacienteETL
+                        listaPacientes.Add(new PersonaETL
                         {
-                          CodigoPaciente = item.codigoPaciente,
-                          CodigoPersona = (long)item.codigoPersonaFK,                          
-                          Estado = (bool)item.estado
+                          Nombre = item.persona.nombre,
+                          PrimerApellido = item.persona.primerApellido,                          
+                          SegundoApellido = item.persona.segundoApellido,
+                          Identificacion = item.persona.identificacion
                                                       
                         });
                     }
