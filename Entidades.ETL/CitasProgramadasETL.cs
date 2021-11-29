@@ -15,5 +15,7 @@ namespace Entidades.ETL
         public string Padecimiento { get; set; }
         public string Tratamiento { get; set; }
         public Boolean Estado { get; set; }
+
+        public DateTime HoraInicio { get; set; }
     }
 }

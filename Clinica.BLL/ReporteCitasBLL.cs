@@ -17,6 +17,15 @@ namespace Clinica.BLL
 
             return rp.ConsultarReporteCitas().ToList();
         }
+
+        public List<CitasProgramadasETL> ContarCitasProgramadasBLL()
+        {
+            ReporteCitasDAL rp = new ReporteCitasDAL();
+            var lista = rp.ContarCitasProgramadas();
+
+
+            return lista;
+        }
     }
 
 }

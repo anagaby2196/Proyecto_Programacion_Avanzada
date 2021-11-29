@@ -116,7 +116,7 @@ namespace Clinica.DAL
                             listaP.Correo = item.correo;
                             listaP.TipoUsuario = (int)item.tipoUsuario;
                             listaP.Estado = (bool)item.estado;
-
+                            
 
                         }
 

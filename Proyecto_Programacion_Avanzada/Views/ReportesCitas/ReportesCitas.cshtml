@@ -6,24 +6,40 @@
 }
 
 
-@{
-
-    var myChart = new Chart(width: 600, height: 400)
-        .AddTitle("Prueba")
-        .DataBindTable(dataSource: Model, xField: "Nombre")
-        .Write();
-} 
-
-
 <html>
-
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DataFromDataBase</title>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
 <body>
-    <h1>Small Bakery Products</h1>
+    <div id="chartContainer"></div>
 
+    <script type="text/javascript">
+        var result = @Html.Raw(ViewBag.DataPoints);
+        var dataPoints =[];
+        for(var i = 0; i < result.length; i++){
+            dataPoints.push({label:result[i].x, y:result[i].y});
+        }
 
+        window.onload = function() {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                theme: "light2",
+                zoomEnabled: true,
+                animationEnabled: true,
+                title: {
+                    text: "Line Chart with Data-Points from DataBase"
+                },
+                data: [
+                {
+                    type: "line",
 
-
-
+                    dataPoints: dataPoints,
+                }
+                ]
+            });
+            chart.render();
+        });
+    </script>
 </body>
-
-</html>
+</html>		

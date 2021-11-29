@@ -8,7 +8,7 @@ namespace Entidades.ETL
 {
     public class ReporteCitasETL : ExpedienteETL
     {
-        public long CodigoRporteCita { get; set; }
+        public long CodigoReporteCita { get; set; }
         public long CodigoExpediente { get; set; }
         public string Nombre { get; set; }
         public string PrimerApellido { get; set; }
@@ -27,7 +27,11 @@ namespace Entidades.ETL
         public string SegundoApellidoDc { get; set; }
 
 
-
+        public partial class Point
+        {
+            public int x { get; set; }
+            public Nullable<int> y { get; set; }
+        }
 
     }
 }

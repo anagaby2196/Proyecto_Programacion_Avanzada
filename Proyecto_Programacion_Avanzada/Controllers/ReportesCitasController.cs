@@ -9,6 +9,7 @@ using System.Web.UI.DataVisualization.Charting;
 using System.IO;
 using System.Text;
 using System.Drawing;
+using Newtonsoft.Json;
 
 namespace Proyecto_Programacion_Avanzada.Controllers
 {
@@ -17,31 +18,31 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         // GET: ReportesCitas
         public ActionResult ReportesCitas()
         {
-            
+            DataFromDataBase();
+
             return View();
         }
+        public ActionResult DataFromDataBase()
+        {
+            ReporteCitasBLL rp = new ReporteCitasBLL();
+            var lista = rp.ContarCitasProgramadasBLL();
 
-        //public ActionResult ChartFromEF()
-        //{
-        //    ReporteCitasBLL rp = new ReporteCitasBLL();
-        //    rp.ConsultarReporteCitasBLL().ToArray();
+            try
+            {
+                
+                ViewBag.DataPoints = JsonConvert.SerializeObject(lista.ToList(), _jsonSetting);
 
-
-        //    ClinicaMedicaV1Entities
-
-        //    ReporteCitasDAL rp2 = new ReporteCitasDAL();
-        //    rp2.ConsultarReporteCitas().ToList();
-        //    var chart = new Chart();
-        //    var area = new ChartArea();
-        //    chart.ChartAreas.Add(area);
-        //    var series = new Series();
-
-        //    foreach (var item in rp)
-        //    {
-        //        series.Points.AddXY(item.)
-        //    }
-
-
-        //}
+                return View(ViewBag.DataPoints);
+            }
+            catch (System.Data.Entity.Core.EntityException)
+            {
+                return View("Error");
+            }
+            catch (System.Data.SqlClient.SqlException)
+            {
+                return View("Error");
+            }
+        }
+        JsonSerializerSettings _jsonSetting = new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore };
     }
 }
