@@ -27,12 +27,6 @@ namespace Entidades.ETL
         public string SegundoApellidoDc { get; set; }
 
 
-        //public PersonaETL personaETL { get; set; }
-
-        //public DireccionETL direccionETL { get; set; }
-        //public ExpedienteETL expedienteETL { get; set; }
-        //public CitasProgramadasETL citasProgramadasETL { get; set; }
-        //public CitasETL citasETL { get; set; }
 
 
     }

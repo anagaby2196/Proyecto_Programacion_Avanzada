@@ -15,7 +15,7 @@ namespace Clinica.BLL
         {
             ReporteCitasDAL rp = new ReporteCitasDAL();
 
-            return rp.ConsultarReporteCitas();
+            return rp.ConsultarReporteCitas().ToList();
         }
     }
 

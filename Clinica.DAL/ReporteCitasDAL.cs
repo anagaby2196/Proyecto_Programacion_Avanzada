@@ -48,7 +48,7 @@ namespace Clinica.DAL
                     
                     foreach (var item in listaReporteCitasDB)
                     {
-                        PersonaETL petl = new PersonaETL();
+                        //PersonaETL petl = new PersonaETL();
 
                         listaReporteCitas.Add(new ReporteCitasETL
                         {

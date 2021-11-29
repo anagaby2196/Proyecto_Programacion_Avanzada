@@ -59,6 +59,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -363,11 +364,11 @@
     <Content Include="Views\Home\Nosotros.cshtml" />
     <Content Include="Views\Home\Promociones.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
-    <Content Include="Views\ReporteCitas\ReportesCitas.cshtml" />
+    <Content Include="Views\ReportesCitas\ReportesCitas.cshtml" />
     <Content Include="Views\Citas\Index.cshtml" />
     <Content Include="Views\Perfil\Perfil.cshtml" />
     <Content Include="Views\Login\OlvidoContrasena.cshtml" />
-    <Content Include="Views\Expediente\Expendiente.cshtml" />
+    <Content Include="Views\Expediente\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

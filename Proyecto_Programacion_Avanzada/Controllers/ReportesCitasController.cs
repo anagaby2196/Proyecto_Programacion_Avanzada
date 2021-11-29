@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Clinica.DAL;
+using System.Web.UI.DataVisualization.Charting;
+using System.IO;
+using System.Text;
+using System.Drawing;
 
 namespace Proyecto_Programacion_Avanzada.Controllers
 {
@@ -12,9 +17,31 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         // GET: ReportesCitas
         public ActionResult ReportesCitas()
         {
-            ReporteCitasBLL rp = new ReporteCitasBLL();
-            rp.ConsultarReporteCitasBLL(); 
-            return View(rp);
+            
+            return View();
         }
+
+        //public ActionResult ChartFromEF()
+        //{
+        //    ReporteCitasBLL rp = new ReporteCitasBLL();
+        //    rp.ConsultarReporteCitasBLL().ToArray();
+
+
+        //    ClinicaMedicaV1Entities
+
+        //    ReporteCitasDAL rp2 = new ReporteCitasDAL();
+        //    rp2.ConsultarReporteCitas().ToList();
+        //    var chart = new Chart();
+        //    var area = new ChartArea();
+        //    chart.ChartAreas.Add(area);
+        //    var series = new Series();
+
+        //    foreach (var item in rp)
+        //    {
+        //        series.Points.AddXY(item.)
+        //    }
+
+
+        //}
     }
 }

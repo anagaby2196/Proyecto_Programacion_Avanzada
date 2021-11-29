@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Clinica.DAL;
+using Entidades.ETL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,14 @@ using System.Threading.Tasks;
 
 namespace Clinica.BLL
 {
-    class ExpedienteBLL
+    public class ExpedienteBLL
     {
+
+
+        public List<ExpedienteETL> ConsultarExpedientes()
+        {
+            ExpedienteDAL expBLL = new ExpedienteDAL();
+            return expBLL.ConsultarExpedientes();
+        }
     }
 }

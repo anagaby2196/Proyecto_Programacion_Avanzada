@@ -60,23 +60,23 @@ namespace Clinica.DAL
                                 where p.identificacion == Identificacion
                             select new
                             {
-                                //codigoExpediente = x.codigoExpediente,
-                                //codigoPaciente = x.codigoPacienteFK,
-                                //nombre = p.nombre,
-                                //primerApellido = p.primerApellido,
-                                //segundoApellido = p.segundoApellido,
-                                //identificacion = p.identificacion,
-                                //telefono = p.telefono,
-                                //correo = p.correo,
-                                //provincia = d.provincia,
-                                //canton = d.canton,
-                                //distrito = d.distrito,
-                                //padecimiento = cp.padecimiento,
-                                //tratamiento = cp.tratamiento,
-                                //horaI = c.horaInicio,
-                                //nombreDc = pdc.nombre,
-                                //primerApellidoDc = pdc.primerApellido,
-                                //segundoApellidoDc = pdc.segundoApellido
+                                codigoExpediente = x.codigoExpediente,
+                                codigoCitaProgramada = x.codigoCitaProgramadasFK,
+                                nombre = p.nombre,
+                                primerApellido = p.primerApellido,
+                                segundoApellido = p.segundoApellido,
+                                identificacion = p.identificacion,
+                                telefono = p.telefono,
+                                correo = p.correo,
+                                provincia = d.provincia,
+                                canton = d.canton,
+                                distrito = d.distrito,
+                                padecimiento = cp.padecimiento,
+                                tratamiento = cp.tratamiento,
+                                horaI = c.horaInicio,
+                                nombreDc = pdc.nombre,
+                                primerApellidoDc = pdc.primerApellido,
+                                segundoApellidoDc = pdc.segundoApellido
                             }).ToList();
 
 

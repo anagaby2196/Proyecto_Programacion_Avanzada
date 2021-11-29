@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Clinica.BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,11 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         // GET: Expediente
         public ActionResult Index()
         {
+
+            ExpedienteBLL exp = new ExpedienteBLL();
+            exp.ConsultarExpedientes();
             return View();
         }
+
     }
 }

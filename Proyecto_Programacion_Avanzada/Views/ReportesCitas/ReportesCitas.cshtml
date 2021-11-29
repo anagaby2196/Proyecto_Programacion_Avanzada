@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Entidades.ETL.ReporteCitasETL>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
+}
+
+
+@{
+
+    var myChart = new Chart(width: 600, height: 400)
+        .AddTitle("Prueba")
+        .DataBindTable(dataSource: Model, xField: "Nombre")
+        .Write();
+} 
+
+
+<html>
+
+<body>
+    <h1>Small Bakery Products</h1>
+
+
+
+
+
+</body>
+
+</html>

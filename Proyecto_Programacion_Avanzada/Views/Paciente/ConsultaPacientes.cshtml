@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Entidades.ETL.PacienteETL>
+﻿
+
 @{
     ViewBag.Title = "ConsultaPacientes";
     Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
@@ -25,7 +26,8 @@
                 {
                     <tr>
 
-                        <td><input type="radio" value="Detalles..." class="btn btn-default" @*onclick="MostrarDatos(@item.Consecutivo);"*@></td>
+                        
+                        <td><input type="radio" value="Detalles..." class="btn btn-default" onclick="MostrarDatos(@item.Consecutivo);"></td>
                         <td>1111111</td>
                         <td>Otto</td>
                         <td>Otto</td>
