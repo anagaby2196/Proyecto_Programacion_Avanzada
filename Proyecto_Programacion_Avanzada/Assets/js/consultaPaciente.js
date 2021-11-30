@@ -1,29 +1,31 @@
 ﻿$(document).ready(function () {
-    $("#tablaAjustes").show();
+    $("#tablaAjustes").hide();
 });
 
-function MostrarAjustes(ConsecutivoSeleccionado) {
+function MostrarDatos(identificacionSeleccionada) {
 
     $.ajax({
         type: 'GET',
-        url: '/Consulta/ConsultarAjustes',
-        data: { Consecutivo: ConsecutivoSeleccionado },
+        url: '/Paciente/ConsultarPaciente',
+        data: { identificacion: identificacionSeleccionada},
         dataType: 'json',
         success: function (data) {
-
-            var lista = "";
-            $.each(data, function (index, value) {
-                lista += '<tr><td>' + value.Ajuste + '</td><td>' + value.AjusteRealizado + '</td></tr>';
-            })
-
-            $("#tAjustes").html(lista);
+            $("#Model_Identificacion").val(data.Identificacion);
+            $("#Model_Nombre").val(data.Nombre);
+            $("#Model_PrimerApellido").val(data.PrimerApellido);
+            $("#Model_SegundoApellido").val(data.SegundoApellido);
+            $("#Model_Telefono").val(data.Telefono);
+            $("#Model_Correo").val(data.Correo);
+            $("#Model_Provincia").val(data.Provincia);
+            $("#Model_Canton").val(data.Canton);
+            $("#Model_Distrito").val(data.Distrito);
             $("#tablaAjustes").show();
 
         },
         error: function (data) {
 
-            $("#tAjustes").html('<tr><td colspan="2">Sin Registros</td></tr>');
-            $("#tablaAjustes").show();
+            
+            $("#tablaAjustes").hide();
 
             //$("#tablaAjustes").hide();
         }

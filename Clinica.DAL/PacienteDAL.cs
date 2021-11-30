@@ -64,18 +64,34 @@ namespace Clinica.DAL
 
         }
 
-        public paciente ConsultarPaciente(string identificacion)
+        public PersonaETL ConsultarPaciente(string identificacion)
         {
 
             //List<PacienteETL> listaPacientes = new List<PacienteETL>();
 
             using (var contexto = new ClinicaMedicaV1Entities())
             {
-                return (from x in contexto.paciente
-                                        join y in contexto.persona on x.codigoPaciente equals y.codigoPersona
-                                       where x.estado == true || y.identificacion == identificacion
-                                       select x).FirstOrDefault();             
-             
+                var personaDAL = (from  x in contexto.persona 
+                                       where x.identificacion == identificacion & x.estado == true
+                                       select x).FirstOrDefault();
+                PersonaETL unaPersona = new PersonaETL();
+
+                unaPersona.Nombre = personaDAL.nombre;
+                unaPersona.PrimerApellido = personaDAL.primerApellido;
+                unaPersona.SegundoApellido = personaDAL.segundoApellido;
+                unaPersona.Identificacion = personaDAL.identificacion;
+                unaPersona.Telefono = personaDAL.telefono;
+                unaPersona.Correo = personaDAL.correo;
+                if (personaDAL.direccion.provincia != null)
+                {   
+                    unaPersona.Provincia = personaDAL.direccion.provincia;
+                    unaPersona.Canton = personaDAL.direccion.canton;
+                    unaPersona.Distrito = personaDAL.direccion.distrito;
+                }
+                
+                return unaPersona;
+
+
             }
 
         }

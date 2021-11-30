@@ -16,7 +16,7 @@ namespace Clinica.BLL
             return prs.RegristrarPaciente(CodigoPersona);
         }
 
-        public paciente ConsultarPacienteBLL(string identificacion)
+        public PersonaETL ConsultarPacienteBLL(string identificacion)
         {
             PacienteDAL prs = new PacienteDAL();
             return prs.ConsultarPaciente(identificacion);

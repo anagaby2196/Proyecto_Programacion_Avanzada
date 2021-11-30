@@ -24,5 +24,16 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             PacienteBLL paciente = new PacienteBLL();
             return paciente.RegristrarPacienteBLL(CodigoPersona);
         }
+
+        public ActionResult ConsultarPaciente(string identificacion)
+        {
+            PacienteBLL paciente = new PacienteBLL();
+            var unPaciente = paciente.ConsultarPacienteBLL(identificacion);
+
+            if (unPaciente!=null)
+                return Json(unPaciente, JsonRequestBehavior.AllowGet);
+            else
+                return Json(null, JsonRequestBehavior.DenyGet);
+        }
     }
 }
