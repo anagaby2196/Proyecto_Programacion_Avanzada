@@ -82,11 +82,17 @@ namespace Clinica.DAL
                 unaPersona.Identificacion = personaDAL.identificacion;
                 unaPersona.Telefono = personaDAL.telefono;
                 unaPersona.Correo = personaDAL.correo;
-                if (personaDAL.direccion.provincia != null)
+                if (personaDAL.direccion != null)
                 {   
                     unaPersona.Provincia = personaDAL.direccion.provincia;
                     unaPersona.Canton = personaDAL.direccion.canton;
                     unaPersona.Distrito = personaDAL.direccion.distrito;
+                }
+                else
+                {
+                    unaPersona.Provincia = "NO INDICA";
+                    unaPersona.Canton = "NO INDICA";
+                    unaPersona.Distrito = "NO INDICA";
                 }
                 
                 return unaPersona;

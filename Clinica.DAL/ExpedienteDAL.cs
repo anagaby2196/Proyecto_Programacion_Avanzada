@@ -59,7 +59,8 @@ namespace Clinica.DAL
                                 join pdc in contexto.persona on dc.codigoPersonaFk equals pdc.codigoPersona
                                 where p.identificacion == Identificacion
                             select new
-                            {
+                            {   
+                                codigoCita = c.codigoCitas,
                                 codigoExpediente = x.codigoExpediente,
                                 codigoCitaProgramada = x.codigoCitaProgramadasFK,
                                 nombre = p.nombre,
@@ -79,16 +80,31 @@ namespace Clinica.DAL
                                 segundoApellidoDc = pdc.segundoApellido
                             }).ToList();
 
+                    List<ExpedienteETL> expedienteETL = new List<ExpedienteETL>();
 
+                    if (listaExpedientes.Count() > 0)
+                    {
+                        foreach (var item in listaExpedientes)
+                        {
+                            expedienteETL.Add(new ExpedienteETL
+                            {
+                            CodigoExpediente = item.codigoExpediente,
+                            
+                        });
+                        }
 
-                    return null;
+                    }
+
+                    
+                    
+
+                    return expedienteETL;
                 }
                 catch (Exception)
                 {
 
                     throw;
                 }
-                return null;
             }
         }
 

@@ -17,5 +17,11 @@ namespace Clinica.BLL
             ExpedienteDAL expBLL = new ExpedienteDAL();
             return expBLL.ConsultarExpedientes();
         }
+
+        public List<ExpedienteETL> ConsultarExpediente(string identificacion)
+        {
+            ExpedienteDAL expBLL = new ExpedienteDAL();
+            return expBLL.ConsultarExpediente(identificacion);
+        }
     }
 }

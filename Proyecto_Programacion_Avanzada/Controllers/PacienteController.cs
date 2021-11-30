@@ -1,4 +1,5 @@
 ﻿using Clinica.BLL;
+using Entidades.ETL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +30,11 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         {
             PacienteBLL paciente = new PacienteBLL();
             var unPaciente = paciente.ConsultarPacienteBLL(identificacion);
-
+            //ExpedienteBLL expediente = new ExpedienteBLL();
+            //var exp = expediente.ConsultarExpediente(identificacion);
+            var exp = new ExpedienteETL();
             if (unPaciente!=null)
-                return Json(unPaciente, JsonRequestBehavior.AllowGet);
+                return Json(new { unPaciente, exp }, JsonRequestBehavior.AllowGet);
             else
                 return Json(null, JsonRequestBehavior.DenyGet);
         }

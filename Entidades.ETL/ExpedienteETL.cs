@@ -11,13 +11,13 @@ namespace Entidades.ETL
         public long CodigoExpediente { get; set; }
         public long CodigoCitaExpendiente { get; set; }
 
-        PersonaETL pETL { get; set; }  
+        public PersonaETL pETL { get; set; }
 
-        CitasProgramadasETL cpETL { get; set; } 
+        public CitasProgramadasETL cpETL { get; set; }
 
-        DoctorETL doctorETL { get; set; } 
-        
-        CitasETL cETL { get; set; }    
+        public DoctorETL doctorETL { get; set; }
+
+        public CitasETL cETL { get; set; }    
 
         
 
