@@ -30,9 +30,9 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         {
             PacienteBLL paciente = new PacienteBLL();
             var unPaciente = paciente.ConsultarPacienteBLL(identificacion);
-            //ExpedienteBLL expediente = new ExpedienteBLL();
-            //var exp = expediente.ConsultarExpediente(identificacion);
-            var exp = new ExpedienteETL();
+            ExpedienteBLL expediente = new ExpedienteBLL();
+            var exp = expediente.ConsultarExpediente(identificacion);
+            
             if (unPaciente!=null)
                 return Json(new { unPaciente, exp }, JsonRequestBehavior.AllowGet);
             else

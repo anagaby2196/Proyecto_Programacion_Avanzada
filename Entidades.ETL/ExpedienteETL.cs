@@ -9,7 +9,14 @@ namespace Entidades.ETL
     public class ExpedienteETL : PacienteETL 
     {
         public long CodigoExpediente { get; set; }
-        public long CodigoCitaExpendiente { get; set; }
+        public long CodigoCitaProgramada { get; set; }
+
+        //Datos de Expediente
+        public DateTime HoraInicio { get; set; }
+        public string NombreDoctor { get; set; }
+        public string Padecimiento { get; set; }
+        public string Tratamiento { get; set; }
+
 
         public PersonaETL pETL { get; set; }
 
@@ -20,7 +27,5 @@ namespace Entidades.ETL
         public CitasETL cETL { get; set; }    
 
         
-
-
     }
 }

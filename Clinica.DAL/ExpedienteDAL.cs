@@ -53,32 +53,25 @@ namespace Clinica.DAL
                        var listaExpedientes = (from x in contexto.expediente                                
                                 join cp in contexto.citasProgramadas on x.codigoCitaProgramadasFK equals cp.codigoCitaProgramadas
                                 join c in contexto.citas on cp.codigoCitasFK equals c.codigoCitas
-                                join p in contexto.persona on cp.codigoPacienteFK equals p.codigoPersona
-                                join d in contexto.direccion on p.codigoDireccionFK equals d.codigoDireccion
-                                join dc in contexto.doctor on cp.codigoDoctorFK equals dc.codigoDoctor
-                                join pdc in contexto.persona on dc.codigoPersonaFk equals pdc.codigoPersona
-                                where p.identificacion == Identificacion
+                                join p in contexto.paciente on cp.codigoPacienteFK equals p.codigoPaciente
+                                join ps in contexto.persona on p.codigoPersonaFK equals ps.codigoPersona
+                                where ps.identificacion == Identificacion
                             select new
                             {   
                                 codigoCita = c.codigoCitas,
                                 codigoExpediente = x.codigoExpediente,
                                 codigoCitaProgramada = x.codigoCitaProgramadasFK,
-                                nombre = p.nombre,
-                                primerApellido = p.primerApellido,
-                                segundoApellido = p.segundoApellido,
-                                identificacion = p.identificacion,
-                                telefono = p.telefono,
-                                correo = p.correo,
-                                provincia = d.provincia,
-                                canton = d.canton,
-                                distrito = d.distrito,
+                                nombre = ps.nombre,
+                                primerApellido = ps.primerApellido,
+                                segundoApellido = ps.segundoApellido,
+                                identificacion = ps.identificacion,
+                                telefono = ps.telefono,
+                                correo = ps.correo,
                                 padecimiento = cp.padecimiento,
                                 tratamiento = cp.tratamiento,
                                 horaI = c.horaInicio,
-                                nombreDc = pdc.nombre,
-                                primerApellidoDc = pdc.primerApellido,
-                                segundoApellidoDc = pdc.segundoApellido
-                            }).ToList();
+                                
+                            });
 
                     List<ExpedienteETL> expedienteETL = new List<ExpedienteETL>();
 
@@ -89,8 +82,12 @@ namespace Clinica.DAL
                             expedienteETL.Add(new ExpedienteETL
                             {
                             CodigoExpediente = item.codigoExpediente,
-                            
-                        });
+                            CodigoCitaProgramada = (long)item.codigoCitaProgramada,
+                            HoraInicio = (DateTime)item.horaI,
+                            //NombreDoctor = item.nombreDc,
+                            Padecimiento = item.padecimiento,
+                            Tratamiento = item.tratamiento
+                            });
                         }
 
                     }
@@ -152,7 +149,7 @@ namespace Clinica.DAL
                             listaEexpedientes.Add(new ExpedienteETL
                             {
                                 CodigoExpediente = item.codigoExpediente,
-                                CodigoCitaExpendiente = (long)item.CodigoCitaExpendiente
+                                CodigoCitaProgramada = (long)item.CodigoCitaExpendiente
 
                             });
                         }                         
