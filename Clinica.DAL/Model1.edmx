@@ -245,6 +245,9 @@
           <Parameter Name="identificacion" Type="varchar" Mode="In" />
         </Function>
         <Function Name="consultarPersonas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="consultarUnExpediente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="identificacion" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="eliminarDireccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codigo" Type="bigint" Mode="In" />
         </Function>
@@ -635,6 +638,9 @@
             <Parameter Name="identificacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="consultarPersonas" />
+          <FunctionImport Name="consultarUnExpediente" ReturnType="Collection(ClinicaMedicaV1Model.consultarUnExpediente_Result)">
+            <Parameter Name="identificacion" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="eliminarDireccion">
             <Parameter Name="codigo" Mode="In" Type="Int64" />
           </FunctionImport>
@@ -674,6 +680,14 @@
           <Property Type="String" Name="canton" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="distrito" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="resena" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="consultarUnExpediente_Result">
+          <Property Type="Int64" Name="codigoExpediente" Nullable="false" />
+          <Property Type="Int64" Name="codigoCitas" Nullable="false" />
+          <Property Type="DateTime" Name="horaInicio" Nullable="true" Precision="23" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="padecimiento" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="tratamiento" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -816,6 +830,18 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="consultarPersona" FunctionName="ClinicaMedicaV1Model.Store.consultarPersona" />
           <FunctionImportMapping FunctionImportName="consultarPersonas" FunctionName="ClinicaMedicaV1Model.Store.consultarPersonas" />
+          <FunctionImportMapping FunctionImportName="consultarUnExpediente" FunctionName="ClinicaMedicaV1Model.Store.consultarUnExpediente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClinicaMedicaV1Model.consultarUnExpediente_Result">
+                <ScalarProperty Name="codigoExpediente" ColumnName="codigoExpediente" />
+                <ScalarProperty Name="codigoCitas" ColumnName="codigoCitas" />
+                <ScalarProperty Name="horaInicio" ColumnName="horaInicio" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="padecimiento" ColumnName="padecimiento" />
+                <ScalarProperty Name="tratamiento" ColumnName="tratamiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="eliminarDireccion" FunctionName="ClinicaMedicaV1Model.Store.eliminarDireccion" />
           <FunctionImportMapping FunctionImportName="eliminarPersona" FunctionName="ClinicaMedicaV1Model.Store.eliminarPersona" />
           <FunctionImportMapping FunctionImportName="insertarDireccion" FunctionName="ClinicaMedicaV1Model.Store.insertarDireccion" />

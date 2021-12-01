@@ -20,10 +20,10 @@ function MostrarDatos(identificacionSeleccionada) {
             $("#Model_Canton").val(data.unPaciente.Canton);
             $("#Model_Distrito").val(data.unPaciente.Distrito);
 
-            var lista = data.exp;
-            $.each(data, function (index, value) {
-                lista += '<tr><td>' + value.cpETL.HoraInicio + '</td><td>' + value.doctorETL.Nombre +
-                    '</td><td>' + value.cpETL.Padecimiento + '</td><td>' + value.cpETL.Tratamiento + '</td></tr>';
+            var lista = "";
+            $.each(data.exp, function (index, value) {
+                lista += '<tr><td>' + value.HoraInicio + '</td><td>' + value.NombreDoctor +
+                    '</td><td>' + value.Padecimiento + '</td><td>' + value.Tratamiento + '</td></tr>';
             })
 
             $("#tabla_expediente").html(lista);

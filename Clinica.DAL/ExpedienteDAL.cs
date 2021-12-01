@@ -50,28 +50,7 @@ namespace Clinica.DAL
                 {
 
                     
-                       var listaExpedientes = (from x in contexto.expediente                                
-                                join cp in contexto.citasProgramadas on x.codigoCitaProgramadasFK equals cp.codigoCitaProgramadas
-                                join c in contexto.citas on cp.codigoCitasFK equals c.codigoCitas
-                                join p in contexto.paciente on cp.codigoPacienteFK equals p.codigoPaciente
-                                join ps in contexto.persona on p.codigoPersonaFK equals ps.codigoPersona
-                                where ps.identificacion == Identificacion
-                            select new
-                            {   
-                                codigoCita = c.codigoCitas,
-                                codigoExpediente = x.codigoExpediente,
-                                codigoCitaProgramada = x.codigoCitaProgramadasFK,
-                                nombre = ps.nombre,
-                                primerApellido = ps.primerApellido,
-                                segundoApellido = ps.segundoApellido,
-                                identificacion = ps.identificacion,
-                                telefono = ps.telefono,
-                                correo = ps.correo,
-                                padecimiento = cp.padecimiento,
-                                tratamiento = cp.tratamiento,
-                                horaI = c.horaInicio,
-                                
-                            });
+                       var listaExpedientes = contexto.consultarUnExpediente("207340817").ToList();
 
                     List<ExpedienteETL> expedienteETL = new List<ExpedienteETL>();
 
@@ -82,9 +61,8 @@ namespace Clinica.DAL
                             expedienteETL.Add(new ExpedienteETL
                             {
                             CodigoExpediente = item.codigoExpediente,
-                            CodigoCitaProgramada = (long)item.codigoCitaProgramada,
-                            HoraInicio = (DateTime)item.horaI,
-                            //NombreDoctor = item.nombreDc,
+                            HoraInicio = (DateTime)item.horaInicio,
+                            NombreDoctor = item.nombre,
                             Padecimiento = item.padecimiento,
                             Tratamiento = item.tratamiento
                             });
