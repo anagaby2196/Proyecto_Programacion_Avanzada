@@ -209,6 +209,7 @@
     <Content Include="Assets\js\login.js" />
     <Content Include="Assets\js\main.js" />
     <Content Include="Assets\js\owl.carousel.min.js" />
+    <Content Include="Assets\js\perfil.js" />
     <Content Include="Assets\js\popper.min.js" />
     <Content Include="Assets\js\scrollax.min.js" />
     <Content Include="Content\bootstrap-datetimepicker.min.js" />

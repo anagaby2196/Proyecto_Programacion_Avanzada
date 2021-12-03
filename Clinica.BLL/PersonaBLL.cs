@@ -42,7 +42,13 @@ namespace Clinica.BLL
             return prs.VerificarUsuario(correo, contrasena);
         }
 
+        public Boolean ActualizarDireccion(long codigoDireccion)
+        {
+            PersonaDAL personaDAL = new PersonaDAL();
+            personaDAL.ActualizarDireccion(codigoDireccion);
 
+            return false;
+        }
 
     }
 }

@@ -15,48 +15,51 @@
 <body>
 
     <div id="tablaAjustes" class="container-fluid col-10">
-        <form>
 
-            <label style="color:black"><h3><b>Datos del Paciente</b></h3></label>
-            <div class="form-row">
-                <div class="form-group col-md-2">
-                    <label for="">Identificación</label>
-                    <input type="text" class="form-control" id="Model_Identificacion" readonly="readonly">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="">Nombre Completo</label>
-                    <input type="text" class="form-control" id="Model_Nombre">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="">Primer Apellido</label>
-                    <input type="text" class="form-control" id="Model_PrimerApellido">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="">Segundo Apellido</label>
-                    <input type="text" class="form-control" id="Model_SegundoApellido">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="">Teléfono</label>
-                    <input type="text" class="form-control" id="Model_Telefono">
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="">Correo Electrónico</label>
-                    <input type="email" class="form-control" id="Model_Correo" readonly="readonly">
-                </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group col-1">
-                    <label for="">Edad</label>
-                    <input type="text" class="form-control" id="Model_Edad">
-                </div>
-                <div class="form-group col-md-1">
-                    <label>Sexo</label>
-                    <input type="text" class="form-control" id="Model_Sexo">
-                </div>
+        <label style="color:black"><h3><b>Datos del Paciente</b></h3></label>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="">Identificación</label>
+                <input type="text" class="form-control" id="Model_Identificacion" readonly="readonly" value="@Model.Identificacion">
             </div>
-            <label style="color:black"><h4><b>Dirección</b></h4></label>
-            <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="">Nombre Completo</label>
+                <input type="text" class="form-control" id="Model_Nombre" value="@Model.Nombre">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Primer Apellido</label>
+                <input type="text" class="form-control" id="Model_PrimerApellido" value="@Model.PrimerApellido">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Segundo Apellido</label>
+                <input type="text" class="form-control" id="Model_SegundoApellido" value="@Model.SegundoApellido">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="">Teléfono</label>
+                <input type="text" class="form-control" id="Model_Telefono" value="@Model.Telefono">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Correo Electrónico</label>
+                <input type="email" class="form-control" id="Model_Correo" readonly="readonly" value="@Model.Correo">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-1">
+                <label for="">Edad</label>
+                <input type="text" class="form-control" id="Model_Edad">
+            </div>
+            <div class="form-group col-md-1">
+                <label>Sexo</label>
+                <input type="text" class="form-control" id="Model_Sexo">
+            </div>
+        </div>
+        <label style="color:black"><h4><b>Dirección</b></h4></label>
+
+        <div class="form-row">
+            @if (Model.Provincia == null && Model.Canton == null && Model.Distrito == null)
+            {
                 <div class="form-group col-md-2">
                     <label>Provincia</label>
                     <input type="text" class="form-control" id="Model_Provincia">
@@ -69,9 +72,34 @@
                     <label>Distrito</label>
                     <input type="text" class="form-control" id="Model_Distrito">
                 </div>
-            </div>
-        </form>
+            }
+            else
+            {
+                <div class="form-group col-md-2">
+                    <label>Provincia</label>
+                    <input type="text" class="form-control" id="Model_Provincia" value="@Model.Provincia">
+                </div>
+                <div class="form-group col-md-2">
+                    <label>Canton</label>
+                    <input type="text" class="form-control" id="Model_Canton" value="@Model.Canton">
+                </div>
+                <div class="form-group col-md-2">
+                    <label>Distrito</label>
+                    <input type="text" class="form-control" id="Model_Distrito" value="@Model.Distrito">
+                </div>
+            }
+
+
+        </div>
+
+        <input type="button" class="btn btn-success" value="Actualizar" onclick="ActualizarPerfil();" />
+
     </div>
+    @section Scripts
+    {
+        @Scripts.Render("/Assets/js/perfil.js")
+    }
+
 </body>
 </html>
 
