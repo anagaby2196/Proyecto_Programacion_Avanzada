@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades.ETL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,15 +10,13 @@ namespace Proyecto_Programacion_Avanzada.Controllers
     public class PerfilController : Controller
     {
         // GET: Perfil
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        
         public ActionResult Perfil()
         {
+            var nUsuario = (PersonaETL)Session["Usuario"];
+            
             ViewBag.Message = "Your application description page.";
-            return View();
+            return View(nUsuario);
         }
     }
 }

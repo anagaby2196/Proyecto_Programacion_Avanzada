@@ -91,7 +91,8 @@ namespace Clinica.DAL
                 using (var contexto = new ClinicaMedicaV1Entities())
                 {
                     var lista = (from x in contexto.usuarios join y in contexto.persona on x.codigoPersonaFK
-                                 equals y.codigoPersona where x.contrasena == contrasena && y.correo == correo select new {
+                                 equals y.codigoPersona
+                                 join d in contexto.direccion on y.codigoDireccionFK equals d.codigoDireccion where x.contrasena == contrasena && y.correo == correo select new {
                         CodigoPersona = y.codigoPersona,
                         nombre = y.nombre,
                         primerApellido = y.primerApellido,
@@ -100,7 +101,10 @@ namespace Clinica.DAL
                         telefono = y.telefono,
                         correo = y.correo,
                         estado = x.estado,
-                        tipoUsuario = x.tipoUsuarioFK
+                        tipoUsuario = x.tipoUsuarioFK,
+                        Canton = d.canton,
+                        Distrito = d.distrito,
+                        Provincia = d.provincia
                     });
 
                     PersonaETL listaP = new PersonaETL();
@@ -117,7 +121,11 @@ namespace Clinica.DAL
                             listaP.Correo = item.correo;
                             listaP.TipoUsuario = (int)item.tipoUsuario;
                             listaP.Estado = (bool)item.estado;
-                            
+                            listaP.Canton = item.Canton;
+                            listaP.Distrito = item.Distrito;
+                            listaP.Provincia = item.Provincia;
+
+
 
                         }
 
