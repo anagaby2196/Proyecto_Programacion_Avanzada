@@ -90,22 +90,34 @@ namespace Clinica.DAL
             {
                 using (var contexto = new ClinicaMedicaV1Entities())
                 {
-                    var lista = (from x in contexto.usuarios join y in contexto.persona on x.codigoPersonaFK
-                                 equals y.codigoPersona
-                                 join d in contexto.direccion on y.codigoDireccionFK equals d.codigoDireccion where x.contrasena == contrasena && y.correo == correo select new {
-                        CodigoPersona = y.codigoPersona,
-                        nombre = y.nombre,
-                        primerApellido = y.primerApellido,
-                        segundoApellido = y.segundoApellido,
-                        identificacion = y.identificacion,
-                        telefono = y.telefono,
-                        correo = y.correo,
-                        estado = x.estado,
-                        tipoUsuario = x.tipoUsuarioFK,
-                        Canton = d.canton,
-                        Distrito = d.distrito,
-                        Provincia = d.provincia
-                    });
+                    var lista = (from x in contexto.usuarios
+                                 join y in contexto.persona on x.codigoPersonaFK
+     equals y.codigoPersona
+                                 where x.contrasena == contrasena && y.correo == correo
+                                 select new
+                                 {
+                                     CodigoPersona = y.codigoPersona,
+                                     nombre = y.nombre,
+                                     primerApellido = y.primerApellido,
+                                     segundoApellido = y.segundoApellido,
+                                     identificacion = y.identificacion,
+                                     telefono = y.telefono,
+                                     correo = y.correo,
+                                     estado = x.estado,
+                                     tipoUsuario = x.tipoUsuarioFK
+                                 });
+
+                    var Direccion = (from x in contexto.usuarios
+                                     join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona
+                                     join d in contexto.direccion on y.codigoDireccionFK equals d.codigoDireccion
+                                     where x.contrasena == contrasena && y.correo == correo
+                                     select new
+                                     {
+                                         tipoUsuario = x.tipoUsuarioFK,
+                                         Canton = d.canton,
+                                         Distrito = d.distrito,
+                                         Provincia = d.provincia
+                                     });
 
                     PersonaETL listaP = new PersonaETL();
                     if (lista.Count() > 0)
@@ -121,19 +133,25 @@ namespace Clinica.DAL
                             listaP.Correo = item.correo;
                             listaP.TipoUsuario = (int)item.tipoUsuario;
                             listaP.Estado = (bool)item.estado;
-                            listaP.Canton = item.Canton;
-                            listaP.Distrito = item.Distrito;
-                            listaP.Provincia = item.Provincia;
 
+                        }
 
+                        if (Direccion.Count() > 0)
+                        {
+                            foreach (var item in Direccion)
+                            {
+                                listaP.Canton = item.Canton;
+                                listaP.Distrito = item.Distrito;
+                                listaP.Provincia = item.Provincia;
+                            }
 
+                            
                         }
 
                         return listaP;
                     }
 
                 }
-
             }
             catch (Exception)
             {

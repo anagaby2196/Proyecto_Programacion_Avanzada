@@ -18,5 +18,15 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             ViewBag.Message = "Your application description page.";
             return View(nUsuario);
         }
+
+        [HttpPost]
+        public JsonResult ActualizarPerfil(string Nombre, string PrimerApellido,
+            string SegundoApellido,string Telefono,string Correo,int Edad,char Sexo,string Provincia
+            ,string Canton,string Distrito)
+        {
+            var status = true;
+
+            return new JsonResult { Data = new { status = status } };
+        }
     }
 }
