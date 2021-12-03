@@ -1,19 +1,33 @@
-﻿
+﻿@model IEnumerable<Entidades.ETL.ExpedienteETL>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div>
-        <h1>    HOLA </h1>
+@Html.Partial("DatosPaciente", new Entidades.ETL.PersonaETL())
+
+
+<div id="exp" class="container-fluid col-10">
+    <div style="margin-top:5%" class="container-fluid"></div>
+    <div class="container-fluid col-10">
+        <label style="color:black"><h4><b>Datos para expediente</b></h4></label>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Tratamiento</label>
+                <input type="text" class="form-control" id="Model_Tratamiento">
+            </div>
+
+        </div>
+        <div>
+            <input type="submit" name="s_Tratamiento" value="Guardar cambios" />
+        </div>
+
     </div>
-</body>
-</html>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("/Assets/js/consultaPaciente.js")
+}
