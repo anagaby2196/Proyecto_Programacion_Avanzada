@@ -13,7 +13,7 @@
 
 
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: '/Perfil/ActualizarPerfil',
         data: {
             Nombre: Model_Nombre,
@@ -25,11 +25,11 @@
             Sexo: Model_Sexo,
             Provincia: Model_Provincia,
             Canton: Model_Canton,
-            Distrito: Model_Distrito,
+            Distrito: Model_Distrito
         },
         dataType: 'json',
         success: function (respuesta) {
-            location.replace("https://www.w3schools.com");
+            location.replace("Perfil");
         },
         error: function (respuesta) {
             alert(respuesta);

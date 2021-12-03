@@ -1,4 +1,5 @@
-﻿using Entidades.ETL;
+﻿using Clinica.BLL;
+using Entidades.ETL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,18 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             string SegundoApellido,string Telefono,string Correo,int Edad,char Sexo,string Provincia
             ,string Canton,string Distrito)
         {
-            var status = true;
+            var nUsuario = (PersonaETL)Session["Usuario"];
+            if (nUsuario.Canton != null && nUsuario.Provincia != null && nUsuario.Distrito != null)
+            {
+                //actualizar
+                PersonaBLL persona = new PersonaBLL();
+                persona.ActualizarDireccion(nUsuario.CodigoDireccion);
+            }
+            else
+            {
+                //crearlo
+            }
+
 
             return new JsonResult { Data = new { status = status } };
         }

@@ -49,6 +49,24 @@ namespace Clinica.DAL
             }
         }
 
+        public Boolean ActualizarDireccion(long codigoDireccion)
+        {
+            try
+            {
+                using (var contexto = new ClinicaMedicaV1Entities())
+                {
+
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
+
         public Boolean AgregarUsuario(PersonaETL persona)
         {
             using (var contexto = new ClinicaMedicaV1Entities())
@@ -91,8 +109,7 @@ namespace Clinica.DAL
                 using (var contexto = new ClinicaMedicaV1Entities())
                 {
                     var lista = (from x in contexto.usuarios
-                                 join y in contexto.persona on x.codigoPersonaFK
-     equals y.codigoPersona
+                                 join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona
                                  where x.contrasena == contrasena && y.correo == correo
                                  select new
                                  {
