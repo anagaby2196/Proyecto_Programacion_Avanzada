@@ -49,14 +49,24 @@ namespace Clinica.DAL
             }
         }
 
-        public Boolean ActualizarDireccion(long codigoDireccion)
+        public Boolean ActualizarDireccion(long codigoDireccion, string Provincia
+            , string Canton, string Distrito)
         {
             try
             {
                 using (var contexto = new ClinicaMedicaV1Entities())
                 {
+                    var persona = (from x in contexto.direccion where x.codigoDireccion == codigoDireccion select x).FirstOrDefault();
 
-                    return true;
+                    if (persona != null)
+                    {
+                        persona.provincia = Provincia;
+                        persona.canton = Canton;
+                        persona.distrito = Distrito;
+                        contexto.SaveChanges();
+                        return true;
+                    }
+                    return false;
                 }
             }
             catch (Exception)
@@ -130,6 +140,7 @@ namespace Clinica.DAL
                                      where x.contrasena == contrasena && y.correo == correo
                                      select new
                                      {
+                                         CodigoDireccion = y.codigoDireccionFK,
                                          tipoUsuario = x.tipoUsuarioFK,
                                          Canton = d.canton,
                                          Distrito = d.distrito,
@@ -157,6 +168,7 @@ namespace Clinica.DAL
                         {
                             foreach (var item in Direccion)
                             {
+                                listaP.CodigoDireccion = (long)item.CodigoDireccion;
                                 listaP.Canton = item.Canton;
                                 listaP.Distrito = item.Distrito;
                                 listaP.Provincia = item.Provincia;

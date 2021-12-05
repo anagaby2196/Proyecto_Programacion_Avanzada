@@ -42,10 +42,11 @@ namespace Clinica.BLL
             return prs.VerificarUsuario(correo, contrasena);
         }
 
-        public Boolean ActualizarDireccion(long codigoDireccion)
+        public Boolean ActualizarDireccion(long codigoDireccion, string Provincia
+            , string Canton, string Distrito)
         {
             PersonaDAL personaDAL = new PersonaDAL();
-            personaDAL.ActualizarDireccion(codigoDireccion);
+            personaDAL.ActualizarDireccion(codigoDireccion, Provincia, Canton, Distrito);
 
             return false;
         }
