@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
     $("#tablaAjustes").hide();
 });
 
@@ -39,4 +40,29 @@ function MostrarDatos(identificacionSeleccionada) {
         }
     });
 
+}
+
+function datosPaciente(pIdentificacion) {
+
+    $.ajax({
+        type: 'GET',
+        url: '/Paciente/ConsultarPaciente',
+        data: { identificacion: pIdentificacion },
+        dataType: 'json',
+        success: function (data) {
+            $("#Model_Identificacion").val(data.unPaciente.Identificacion);
+            $("#Model_Nombre").val(data.unPaciente.Nombre);
+            $("#Model_PrimerApellido").val(data.unPaciente.PrimerApellido);
+            $("#Model_SegundoApellido").val(data.unPaciente.SegundoApellido);
+            $("#Model_Telefono").val(data.unPaciente.Telefono);
+            $("#Model_Correo").val(data.unPaciente.Correo);
+            $("#Model_Provincia").val(data.unPaciente.Provincia);
+            $("#Model_Canton").val(data.unPaciente.Canton);
+            $("#Model_Distrito").val(data.unPaciente.Distrito);
+        },
+        error: function (data) {
+            alert("Paciente no encontrado")
+        }
+
+    });
 }
