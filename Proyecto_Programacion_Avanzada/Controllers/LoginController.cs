@@ -40,8 +40,10 @@ namespace Proyecto_Programacion_Avanzada.Controllers
                     var usuario = personabll2.VerificarLogin(persona.Correo, persona.Contrasena);
                     PacienteController agregarPaciente = new PacienteController();
                     agregarPaciente.AgregarPaciente(usuario.CodigoPersona);
+                    var nombreCompleto = usuario.Nombre + " " + usuario.PrimerApellido + " " + usuario.SegundoApellido;
                     Session["Usuario"] = usuario;
                     Session["TipoUsuario"] = usuario.TipoUsuario;
+                    Session["nombreCompleto"] = nombreCompleto;
                     return RedirectToAction("Perfil", "Perfil");
                 }
             }
@@ -58,8 +60,10 @@ namespace Proyecto_Programacion_Avanzada.Controllers
                 var usuario = personabll.VerificarLogin(correoLogin, contrasenaLogin);
                 if (usuario != null)
                 {
+                    var nombreCompleto = usuario.Nombre + " " + usuario.PrimerApellido + " " + usuario.SegundoApellido;
                     Session["Usuario"] = usuario;
                     Session["TipoUsuario"] = usuario.TipoUsuario;
+                    Session["nombreCompleto"] = nombreCompleto;
                     return RedirectToAction("Perfil", "Perfil");
                 }
             }

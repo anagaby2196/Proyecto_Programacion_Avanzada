@@ -47,18 +47,31 @@
             eventLimit: true,
             eventColor: '#378006',
             events: events
-            ,eventClick: function (calEvent, jsEvent, view) {
-                selectedEvent = calEvent;
-                $('#ModalEventos #eventTitle').text(calEvent.title);
-                var $description = $('<div/>');
-                $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("YYYY-MMM-DD HH:mm a")));
-                if (calEvent.end != null) {
-                    $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("YYYY-MMM-DD HH:mm a")));
-                }
-                $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
-                $('#ModalEventos #pDetails').empty().html($description);
+            , eventClick: function (calEvent, jsEvent, view) {
+                
+                var session = $('#nombreUsuarioID').text();
+                if (session == calEvent.title) {
+                    selectedEvent = calEvent;
+                    $('#ModalEventos #eventTitle').text(calEvent.title);
+                    var $description = $('<div/>');
+                    $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("YYYY-MMM-DD HH:mm a")));
+                    if (calEvent.end != null) {
+                        $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("YYYY-MMM-DD HH:mm a")));
+                    }
+                    $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
+                    $('#ModalEventos #pDetails').empty().html($description);
 
-                $('#ModalEventos').modal();
+                    $('#ModalEventos').modal();
+                } else {
+
+                    swal(
+                        'Oops...',
+                        'No puedes editar citas de otros usuarios',
+                        'error'
+                    )
+                }
+
+                
             }
             ,
             selectable: true,
@@ -101,7 +114,7 @@
             $.ajax({
                 type: "POST",
                 url: '/Citas/DeleteEvent',
-                data: {eventoID: selectedEvent.eventID},
+                data: { eventoID: selectedEvent.eventID, Sujeto: selectedEvent.title},
                 success: function (data) {
                     if (data.status) {
                         //Refresh the calender
@@ -109,8 +122,8 @@
                         $('#myModal').modal('hide');
                     }
                 },
-                error: function () {
-                    alert('Failed');
+                error: function (data) {
+                    alert('Error');
                     FetchEventAndRenderCalendar();
                 }
             })

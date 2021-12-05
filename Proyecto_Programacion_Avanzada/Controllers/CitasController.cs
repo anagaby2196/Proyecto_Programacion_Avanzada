@@ -4,6 +4,7 @@ using Entidades.ETL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,6 +17,9 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         {
             CitasBLL citas = new CitasBLL();
             var events = citas.CitasDisponiblesBLL().ToArray();
+            var nUsuario = (PersonaETL)Session["Usuario"];
+            var nombreCompleto = nUsuario.Nombre + " " + nUsuario.PrimerApellido + " " + nUsuario.SegundoApellido;
+            Session["nombreCompleto"] = nombreCompleto;
             return View();
         }
 
@@ -56,14 +60,22 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         {
             var nUsuario = (PersonaETL)Session["Usuario"];
             var nombreCompleto = nUsuario.Nombre + " " + nUsuario.PrimerApellido + " " + nUsuario.SegundoApellido;
+            
             return SaveEvent(codigoCitas, nombreCompleto, descripcion, horaInicio, horaFin, esTodoElDia, codDoctor);
         }
 
         [HttpPost]
-        public JsonResult DeleteEvent(int eventoID)
+        public JsonResult DeleteEvent(int eventoID, string Sujeto)
         {
-            CitasBLL citas = new CitasBLL();
-            var status = citas.CancelarCitaBLL(eventoID);
+            var status = false;
+            var sujetoActivo = Session["nombreCompleto"];
+            if (sujetoActivo.ToString() == Sujeto)
+            {
+                CitasBLL citas = new CitasBLL();
+                status = citas.CancelarCitaBLL(eventoID);
+                return new JsonResult { Data = new { status = status } };
+            }
+
             return new JsonResult { Data = new { status = status } };
         }
     }
