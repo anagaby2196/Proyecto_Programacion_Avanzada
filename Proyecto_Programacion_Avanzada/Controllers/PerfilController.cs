@@ -52,5 +52,11 @@ namespace Proyecto_Programacion_Avanzada.Controllers
 
             return new JsonResult { Data = new { status = status } };
         }
+
+        public ActionResult Perfiles()
+        {
+            return View();
+        }
+
     }
 }

@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="~/Assets/css/style.css">
     <link rel="stylesheet" href="~/Assets/css/login.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
@@ -65,6 +66,8 @@
         </script>
     }
 
+
+
     <div class="login-reg-panel" style="margin-top:-10%">
         <div class="login-info-box">
             <h2 style="font-family: 'Eras ITC'; color: white">Iniciar Sesión</h2>
@@ -86,11 +89,12 @@
             {
                 <div class="login-show">
                     <h2 style="font-family: 'Eras ITC';"></h2>
-                    <input type="text" name="correoLogin" placeholder="Correo">
-                    <input type="password" name="contrasenaLogin" placeholder="Contraseña">
+                    <input type="text" name="correoLogin" placeholder="Correo" onfocusout="ValidarCampoCorreo(this.value)">
+                    <input type="password" name="contrasenaLogin" placeholder="Contraseña" onfocusout="ValidarCampoContrasena(this.value)">
                     <button type="submit" class="btn btn-primary col-3" style="font-family: 'Eras ITC'; margin-left:auto">INGRESAR</button>
                     @Html.ActionLink("¿Olvidó su contraseña?", "OlvidoContrasena", "Login", null, new { @style = "color:#000000; font-family: 'Eras ITC'; margin-left:40%" })
                 </div>
+
             }
 
 
@@ -104,25 +108,32 @@
                     <div class="row">
                         <div class="register-show col-6">
 
-                            <input type="text" name="nombre" placeholder="Nombre">
-                            <input type="text" name="papellido" placeholder="Primer Apellido">
-                            <input type="text" name="sapellido" placeholder="Segundo Apellido">
-                            <input type="text" name="identificacion" placeholder="Identificación">
+                            <input type="text" name="nombre" placeholder="Nombre" onfocusout="ValidarCampo(this.value)">
+                            <input type="text" name="papellido" placeholder="Primer Apellido" onfocusout="ValidarCampo(this.value)">
+                            <input type="text" name="sapellido" placeholder="Segundo Apellido" onfocusout="ValidarCampo(this.value)">
+                            <input type="text" name="identificacion" id="identificacion" placeholder="Identificación" onfocusout="ValidarCampoId()">
                         </div>
                         <div class="register-show col-6">
 
-                            <input type="text" name="telefono" placeholder="Teléfono">
-                            <input type="text" name="correo" placeholder="Correo">
-                            <input type="password" name="contrasena1" placeholder="Contraseña">
-                            <input type="password" name="Contrasena" placeholder="Confirmar Contraseña">
+                            <input type="tel" name="telefono" id="telefono" placeholder="1234-1234" onfocusout="ValidarCampoTel()">
+                            <input type="text" name="correo" placeholder="Correo" onfocusout="ValidarCampoCorreo(this.value)">
+                            <input type="password" name="contrasena1" placeholder="Contraseña" id="Contrasena1" onfocusout="ValidarCampoContrasena(this.value)">
+                            <input type="password" name="Contrasena" id="Contrasena"placeholder="Confirmar Contraseña" onfocusout="ValidarContrasenas(this.value)">
+
                             <button type="submit" class="btn btn-primary" style="font-family: 'Eras ITC';">Registrar</button>
                         </div>
                     </div>
                 </div>
             }
-
-
+            @*<div id="message">
+                <h3>Password must contain the following:</h3>
+                <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                <p id="number" class="invalid">A <b>number</b></p>
+                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+            </div>*@
         </div>
+
     </div>
 
 
@@ -148,6 +159,5 @@
     <footer class="col-md-12 text-center">
         <p style="font-family:'Eras ITC'">&copy; @DateTime.Now.Year / Desarrollado por: Jhonsel Josué Díaz Chacón - Kevin Martín Fallas Alfaro - Ana Gabriela Mora Salas</p>
     </footer>
-
 </body>
 </html>
