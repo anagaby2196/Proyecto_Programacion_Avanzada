@@ -76,6 +76,8 @@
           <Property Name="correo" Type="varchar" MaxLength="50" />
           <Property Name="codigoDireccionFK" Type="bigint" />
           <Property Name="estado" Type="bit" />
+          <Property Name="SEXO" Type="char" MaxLength="1" />
+          <Property Name="EDAD" Type="int" />
         </EntityType>
         <EntityType Name="reporteCitas">
           <Key>
@@ -410,6 +412,8 @@
           <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="codigoDireccionFK" Type="Int64" />
           <Property Name="estado" Type="Boolean" />
+          <Property Name="SEXO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="EDAD" Type="Int32" />
           <NavigationProperty Name="direccion" Relationship="Self.codigoDireccion_FK" FromRole="persona" ToRole="direccion" />
           <NavigationProperty Name="doctor" Relationship="Self.codigoPersona_DFK" FromRole="persona" ToRole="doctor" />
           <NavigationProperty Name="paciente" Relationship="Self.codigoPersona_FK" FromRole="persona" ToRole="paciente" />
@@ -771,6 +775,8 @@
                 <ScalarProperty Name="correo" ColumnName="correo" />
                 <ScalarProperty Name="codigoDireccionFK" ColumnName="codigoDireccionFK" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="SEXO" ColumnName="SEXO" />
+                <ScalarProperty Name="EDAD" ColumnName="EDAD" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

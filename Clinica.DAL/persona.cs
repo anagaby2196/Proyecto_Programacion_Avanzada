@@ -31,6 +31,8 @@ namespace Clinica.DAL
         public string correo { get; set; }
         public Nullable<long> codigoDireccionFK { get; set; }
         public Nullable<bool> estado { get; set; }
+        public string SEXO { get; set; }
+        public Nullable<int> EDAD { get; set; }
     
         public virtual direccion direccion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
