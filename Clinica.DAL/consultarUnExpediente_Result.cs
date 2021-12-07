@@ -19,5 +19,6 @@ namespace Clinica.DAL
         public string nombre { get; set; }
         public string padecimiento { get; set; }
         public string tratamiento { get; set; }
+        public Nullable<long> codigoCitaProgramadasFK { get; set; }
     }
 }

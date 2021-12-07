@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ClinicaMedicaV1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ClinicaMedicaV1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="citas">
           <Key>
             <PropertyRef Name="codigoCitas" />
@@ -324,8 +324,7 @@
             <End Role="usuarios" EntitySet="usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClinicaMedicaV1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -635,21 +634,18 @@
             <Parameter Name="tipoUsuarioFK" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="consultarCita" ReturnType="Collection(ClinicaMedicaV1Model.consultarCita_Result)">
-            <Parameter Name="estado" Mode="In" Type="String" />
+          <Parameter Name="estado" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="consultarDireccion" ReturnType="Collection(ClinicaMedicaV1Model.consultarDireccion_Result)" />
           <FunctionImport Name="consultarPersona">
-            <Parameter Name="identificacion" Mode="In" Type="String" />
+          <Parameter Name="identificacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="consultarPersonas" />
-          <FunctionImport Name="consultarUnExpediente" ReturnType="Collection(ClinicaMedicaV1Model.consultarUnExpediente_Result)">
-            <Parameter Name="identificacion" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="eliminarDireccion">
-            <Parameter Name="codigo" Mode="In" Type="Int64" />
+          <Parameter Name="codigo" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="eliminarPersona">
-            <Parameter Name="identificacion" Mode="In" Type="String" />
+          <Parameter Name="identificacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="insertarDireccion">
             <Parameter Name="provincia" Mode="In" Type="String" />
@@ -667,6 +663,9 @@
           </FunctionImport>
           <FunctionImport Name="ultimaInsercion" ReturnType="Collection(Int64)" />
           <FunctionImport Name="ultimaInsercionPersona" ReturnType="Collection(Int64)" />
+          <FunctionImport Name="consultarUnExpediente" ReturnType="Collection(ClinicaMedicaV1Model.consultarUnExpediente_Result)">
+            <Parameter Name="identificacion" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="consultarCita_Result">
           <Property Type="Int64" Name="codigoCitas" Nullable="false" />
@@ -692,6 +691,7 @@
           <Property Type="String" Name="nombre" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="padecimiento" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="tratamiento" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="codigoCitaProgramadasFK" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -836,6 +836,12 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="consultarPersona" FunctionName="ClinicaMedicaV1Model.Store.consultarPersona" />
           <FunctionImportMapping FunctionImportName="consultarPersonas" FunctionName="ClinicaMedicaV1Model.Store.consultarPersonas" />
+          <FunctionImportMapping FunctionImportName="eliminarDireccion" FunctionName="ClinicaMedicaV1Model.Store.eliminarDireccion" />
+          <FunctionImportMapping FunctionImportName="eliminarPersona" FunctionName="ClinicaMedicaV1Model.Store.eliminarPersona" />
+          <FunctionImportMapping FunctionImportName="insertarDireccion" FunctionName="ClinicaMedicaV1Model.Store.insertarDireccion" />
+          <FunctionImportMapping FunctionImportName="insertarPersona" FunctionName="ClinicaMedicaV1Model.Store.insertarPersona" />
+          <FunctionImportMapping FunctionImportName="ultimaInsercion" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercion" />
+          <FunctionImportMapping FunctionImportName="ultimaInsercionPersona" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercionPersona" />
           <FunctionImportMapping FunctionImportName="consultarUnExpediente" FunctionName="ClinicaMedicaV1Model.Store.consultarUnExpediente">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ClinicaMedicaV1Model.consultarUnExpediente_Result">
@@ -845,15 +851,10 @@
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="padecimiento" ColumnName="padecimiento" />
                 <ScalarProperty Name="tratamiento" ColumnName="tratamiento" />
+                <ScalarProperty Name="codigoCitaProgramadasFK" ColumnName="codigoCitaProgramadasFK" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="eliminarDireccion" FunctionName="ClinicaMedicaV1Model.Store.eliminarDireccion" />
-          <FunctionImportMapping FunctionImportName="eliminarPersona" FunctionName="ClinicaMedicaV1Model.Store.eliminarPersona" />
-          <FunctionImportMapping FunctionImportName="insertarDireccion" FunctionName="ClinicaMedicaV1Model.Store.insertarDireccion" />
-          <FunctionImportMapping FunctionImportName="insertarPersona" FunctionName="ClinicaMedicaV1Model.Store.insertarPersona" />
-          <FunctionImportMapping FunctionImportName="ultimaInsercion" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercion" />
-          <FunctionImportMapping FunctionImportName="ultimaInsercionPersona" FunctionName="ClinicaMedicaV1Model.Store.ultimaInsercionPersona" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -50,7 +50,7 @@ namespace Clinica.DAL
                 {
 
                     
-                       var listaExpedientes = contexto.consultarUnExpediente("207340817").ToList();
+                       var listaExpedientes = contexto.consultarUnExpediente(Identificacion).ToList();
 
                     List<ExpedienteETL> expedienteETL = new List<ExpedienteETL>();
 
@@ -64,7 +64,8 @@ namespace Clinica.DAL
                             HoraInicio = (DateTime)item.horaInicio,
                             NombreDoctor = item.nombre,
                             Padecimiento = item.padecimiento,
-                            Tratamiento = item.tratamiento
+                            Tratamiento = item.tratamiento,
+                            CodigoCitaProgramada = (long)item.codigoCitaProgramadasFK
                             });
                         }
 

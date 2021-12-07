@@ -77,6 +77,62 @@ namespace Clinica.DAL
             
         }
 
+        public Boolean insertarDireccionPersona(PersonaETL personaETL)
+        {
+            try
+            {
+                using (var contexto = new ClinicaMedicaV1Entities())
+                {
+                    var ultimaDireccion = (from x in contexto.direccion select x.codigoDireccion).Last();
+
+                    var persona = (from x in contexto.persona where x.identificacion == personaETL.Identificacion select x).FirstOrDefault();
+
+                    if (persona != null)
+                    {
+                        persona.nombre = personaETL.Nombre;
+                        persona.primerApellido = personaETL.PrimerApellido;
+                        persona.segundoApellido = personaETL.SegundoApellido;
+                        persona.telefono = personaETL.Telefono;
+                        persona.SEXO = personaETL.Sexo.ToString();
+                        persona.EDAD = personaETL.Edad;
+                        persona.codigoDireccionFK = ultimaDireccion;
+                        contexto.SaveChanges();
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public Boolean AgregarDireccio(string provincia, string canton, string distrito)
+        {
+            try
+            {
+                using (var contexto = new ClinicaMedicaV1Entities())
+                {
+                    direccion nuevaDireccion = new direccion();
+                    nuevaDireccion.provincia = provincia;
+                    nuevaDireccion.canton = canton;
+                    nuevaDireccion.distrito = distrito;
+                    contexto.direccion.Add(nuevaDireccion);
+                    contexto.SaveChanges();
+                    return true;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public Boolean AgregarUsuario(PersonaETL persona)
         {
             using (var contexto = new ClinicaMedicaV1Entities())
@@ -105,8 +161,7 @@ namespace Clinica.DAL
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
-                //contexto.actualizaPersona(persona.Nombre, persona.PrimerApellido, persona.SegundoApellido,
-                //                            persona.Identificacion, persona.Telefono, persona.Correo, persona.TipoUsuario);
+                
                 var persona = (from x in contexto.persona where x.identificacion == personaETL.Identificacion select x).FirstOrDefault();
 
                 if (persona != null)

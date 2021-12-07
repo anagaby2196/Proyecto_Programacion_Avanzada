@@ -27,19 +27,20 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         {
             var status = false;
             var nUsuario = (PersonaETL)Session["Usuario"];
+            PersonaBLL persona = new PersonaBLL();
+            PersonaETL personaActualizar = new PersonaETL();
+            personaActualizar.Identificacion = nUsuario.Identificacion;
+            personaActualizar.Nombre = Nombre;
+            personaActualizar.PrimerApellido = PrimerApellido;
+            personaActualizar.SegundoApellido = SegundoApellido;
+            personaActualizar.Telefono = Telefono;
+            personaActualizar.Correo = Correo;
+            personaActualizar.Edad = Edad;
+            personaActualizar.Sexo = Sexo;
+
             if (nUsuario.Canton != null && nUsuario.Provincia != null && nUsuario.Distrito != null)
             {
                 //actualizar
-                PersonaBLL persona = new PersonaBLL();
-                PersonaETL personaActualizar = new PersonaETL();
-                personaActualizar.Identificacion = nUsuario.Identificacion;
-                personaActualizar.Nombre = Nombre;
-                personaActualizar.PrimerApellido = PrimerApellido;
-                personaActualizar.SegundoApellido = SegundoApellido;
-                personaActualizar.Telefono = Telefono;
-                personaActualizar.Correo = Correo;
-                personaActualizar.Edad = Edad;
-                personaActualizar.Sexo = Sexo;
                 persona.ActualizarPersonaBLL(personaActualizar);
                 
                 status = persona.ActualizarDireccion(nUsuario.CodigoDireccion, Provincia, Canton, Distrito);
@@ -47,7 +48,14 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             }
             else
             {
-                //crearlo
+                //crear la direccion
+                if (persona.AgregarDireccion(Provincia, Canton, Distrito))
+                {
+                    
+                    status = persona.insertarDireccionPersona(personaActualizar);
+                    Session["Usuario"] = persona.VerificarLogin(nUsuario.Correo, nUsuario.Contrasena);
+                }
+                
             }
 
 

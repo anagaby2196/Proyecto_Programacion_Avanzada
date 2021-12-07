@@ -51,5 +51,16 @@ namespace Clinica.BLL
             return false;
         }
 
+        public Boolean AgregarDireccion(string provincia, string canton, string distrito)
+        {
+            PersonaDAL personaDAL = new PersonaDAL();
+            return personaDAL.AgregarDireccio(provincia, canton, distrito);
+        }
+
+        public Boolean insertarDireccionPersona(PersonaETL persona)
+        {
+            PersonaDAL personaDAL = new PersonaDAL();
+            return personaDAL.insertarDireccionPersona(persona);
+        }
     }
 }

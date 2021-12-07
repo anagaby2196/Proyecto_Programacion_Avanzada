@@ -124,15 +124,6 @@ namespace Clinica.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("consultarPersonas");
         }
     
-        public virtual ObjectResult<consultarUnExpediente_Result> consultarUnExpediente(string identificacion)
-        {
-            var identificacionParameter = identificacion != null ?
-                new ObjectParameter("identificacion", identificacion) :
-                new ObjectParameter("identificacion", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<consultarUnExpediente_Result>("consultarUnExpediente", identificacionParameter);
-        }
-    
         public virtual int eliminarDireccion(Nullable<long> codigo)
         {
             var codigoParameter = codigo.HasValue ?
@@ -209,6 +200,15 @@ namespace Clinica.DAL
         public virtual ObjectResult<Nullable<long>> ultimaInsercionPersona()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<long>>("ultimaInsercionPersona");
+        }
+    
+        public virtual ObjectResult<consultarUnExpediente_Result> consultarUnExpediente(string identificacion)
+        {
+            var identificacionParameter = identificacion != null ?
+                new ObjectParameter("identificacion", identificacion) :
+                new ObjectParameter("identificacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<consultarUnExpediente_Result>("consultarUnExpediente", identificacionParameter);
         }
     }
 }
