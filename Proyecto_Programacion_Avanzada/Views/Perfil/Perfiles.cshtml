@@ -1,17 +1,68 @@
-﻿
+﻿@model IEnumerable<Entidades.ETL.PersonaETL>
+
 @{
+    ViewBag.Title = "Consulta Perfiles";
     Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Perfiles</title>
-</head>
-<body>
-    <div> 
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<div style="margin-top:5%" class="container-fluid"></div>
+<div class="container-fluid col-10">
+    <h2 style="text-align:center">Consulta de Perfiles Usuarios</h2>
+    <div class="table-responsive-sm">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+
+                    <th scope="col">Identificacion</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Sº Apellido</th>
+                    <th scope="col">Tipo Usuario</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr style="font-size:medium">
+
+                    <td>@item.Identificacion</td>
+                    <td>@item.Nombre</td>
+                    <td>@item.PrimerApellido</td>
+                    <td>@item.SegundoApellido</td>
+                    <td class="col-md-3">
+                        <select id="Tipo_Usuario" class="form-control" style="font-size:medium" onchange="ActualizarTioUsuario();">
+                            @if (item.TipoUsuario == 1)
+                    {
+                            <option value="1" selected="selected"><b>Paciente</b></option>
+                            <option value="2" style="color:darkturquoise"><b>Doctor</b></option>
+                            <option value="3" style="color:limegreen"><b>Doctor Administrador</b></option>
+                    }
+                    else if (item.TipoUsuario == 2)
+                    {
+                            <option value="1"><b>Paciente</b></option>
+                            <option value="2" selected="selected" style="color:darkturquoise"><b>Doctor</b></option>
+                            <option value="3" style="color:limegreen"><b>Doctor Administrador</b></option>
+                    }
+                    else if (item.TipoUsuario == 3)
+                    {
+                            <option value="1"><b>Paciente</b></option>
+                            <option value="2" style="color:darkturquoise"><b>Doctor</b></option>
+                            <option value="3" selected="selected" style="color:limegreen"><b>Doctor Administrador</b></option>
+                    }
+                        </select>
+                    </td>
+
+                </tr>
+                }
+
+
+            </tbody>
+        </table>
     </div>
-</body>
-</html>
+</div>
+
+<script src="~/Assets/js/perfil.js"></script>

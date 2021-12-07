@@ -272,6 +272,44 @@ namespace Clinica.DAL
             return null;
         }
 
+        public List<PersonaETL> ConsultarPerfiles()
+        {
+
+            List<PersonaETL> listaPerfiles = new List<PersonaETL>();
+
+            using (var contexto = new ClinicaMedicaV1Entities())
+            {
+                var listaPerfilesDB = (from x in contexto.paciente
+                                        join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona
+                                        join dc in contexto.usuarios on y.codigoPersona equals dc.codigoPersonaFK
+                                        where x.estado == true select new { 
+                                        nombre = y.nombre,
+                                        primerApellido = y.primerApellido,
+                                        segundoApellido = y.segundoApellido,
+                                        identificacion = y .identificacion,
+                                        tipoUsuarioFK = dc.tipoUsuarioFK
+                                        }).OrderBy(dc => dc.tipoUsuarioFK).ToList();
+
+                if (listaPerfilesDB.Count > 0)
+                {
+                    foreach (var item in listaPerfilesDB)
+                    {
+                        listaPerfiles.Add(new PersonaETL
+                        {
+                            Nombre = item.nombre,
+                            PrimerApellido = item.primerApellido,
+                            SegundoApellido = item.segundoApellido,
+                            Identificacion = item.identificacion,
+                            TipoUsuario = (int)item.tipoUsuarioFK
+                        });
+                    }
+                }
+                return listaPerfiles;
+            }
+
+        }
+
 
     }
+
 }

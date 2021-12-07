@@ -62,5 +62,11 @@ namespace Clinica.BLL
             PersonaDAL personaDAL = new PersonaDAL();
             return personaDAL.insertarDireccionPersona(persona);
         }
+
+        public List<PersonaETL> ConsultarPerfiles()
+        {
+            PersonaDAL personaDAL = new PersonaDAL();
+            return personaDAL.ConsultarPerfiles();
+        }
     }
 }

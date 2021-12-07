@@ -64,8 +64,23 @@ namespace Proyecto_Programacion_Avanzada.Controllers
 
         public ActionResult Perfiles()
         {
-            return View();
+            PersonaBLL perfiles = new PersonaBLL();
+            
+            return View(perfiles.ConsultarPerfiles());
         }
 
+        public JsonResult ActualizarTipoUsuario(int TipoUsuario)
+        {
+            var status = false;
+
+
+
+
+
+
+
+
+            return new JsonResult { Data = new { status = status } };
+        }
     }
 }

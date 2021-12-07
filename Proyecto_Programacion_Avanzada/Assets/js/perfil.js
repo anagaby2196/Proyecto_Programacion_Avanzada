@@ -37,3 +37,33 @@
     });
 
 }
+
+
+function ActualizarTioUsuario() {
+    swal({
+        title: "Esta seguro que quiere cambiar el Ripo de Usuario?",
+        text: "Una vez echo el cambio, el usuario se habilitara con ese otro tipo de rol!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                var Model_TipoUsuario = $("#Tipo_Usuario").val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/Perfil/ActualizarTipoUsuario',
+                    data: {
+                        TipoUsuario: Model_TipoUsuario
+                    },
+                    dataType: 'json',
+                    success: function (respuesta) {
+                        location.reload();
+                    },
+                    error: function (respuesta) {
+                        alert("Accion no se pudo completar");
+                    }
+                })
+            }
+        });
+}
