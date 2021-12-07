@@ -101,12 +101,26 @@ namespace Clinica.DAL
                 }
             }
         }
-        public Boolean ActualizarPersona(PersonaETL persona)
+        public Boolean ActualizarPersona(PersonaETL personaETL)
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
-                contexto.actualizaPersona(persona.Nombre, persona.PrimerApellido, persona.SegundoApellido,
-                                            persona.Identificacion, persona.Telefono, persona.Correo, persona.TipoUsuario);
+                //contexto.actualizaPersona(persona.Nombre, persona.PrimerApellido, persona.SegundoApellido,
+                //                            persona.Identificacion, persona.Telefono, persona.Correo, persona.TipoUsuario);
+                var persona = (from x in contexto.persona where x.identificacion == personaETL.Identificacion select x).FirstOrDefault();
+
+                if (persona != null)
+                {
+                    persona.nombre = personaETL.Nombre;
+                    persona.primerApellido = personaETL.PrimerApellido;
+                    persona.segundoApellido = personaETL.SegundoApellido;
+                    persona.telefono = personaETL.Telefono;
+                    persona.SEXO = personaETL.Sexo.ToString();
+                    persona.EDAD = personaETL.Edad;
+                    contexto.SaveChanges();
+                    return true;
+                }
+
                 return true;
             }
         }
@@ -131,7 +145,9 @@ namespace Clinica.DAL
                                      telefono = y.telefono,
                                      correo = y.correo,
                                      estado = x.estado,
-                                     tipoUsuario = x.tipoUsuarioFK
+                                     tipoUsuario = x.tipoUsuarioFK,
+                                     sexo = y.SEXO,
+                                     edad = y.EDAD
                                  });
 
                     var Direccion = (from x in contexto.usuarios
@@ -161,7 +177,18 @@ namespace Clinica.DAL
                             listaP.Correo = item.correo;
                             listaP.TipoUsuario = (int)item.tipoUsuario;
                             listaP.Estado = (bool)item.estado;
-
+                            listaP.Contrasena = contrasena;
+                            if (item.edad == null || listaP.Sexo == null)
+                            {
+                                listaP.Edad = 0;
+                                listaP.Sexo = 'N';
+                            }
+                            else
+                            {
+                                listaP.Edad = (int)item.edad;
+                                listaP.Sexo = char.Parse(item.sexo);
+                            }
+                            
                         }
 
                         if (Direccion.Count() > 0)

@@ -29,7 +29,7 @@
         },
         dataType: 'json',
         success: function (respuesta) {
-            location.replace("Perfil");
+            location.reload();
         },
         error: function (respuesta) {
             alert(respuesta);

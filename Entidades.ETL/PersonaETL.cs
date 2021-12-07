@@ -21,6 +21,7 @@ namespace Entidades.ETL
         public UsuarioETL usuario { get; set; }
 
         public string Contrasena { get; set; }
-
+        public int Edad { get; set; }
+        public char Sexo { get; set; }
     }
 }

@@ -32,13 +32,14 @@ namespace Proyecto_Programacion_Avanzada.Controllers
                 //actualizar
                 PersonaBLL persona = new PersonaBLL();
                 PersonaETL personaActualizar = new PersonaETL();
+                personaActualizar.Identificacion = nUsuario.Identificacion;
                 personaActualizar.Nombre = Nombre;
                 personaActualizar.PrimerApellido = PrimerApellido;
                 personaActualizar.SegundoApellido = SegundoApellido;
                 personaActualizar.Telefono = Telefono;
                 personaActualizar.Correo = Correo;
-                //personaActualizar.Edad = Edad;
-                //personaActualizar.Sexo = Sexo;
+                personaActualizar.Edad = Edad;
+                personaActualizar.Sexo = Sexo;
                 persona.ActualizarPersonaBLL(personaActualizar);
                 
                 status = persona.ActualizarDireccion(nUsuario.CodigoDireccion, Provincia, Canton, Distrito);
