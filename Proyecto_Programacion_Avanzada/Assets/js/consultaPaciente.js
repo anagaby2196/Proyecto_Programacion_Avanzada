@@ -59,10 +59,23 @@ function datosPaciente(pIdentificacion) {
             $("#Model_Provincia").val(data.unPaciente.Provincia);
             $("#Model_Canton").val(data.unPaciente.Canton);
             $("#Model_Distrito").val(data.unPaciente.Distrito);
+            $("Model_horaInicio").val(data.unPaciente.HoraInicio);
+            $("Model_codigoCitaProgramadas").val(data.unPaciente.CitaProgramada);
+            
         },
         error: function (data) {
             alert("Paciente no encontrado")
         }
 
     });
+}
+
+function datosCitaProgramada() {
+
+    $.ajax({
+
+        type: 'GET',
+        url: ''
+    });
+   
 }

@@ -7,6 +7,7 @@
 
 @Html.Partial("DatosPaciente", new Entidades.ETL.PersonaETL())
 
+@Html.Partial("CitasVista", new Entidades.ETL.CitasETL())
 
 <div id="exp" class="container-fluid col-10">
     <div style="margin-top:5%" class="container-fluid"></div>
@@ -14,13 +15,25 @@
         <label style="color:black"><h4><b>Datos para expediente</b></h4></label>
         <div class="form-row">
             <div class="form-group col-md-6">
+                <input type="hidden" class="form-control" id="Model_codigoCitaProgramadas">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="hidden" class="form-control" id="Model_codigoCitasFK">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="hidden" class="form-control" id="Model_codigoPacienteFK">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="hidden" class="form-control" id="Model_codigoDoctorFK">
+            </div>
+            <div class="form-group col-md-6">
                 <label>Tratamiento</label>
                 <input type="text" class="form-control" id="Model_Tratamiento">
             </div>
 
         </div>
         <div>
-            <input type="submit" name="s_Tratamiento" value="Guardar cambios" />
+            <input type="submit" name="s_Tratamiento" value="Guardar cambios" onclick="ActualizarExpediente('Model_codigoCitaProgramadas','Model_Tratamiento');" />
         </div>
 
     </div>
@@ -29,5 +42,6 @@
 
 @section scripts
 {
+    @Scripts.Render("/Assets/js/expedienteJS.js")
     @Scripts.Render("/Assets/js/consultaPaciente.js")
 }

@@ -196,6 +196,7 @@
     <Content Include="Assets\js\CalendarioUsuario.js" />
     <Content Include="Assets\js\Calendario.js" />
     <Content Include="Assets\js\consultaPaciente.js" />
+    <Content Include="Assets\js\expedienteJS.js" />
     <Content Include="Assets\js\google-map.js" />
     <Content Include="Assets\js\jquery-3.2.1.min.js" />
     <Content Include="Assets\js\jquery-migrate-3.0.1.min.js" />
@@ -372,6 +373,7 @@
     <Content Include="Views\Expediente\Index.cshtml" />
     <Content Include="Views\Expediente\DatosPaciente.cshtml" />
     <Content Include="Views\Perfil\Perfiles.cshtml" />
+    <Content Include="Views\Expediente\CitasVista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

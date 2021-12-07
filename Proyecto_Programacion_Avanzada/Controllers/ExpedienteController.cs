@@ -1,4 +1,5 @@
 ﻿using Clinica.BLL;
+using Entidades.ETL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,18 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             return View();
         }
 
+        [HttpPost]
+        public JsonResult ActualizaExpediente(string expediente)
+        {
+            var status = false;
+            CitasProgramadasBLL cp = new CitasProgramadasBLL(); 
+            
+
+            return new JsonResult { Data = new { status = status } };
+        }
     }
+
+    
+
+
 }
