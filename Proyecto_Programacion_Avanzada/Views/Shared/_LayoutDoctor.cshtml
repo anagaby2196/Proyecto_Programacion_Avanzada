@@ -35,11 +35,13 @@
 
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <div class="navbar-collapse navbar-right" id="collapsibleNavbar">
+            <li class="form-inline" style="margin-right: 50%; color: white; font-size:large">
+                @Session["nombreCompleto"].ToString()
+            </li>
             <ul class="navbar-nav ml-auto">
-
                 @if (Session["TipoUsuario"].ToString() == "1")
                 {
-                    <h3 style="margin-right:initial; color: white;" class="modal-title"><label id="nombreUsuarioID">@Session["nombreCompleto"].ToString()</label></h3>
+
                     <li class="form-inline" style="margin-left: -20%; margin-right: 5%">
                         @Html.ActionLink("Crear Cita", "Index", "Citas", null, new { @style = "color:#FFFFFF" })
                     </li>
