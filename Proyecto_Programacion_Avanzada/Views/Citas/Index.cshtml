@@ -57,7 +57,7 @@
                 <div class="modal-body">
                     <form class="col-md-12 form-horizontal">
                         <input type="hidden" id="hdEventID" value="0" />
-                        @if (Session["TipoUsuario"].ToString() == "2")
+                        @if (Session["TipoUsuario"].ToString() == "2" || Session["TipoUsuario"].ToString() == "3")
                         {
                             <div class="form-group">
                                 <label>Subject</label>

@@ -49,8 +49,9 @@
             events: events
             , eventClick: function (calEvent, jsEvent, view) {
                 
-                var session = $('#nombreUsuarioID').text();
-                if (session == calEvent.title) {
+                var session = $('#nombreUsuarioID').text().toUpperCase();
+
+                if (session == calEvent.title.toUpperCase()) {
                     selectedEvent = calEvent;
                     $('#ModalEventos #eventTitle').text(calEvent.title);
                     var $description = $('<div/>');
@@ -114,13 +115,18 @@
             $.ajax({
                 type: "POST",
                 url: '/Citas/DeleteEvent',
-                data: { eventoID: selectedEvent.eventID, Sujeto: selectedEvent.title},
+                data: { eventoID: selectedEvent.eventID, Sujeto: selectedEvent.title.toUpperCase()},
                 success: function (data) {
                     if (data.status) {
                         //Refresh the calender
                         FetchEventAndRenderCalendar();
                         $('#myModal').modal('hide');
                     }
+                    swal(
+                        '',
+                        'Se ah cancelado correctamente',
+                        'warning'
+                    )
                 },
                 error: function (data) {
                     alert('Error');
@@ -208,6 +214,11 @@
                     FetchEventAndRenderCalendar();
                     $('#myModalSave').modal('hide');
                 }
+                swal(
+                    '',
+                    'Agendado correctamente',
+                    'success'
+                )
             },
             error: function () {
                 alert('Failed');

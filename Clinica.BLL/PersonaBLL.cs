@@ -46,9 +46,8 @@ namespace Clinica.BLL
             , string Canton, string Distrito)
         {
             PersonaDAL personaDAL = new PersonaDAL();
-            personaDAL.ActualizarDireccion(codigoDireccion, Provincia, Canton, Distrito);
+            return personaDAL.ActualizarDireccion(codigoDireccion, Provincia, Canton, Distrito);
 
-            return false;
         }
 
         public Boolean AgregarDireccion(string provincia, string canton, string distrito)

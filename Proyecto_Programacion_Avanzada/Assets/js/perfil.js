@@ -29,10 +29,19 @@
         },
         dataType: 'json',
         success: function (respuesta) {
+            swal(
+                'Se ah procesado...',
+                'Sa ah actualizado corrrectamente',
+                'success',
+            )
             location.reload();
         },
         error: function (respuesta) {
-            alert(respuesta);
+            swal(
+                'Oops...',
+                'Ah ocurrido un error' + ' ' + respuesta,
+                'error'
+            )
         }
     });
 

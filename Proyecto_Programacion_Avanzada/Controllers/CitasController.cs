@@ -61,7 +61,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             var nUsuario = (PersonaETL)Session["Usuario"];
             var nombreCompleto = nUsuario.Nombre + " " + nUsuario.PrimerApellido + " " + nUsuario.SegundoApellido;
             
-            return SaveEvent(codigoCitas, nombreCompleto, descripcion, horaInicio, horaFin, esTodoElDia, codDoctor);
+            return SaveEvent(codigoCitas, nombreCompleto.ToUpper(), descripcion, horaInicio, horaFin, esTodoElDia, codDoctor);
         }
 
         [HttpPost]
@@ -69,7 +69,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         {
             var status = false;
             var sujetoActivo = Session["nombreCompleto"];
-            if (sujetoActivo.ToString() == Sujeto)
+            if (sujetoActivo.ToString().ToUpper() == Sujeto)
             {
                 CitasBLL citas = new CitasBLL();
                 status = citas.CancelarCitaBLL(eventoID);

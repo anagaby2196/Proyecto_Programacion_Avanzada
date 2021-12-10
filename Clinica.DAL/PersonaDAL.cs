@@ -83,7 +83,7 @@ namespace Clinica.DAL
             {
                 using (var contexto = new ClinicaMedicaV1Entities())
                 {
-                    var ultimaDireccion = (from x in contexto.direccion select x.codigoDireccion).Last();
+                    var ultimaDireccion = (from x in contexto.direccion orderby x.codigoDireccion descending select x.codigoDireccion).FirstOrDefault();
 
                     var persona = (from x in contexto.persona where x.identificacion == personaETL.Identificacion select x).FirstOrDefault();
 

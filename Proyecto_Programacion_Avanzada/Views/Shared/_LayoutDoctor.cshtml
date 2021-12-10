@@ -36,7 +36,7 @@
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <div class="navbar-collapse navbar-right" id="collapsibleNavbar">
             <li class="form-inline" style="margin-right: 50%; color: white; font-size:large">
-                @Session["nombreCompleto"].ToString()
+                <h4><label id="nombreUsuarioID">@Session["nombreCompleto"].ToString()</label></h4> 
             </li>
             <ul class="navbar-nav ml-auto">
                 @if (Session["TipoUsuario"].ToString() == "1")
