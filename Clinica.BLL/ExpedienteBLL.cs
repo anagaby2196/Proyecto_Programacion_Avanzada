@@ -21,7 +21,14 @@ namespace Clinica.BLL
         public List<ExpedienteETL> ConsultarExpediente(string identificacion)
         {
             ExpedienteDAL expBLL = new ExpedienteDAL();
-            return expBLL.ConsultarExpediente(identificacion);
+
+            var expediente = expBLL.ConsultarExpediente(identificacion);
+            //foreach (var item in expediente)
+            //{
+            //    item.HoraInicio = item.HoraInicio.ToString();
+            //}
+
+            return expediente;
         }
     }
 }

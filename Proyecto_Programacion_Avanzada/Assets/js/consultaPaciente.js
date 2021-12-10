@@ -23,7 +23,7 @@ function MostrarDatos(identificacionSeleccionada) {
 
             var lista = "";
             $.each(data.exp, function (index, value) {
-                lista += '<tr><td>' + value.HoraInicio + '</td><td>' + value.NombreDoctor +
+                lista += '<tr><td>' + convertToJavaScriptDate(value.HoraInicio) + '</td><td>' + value.NombreDoctor +
                     '</td><td>' + value.Padecimiento + '</td><td>' + value.Tratamiento + '</td></tr>';
             })
 
@@ -42,8 +42,8 @@ function MostrarDatos(identificacionSeleccionada) {
 
 }
 
-function datosPaciente(pIdentificacion) {
 
+function datosPaciente(pIdentificacion) {
     $.ajax({
         type: 'GET',
         url: '/Paciente/ConsultarPaciente',
@@ -59,16 +59,23 @@ function datosPaciente(pIdentificacion) {
             $("#Model_Provincia").val(data.unPaciente.Provincia);
             $("#Model_Canton").val(data.unPaciente.Canton);
             $("#Model_Distrito").val(data.unPaciente.Distrito);
-            $("Model_horaInicio").val(data.unPaciente.HoraInicio);
-            $("Model_codigoCitaProgramadas").val(data.unPaciente.CitaProgramada);
+            var fecha;
+            var codigo = "";
+            $.each(data.exp, function (index, value) {
+                fecha = convertToJavaScriptDate(value.HoraInicio);
+                codigo = value.CodigoCitaProgramada;
+            })
             
+            $("#Model_Hora").val(fecha);
+            $("#Model_codigoCitaProgramadas").val(codigo);
         },
         error: function (data) {
             alert("Paciente no encontrado")
         }
-
     });
 }
+
+
 
 function datosCitaProgramada() {
 
@@ -79,3 +86,12 @@ function datosCitaProgramada() {
     });
    
 }
+
+
+function convertToJavaScriptDate(value) {
+    var pattern = /Date\(([^)]+)\)/;
+    var results = pattern.exec(value);
+    var dt = new Date(parseFloat(results[1]));
+    return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+}
+
