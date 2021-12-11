@@ -96,15 +96,9 @@
                             <textarea id="txtDescription" rows="3" class="form-control"></textarea>
                         </div>
                         <div class="form-group">
-                            <div class="form-group col-md-4">
-                                <label>Doctores</label>
-                                <select id="SelectDoctor" class="form-control">
-                                    <option value="">Default</option>
-                                    <option value="1">Dr.Gabriela Salas H.</option>
-                                    <option value="1">Dr.José Andrés Chinchilla G.</option>
-                                    <option value="1">Dr.Mariangel Madriz S.</option>
-                                </select>
-                            </div>
+
+                            @Html.Partial("_comboDoctores", new Entidades.ETL.DoctorETL())
+
                             <div class="form-group col-md-8" style="margin-left:80%; margin-top:-10%">
                                 <button type="button" id="btnSave" class="btn btn-success">Guardar</button>
                             </div>

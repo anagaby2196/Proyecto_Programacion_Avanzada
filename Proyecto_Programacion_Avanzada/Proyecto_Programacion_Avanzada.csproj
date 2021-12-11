@@ -374,6 +374,7 @@
     <Content Include="Views\Expediente\DatosPaciente.cshtml" />
     <Content Include="Views\Perfil\Perfiles.cshtml" />
     <Content Include="Views\Expediente\CitasVista.cshtml" />
+    <Content Include="Views\Citas\_comboDoctores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

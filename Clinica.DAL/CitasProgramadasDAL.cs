@@ -10,24 +10,27 @@ namespace Clinica.DAL
     public class CitasProgramadasDAL
     {
 
-        public Boolean IngresarCitaProgramada(string codigoDoctor, string pPadecimiento, string pTratamiento)
+        public Boolean IngresarCitaProgramada(string codigoPaciente, long codigoDoctor)
         {
+            long numeP = long.Parse(codigoPaciente);
+
             using (var contexto = new ClinicaMedicaV1Entities())
             {
                 try
                 {
 
-                    var ultimaCita = (from x in contexto.citas select x.codigoCitas).LastOrDefault();
+                    var ultimaCita = (from x in contexto.citas orderby x.codigoCitas descending select x.codigoCitas).FirstOrDefault();
                     //Ver de nuevo otra forma de sacar el valor del doctor en el html
 
 
                     citasProgramadas nuevaCita = new citasProgramadas();
                     nuevaCita.codigoCitasFK = ultimaCita;
-                    //nuevaCita.codigoPacienteFK = 
-                    //nuevaCita.estado = true;
+                    nuevaCita.codigoPacienteFK = numeP;
+                    nuevaCita.codigoDoctorFK = codigoDoctor;
+                    nuevaCita.estado = true;
 
-                    //contexto.paciente.Add(nuevoPaciente);
-                    //contexto.SaveChanges();
+                    contexto.citasProgramadas.Add(nuevaCita);
+                    contexto.SaveChanges();
                     return true;
 
 

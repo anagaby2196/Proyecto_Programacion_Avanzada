@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Clinica.DAL;
-using Entidades.ETL;
 
 
 namespace Clinica.BLL

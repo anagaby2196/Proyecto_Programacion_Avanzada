@@ -35,31 +35,32 @@ namespace Clinica.DAL
             }
         }
 
-        public List<DoctorETL> ConsultarDoctores()
+        public List<string> ConsultarDoctores()
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
                 var listaDoctoresDB = (from x in contexto.doctor
+                                       join y in contexto.persona on x.codigoPersonaFk equals y.codigoPersona
                                        where x.estado == true
-                                       select x).ToList();
-                List<DoctorETL> listaDoctores = new List<DoctorETL>();
+                                       select new { 
+                                       nombreCompleto = y.nombre + " " + y.primerApellido + " " + y.segundoApellido,
+                                       codigoDoctor = x.codigoDoctor
+                                       }).ToList();
+                List<string> listaDoctores = new List<string>();
 
-                if (listaDoctores.Count > 0)
+                if (listaDoctoresDB.Count > 0)
                 {
                     foreach (var item in listaDoctoresDB)
                     {
-                        listaDoctores.Add(new DoctorETL
+                   
+                        listaDoctores.AddRange( new string[]
                         {
-                            CodigoDoctor = item.codigoDoctor,
-                            CodigoPersonaFK = (long)item.codigoPersonaFk,
-                            Estado = (Boolean)item.estado
-
+                            item.nombreCompleto,
+                            item.codigoDoctor.ToString()
                         });
                     }
                 }
-                {
-
-                }                
+                               
 
                 return listaDoctores;
             }

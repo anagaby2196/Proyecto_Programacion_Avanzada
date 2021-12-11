@@ -16,7 +16,7 @@ namespace Clinica.BLL
             return dc.RegristrarDoctor(doctor);
         }
 
-        public List<DoctorETL> ConsultarDoctoresBLL()
+        public List<string> ConsultarDoctoresBLL()
         {
             DoctorDAL dc = new DoctorDAL();
             return dc.ConsultarDoctores();

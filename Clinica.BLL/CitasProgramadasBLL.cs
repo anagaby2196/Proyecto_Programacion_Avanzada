@@ -11,12 +11,12 @@ namespace Clinica.BLL
     public class CitasProgramadasBLL
     {
 
-        public Boolean AgregarCitaProgramada(CitasProgramadasETL cpETL, string nombrePaciente, long codDoctor)
+        public Boolean AgregarCitaProgramada(string codigoPaciente, long codDoctor)
         {
 
             CitasProgramadasDAL cp = new CitasProgramadasDAL();
             
-            return true;
+            return cp.IngresarCitaProgramada(codigoPaciente, codDoctor);
         }
 
 

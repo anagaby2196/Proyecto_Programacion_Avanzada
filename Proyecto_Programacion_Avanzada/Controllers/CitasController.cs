@@ -18,17 +18,33 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         {
             CitasBLL citas = new CitasBLL();
             PacienteBLL paciente = new PacienteBLL();
+            DoctorBLL doctor = new DoctorBLL();
             var pacientes = paciente.ConsultarPacientesBLL();
-            List<SelectListItem> combo = new List<SelectListItem>();
+
+            List<SelectListItem> comboPacientes = new List<SelectListItem>();
             foreach (var item in pacientes)
             { string nombrePaciente = item.Nombre + " " + item.PrimerApellido + " " + item.SegundoApellido;
-                combo.Add(new SelectListItem
+                comboPacientes.Add(new SelectListItem
                 {
                     Value = item.CodigoPersona.ToString(),
                     Text = nombrePaciente.ToUpper()
                 });
             }
-            ViewBag.Pacientes = combo;
+            ViewBag.Pacientes = comboPacientes;
+
+            var doctores = doctor.ConsultarDoctoresBLL();
+            List<SelectListItem> combodoctores = new List<SelectListItem>();
+            foreach (var item in doctores)
+            {
+                combodoctores.Add(new SelectListItem
+                {
+                    Value = doctores[1],
+                    Text = doctores[0]
+                });
+            }
+
+            ViewBag.Doctores = combodoctores;
+
             var events = citas.CitasDisponiblesBLL().ToArray();
             var nUsuario = (PersonaETL)Session["Usuario"];
             var nombreCompleto = nUsuario.Nombre + " " + nUsuario.PrimerApellido + " " + nUsuario.SegundoApellido;
@@ -84,7 +100,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             {
                 status = citas.ActualizarCitaBLL(evento);
             }
-            CitasPBLL.AgregarCitaProgramada(citaProgramada, nombrePac[1], codDoctor);
+            CitasPBLL.AgregarCitaProgramada(nombrePac[1], codDoctor);
 
             return new JsonResult { Data = new { status = status } };
         }

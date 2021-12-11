@@ -1,0 +1,5 @@
+﻿@model Entidades.ETL.DoctorETL
+<div class="form-group col-md-4">
+    <label>Doctores</label>
+    @Html.DropDownListFor(m => m.CodigoDoctor, new SelectList(ViewBag.Doctores, "Value", "Text"), new { @id = "SelectDoctor", @class = "form-control" })
+</div>
