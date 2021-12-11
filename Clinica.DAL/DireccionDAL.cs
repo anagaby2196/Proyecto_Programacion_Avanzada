@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clinica.DAL
 {
-    class DireccionDAL
+    public class DireccionDAL
     {
     }
 }

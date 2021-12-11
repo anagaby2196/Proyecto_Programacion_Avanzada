@@ -67,7 +67,7 @@
 
                     swal(
                         'Oops...',
-                        'No puedes editar citas de otros usuarios',
+                        'No se puede editar la citas de otros pacientes',
                         'error'
                     )
                 }

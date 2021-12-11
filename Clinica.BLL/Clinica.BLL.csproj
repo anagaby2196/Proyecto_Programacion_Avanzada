@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="CitasBLL.cs" />
     <Compile Include="CitasProgramadasBLL.cs" />
-    <Compile Include="DireccioBLL.cs" />
+    <Compile Include="DireccionBLL.cs" />
     <Compile Include="DoctorBLL.cs" />
     <Compile Include="ExpedienteBLL.cs" />
     <Compile Include="PacienteBLL.cs" />

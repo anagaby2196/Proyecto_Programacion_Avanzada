@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Clinica.BLL
 {
-    class DireccioBLL
+    public class DireccionBLL
     {
     }
 }
