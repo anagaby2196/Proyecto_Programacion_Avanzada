@@ -1,4 +1,5 @@
-﻿using Clinica.DAL;
+﻿using Clinica.BLL;
+using Clinica.DAL;
 using Clinica_BLL;
 using Entidades.ETL;
 using System;
@@ -16,6 +17,18 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         public ActionResult Index()
         {
             CitasBLL citas = new CitasBLL();
+            PacienteBLL paciente = new PacienteBLL();
+            var pacientes = paciente.ConsultarPacientesBLL();
+            List<SelectListItem> combo = new List<SelectListItem>();
+            foreach (var item in pacientes)
+            { string nombrePaciente = item.Nombre + " " + item.PrimerApellido + " " + item.SegundoApellido;
+                combo.Add(new SelectListItem
+                {
+                    Value = item.CodigoPersona.ToString(),
+                    Text = nombrePaciente.ToUpper()
+                });
+            }
+            ViewBag.Pacientes = combo;
             var events = citas.CitasDisponiblesBLL().ToArray();
             var nUsuario = (PersonaETL)Session["Usuario"];
             var nombreCompleto = nUsuario.Nombre + " " + nUsuario.PrimerApellido + " " + nUsuario.SegundoApellido;
@@ -38,7 +51,6 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         {
             CitasETL evento = new CitasETL();
             evento.CodigoCitas = codigoCitas;
-            evento.Asunto = asunto;
             evento.Descripcion = descripcion;
             evento.HoraInicio = (DateTime)horaInicio;
             evento.HoraFin = (DateTime)horaFin;
@@ -46,11 +58,18 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             evento.esTodoElDia = (bool)esTodoElDia;
 
             var status = false;
+
             CitasBLL citas = new CitasBLL();
             if (evento != null)
             {
                 status = citas.ActualizarCitaBLL(evento);
             }
+            
+            CitasProgramadasBLL CitasPBLL = new CitasProgramadasBLL();
+            CitasProgramadasETL citaProgramada = new CitasProgramadasETL();
+            citaProgramada.CodigoCita = codigoCitas;
+            citaProgramada.CodigoDoctor = codDoctor;
+            CitasPBLL.AgregarCitaProgramada(citaProgramada, asunto.ToUpper());
 
             return new JsonResult { Data = new { status = status } };
         }

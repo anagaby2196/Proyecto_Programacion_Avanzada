@@ -54,8 +54,8 @@ namespace Clinica.DAL
                           Nombre = item.persona.nombre,
                           PrimerApellido = item.persona.primerApellido,                          
                           SegundoApellido = item.persona.segundoApellido,
-                          Identificacion = item.persona.identificacion
-                                                      
+                          Identificacion = item.persona.identificacion,
+                          CodigoPersona = (long)item.codigoPersonaFK                            
                         });
                     }
                 }
