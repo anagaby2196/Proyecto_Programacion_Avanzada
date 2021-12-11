@@ -66,7 +66,7 @@
                         @if (Session["TipoUsuario"].ToString() == "2" || Session["TipoUsuario"].ToString() == "3")
                         {
                             <div class="form-group">
-                                <label>Subject</label>
+                                <label>Nombre del Paciente</label>
                                 @*<input type="text" id="txtSubject" class="form-control" />*@
                                 @Html.DropDownListFor(m => m.CodigoPersona, new SelectList(ViewBag.Pacientes, "Value", "Text"), new { @id = "txtSubject", @class = "form-control" })
                             </div>
