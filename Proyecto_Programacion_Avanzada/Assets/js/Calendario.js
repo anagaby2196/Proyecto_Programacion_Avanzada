@@ -188,7 +188,7 @@
             type: "POST",
             url: '/Citas/SaveEvent',
             //long codigoCitas, string asunto,string descripcion, DateTime horaInicio,DateTime horaFin,string temaColor,Boolean esTodoElDia
-            data: { codigoCitas: data.EventID, asunto: data.Subject, descripcion: data.Description, horaInicio: data.Start, horaFin: data.End, esTodoElDia: data.IsFullDay, codDoctor: data.Doctor},
+            data: { codigoCitas: data.EventID, CodigoPersona: data.Subject, descripcion: data.Description, horaInicio: data.Start, horaFin: data.End, esTodoElDia: data.IsFullDay, codDoctor: data.Doctor},
             dataType: 'json',
             success: function (data) {
                 if (data.status) {

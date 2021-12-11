@@ -74,7 +74,7 @@ namespace Clinica.DAL
 
                 throw;
             }
-            
+
         }
 
         public Boolean insertarDireccionPersona(PersonaETL personaETL)
@@ -161,7 +161,7 @@ namespace Clinica.DAL
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
-                
+
                 var persona = (from x in contexto.persona where x.identificacion == personaETL.Identificacion select x).FirstOrDefault();
 
                 if (persona != null)
@@ -243,7 +243,7 @@ namespace Clinica.DAL
                                 listaP.Edad = (int)item.edad;
                                 listaP.Sexo = char.Parse(item.sexo);
                             }
-                            
+
                         }
 
                         if (Direccion.Count() > 0)
@@ -256,7 +256,7 @@ namespace Clinica.DAL
                                 listaP.Provincia = item.Provincia;
                             }
 
-                            
+
                         }
 
                         return listaP;
@@ -280,15 +280,15 @@ namespace Clinica.DAL
             using (var contexto = new ClinicaMedicaV1Entities())
             {
                 var listaPerfilesDB = (from x in contexto.paciente
-                                        join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona
-                                        join dc in contexto.usuarios on y.codigoPersona equals dc.codigoPersonaFK
-                                        where x.estado == true select new { 
-                                        nombre = y.nombre,
-                                        primerApellido = y.primerApellido,
-                                        segundoApellido = y.segundoApellido,
-                                        identificacion = y .identificacion,
-                                        tipoUsuarioFK = dc.tipoUsuarioFK
-                                        }).OrderBy(dc => dc.tipoUsuarioFK).ToList();
+                                       join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona
+                                       join dc in contexto.usuarios on y.codigoPersona equals dc.codigoPersonaFK
+                                       where x.estado == true select new {
+                                           nombre = y.nombre,
+                                           primerApellido = y.primerApellido,
+                                           segundoApellido = y.segundoApellido,
+                                           identificacion = y.identificacion,
+                                           tipoUsuarioFK = dc.tipoUsuarioFK
+                                       }).OrderBy(dc => dc.tipoUsuarioFK).ToList();
 
                 if (listaPerfilesDB.Count > 0)
                 {
@@ -307,6 +307,44 @@ namespace Clinica.DAL
                 return listaPerfiles;
             }
 
+        }
+
+        public List<string> NombrePaciente(string CodigoPersona)
+        {
+            long numeP = long.Parse(CodigoPersona);
+            try
+            {
+                List<string> NombreYpaciente = new List<string>();
+
+
+                using (var contexto = new ClinicaMedicaV1Entities())
+                {
+                    var paciente = (from x in contexto.paciente
+                                    join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona
+                                    join dc in contexto.usuarios on y.codigoPersona equals dc.codigoPersonaFK
+                                    where x.estado == true & dc.tipoUsuarioFK == 1 & x.codigoPersonaFK == numeP
+                                    select new {
+                                        nombre = y.nombre,
+                                        primerApellido = y.primerApellido,
+                                        segundoApellido = y.segundoApellido,
+                                        identificacion = y.identificacion,
+                                        tipoUsuarioFK = dc.tipoUsuarioFK,
+                                        codigoPaciente = x.codigoPaciente
+                                    }).FirstOrDefault();
+                    string nombreCompleto = paciente.nombre + " " + paciente.primerApellido + " " + paciente.segundoApellido;
+                    NombreYpaciente.AddRange( new string[]
+                    {
+                        nombreCompleto.ToUpper(),
+                        paciente.codigoPaciente.ToString()
+                    });
+                    return NombreYpaciente;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 

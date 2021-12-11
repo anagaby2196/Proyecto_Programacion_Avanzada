@@ -11,19 +11,13 @@ namespace Clinica.BLL
     public class CitasProgramadasBLL
     {
 
-        public Boolean AgregarCitaProgramada(CitasProgramadasETL cpETL, string nombrePaciente)
+        public Boolean AgregarCitaProgramada(CitasProgramadasETL cpETL, string nombrePaciente, long codDoctor)
         {
 
             CitasProgramadasDAL cp = new CitasProgramadasDAL();
-            //cp.IngresarCitaProgramada();
+            
             return true;
         }
-
-
-
-        //var nombreCompleto = nUsuario.Nombre + " " + nUsuario.PrimerApellido + " " + nUsuario.SegundoApellido;
-
-
 
 
 

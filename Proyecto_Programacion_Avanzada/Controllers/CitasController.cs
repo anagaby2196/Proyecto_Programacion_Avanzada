@@ -47,10 +47,30 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveEvent(long codigoCitas, string asunto, string descripcion, DateTime horaInicio, DateTime horaFin, Boolean esTodoElDia, long codDoctor)
+        public JsonResult SaveEvent(long codigoCitas, string CodigoPersona, string descripcion, DateTime horaInicio, DateTime horaFin, Boolean esTodoElDia, long codDoctor)
         {
             CitasETL evento = new CitasETL();
+            PersonaBLL persona = new PersonaBLL();
+            CitasProgramadasBLL CitasPBLL = new CitasProgramadasBLL();
+            CitasProgramadasETL citaProgramada = new CitasProgramadasETL();
+            citaProgramada.CodigoCita = codigoCitas;
+            citaProgramada.CodigoDoctor = codDoctor;
+            var nUsuario = (PersonaETL)Session["Usuario"];
             evento.CodigoCitas = codigoCitas;
+            long number1 = 0;
+            List<string> nombrePac = new List<string>();
+            bool canConvert = long.TryParse(CodigoPersona, out number1);
+            if (canConvert == true)
+            {
+                nombrePac = persona.NombreCompleto(CodigoPersona);
+                CodigoPersona = nombrePac[0];
+                
+            }
+            else
+            {
+                nombrePac = persona.NombreCompleto(nUsuario.CodigoPersona.ToString());
+            }
+            evento.Asunto = CodigoPersona;
             evento.Descripcion = descripcion;
             evento.HoraInicio = (DateTime)horaInicio;
             evento.HoraFin = (DateTime)horaFin;
@@ -64,12 +84,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             {
                 status = citas.ActualizarCitaBLL(evento);
             }
-            
-            CitasProgramadasBLL CitasPBLL = new CitasProgramadasBLL();
-            CitasProgramadasETL citaProgramada = new CitasProgramadasETL();
-            citaProgramada.CodigoCita = codigoCitas;
-            citaProgramada.CodigoDoctor = codDoctor;
-            CitasPBLL.AgregarCitaProgramada(citaProgramada, asunto.ToUpper());
+            CitasPBLL.AgregarCitaProgramada(citaProgramada, nombrePac[1], codDoctor);
 
             return new JsonResult { Data = new { status = status } };
         }

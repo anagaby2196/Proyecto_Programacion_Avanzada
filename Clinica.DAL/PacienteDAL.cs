@@ -67,7 +67,6 @@ namespace Clinica.DAL
         public PersonaETL ConsultarPaciente(string identificacion)
         {
 
-            //List<PacienteETL> listaPacientes = new List<PacienteETL>();
 
             using (var contexto = new ClinicaMedicaV1Entities())
             {

@@ -67,5 +67,11 @@ namespace Clinica.BLL
             PersonaDAL personaDAL = new PersonaDAL();
             return personaDAL.ConsultarPerfiles();
         }
+
+        public List<string> NombreCompleto(string CodigoPersona)
+        {
+            PersonaDAL personaDAL = new PersonaDAL();
+            return personaDAL.NombrePaciente(CodigoPersona);
+        }
     }
 }
