@@ -29,12 +29,12 @@
                 {
                 <tr style="font-size:medium">
 
-                    <td>@item.Identificacion</td>
+                    <td id="identificacionDc">@item.Identificacion</td>
                     <td>@item.Nombre</td>
                     <td>@item.PrimerApellido</td>
                     <td>@item.SegundoApellido</td>
                     <td class="col-md-3">
-                        <select id="Tipo_Usuario" class="form-control" style="font-size:medium" onchange="ActualizarTioUsuario();">
+                        <select id="Tipo_Usuario" class="form-control" style="font-size:medium" onchange="ActualizarTioUsuario(this.value);">
                             @if (item.TipoUsuario == 1)
                     {
                             <option value="1" selected="selected"><b>Paciente</b></option>

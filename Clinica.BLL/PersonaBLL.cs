@@ -72,5 +72,12 @@ namespace Clinica.BLL
             PersonaDAL personaDAL = new PersonaDAL();
             return personaDAL.NombrePaciente(CodigoPersona);
         }
+
+        public Boolean CambiarTipoUsuario(int TipoUsuario, string Identificacion)
+        {
+            PersonaDAL personaDAL = new PersonaDAL();
+            return personaDAL.CambiarTipoUsuario(TipoUsuario, Identificacion);
+
+        }
     }
 }

@@ -9,17 +9,15 @@ namespace Clinica.DAL
 {
     public class DoctorDAL
     {
-        public Boolean RegristrarDoctor(DoctorETL doctor)
+        public Boolean RegristrarDoctor(long codigoPersona)
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
                 try
                 {
-                    var ultimaPersona = (from x in contexto.persona select x).LastOrDefault();
-
-
+                    
                     doctor doc = new doctor();
-                    doc.codigoPersonaFk = ultimaPersona.codigoPersona;
+                    doc.codigoPersonaFk = codigoPersona;
                     doc.estado = true;
 
                     contexto.doctor.Add(doc);
@@ -89,14 +87,13 @@ namespace Clinica.DAL
                                        where x.estado == true || y.identificacion == identificacion
                                        select x).FirstOrDefault();
 
-                List<DoctorETL> listaDoctores = new List<DoctorETL>();
-                if (listaDoctores.Count > 0)
+                if (listaDoctoresDB != null)
                 {
-                    foreach (var item in listaDoctores) item.Estado = false;
+                    listaDoctoresDB.estado = false;
                     contexto.SaveChanges();
-
+                    return true;
                 }
-                return true;
+                return false;
 
 
             }

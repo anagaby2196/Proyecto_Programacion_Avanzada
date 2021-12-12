@@ -48,7 +48,7 @@
 }
 
 
-function ActualizarTioUsuario() {
+function ActualizarTioUsuario(tipoUsuario) {
     swal({
         title: "Esta seguro que quiere cambiar el Ripo de Usuario?",
         text: "Una vez echo el cambio, el usuario se habilitara con ese otro tipo de rol!",
@@ -58,12 +58,14 @@ function ActualizarTioUsuario() {
     })
         .then((willDelete) => {
             if (willDelete) {
-                var Model_TipoUsuario = $("#Tipo_Usuario").val();
+                var Model_TipoUsuario = tipoUsuario;
+                var Model_IdUsuario = $("#identificacionDc").text();
                 $.ajax({
                     type: 'POST',
                     url: '/Perfil/ActualizarTipoUsuario',
                     data: {
-                        TipoUsuario: Model_TipoUsuario
+                        TipoUsuario: Model_TipoUsuario,
+                        Identificacion: Model_IdUsuario
                     },
                     dataType: 'json',
                     success: function (respuesta) {

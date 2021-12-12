@@ -159,25 +159,34 @@ namespace Clinica.DAL
         }
         public Boolean ActualizarPersona(PersonaETL personaETL)
         {
-            using (var contexto = new ClinicaMedicaV1Entities())
+            try
             {
-
-                var persona = (from x in contexto.persona where x.identificacion == personaETL.Identificacion select x).FirstOrDefault();
-
-                if (persona != null)
+                using (var contexto = new ClinicaMedicaV1Entities())
                 {
-                    persona.nombre = personaETL.Nombre;
-                    persona.primerApellido = personaETL.PrimerApellido;
-                    persona.segundoApellido = personaETL.SegundoApellido;
-                    persona.telefono = personaETL.Telefono;
-                    persona.SEXO = personaETL.Sexo.ToString();
-                    persona.EDAD = personaETL.Edad;
-                    contexto.SaveChanges();
+
+                    var persona = (from x in contexto.persona where x.identificacion == personaETL.Identificacion select x).FirstOrDefault();
+
+                    if (persona != null)
+                    {
+                        persona.nombre = personaETL.Nombre;
+                        persona.primerApellido = personaETL.PrimerApellido;
+                        persona.segundoApellido = personaETL.SegundoApellido;
+                        persona.telefono = personaETL.Telefono;
+                        persona.SEXO = personaETL.Sexo.ToString();
+                        persona.EDAD = personaETL.Edad;
+                        contexto.SaveChanges();
+                        return true;
+                    }
+
                     return true;
                 }
-
-                return true;
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
 
@@ -276,36 +285,46 @@ namespace Clinica.DAL
         {
 
             List<PersonaETL> listaPerfiles = new List<PersonaETL>();
-
-            using (var contexto = new ClinicaMedicaV1Entities())
+            try
             {
-                var listaPerfilesDB = (from x in contexto.paciente
-                                       join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona
-                                       join dc in contexto.usuarios on y.codigoPersona equals dc.codigoPersonaFK
-                                       where x.estado == true select new {
-                                           nombre = y.nombre,
-                                           primerApellido = y.primerApellido,
-                                           segundoApellido = y.segundoApellido,
-                                           identificacion = y.identificacion,
-                                           tipoUsuarioFK = dc.tipoUsuarioFK
-                                       }).OrderBy(dc => dc.tipoUsuarioFK).ToList();
-
-                if (listaPerfilesDB.Count > 0)
+                using (var contexto = new ClinicaMedicaV1Entities())
                 {
-                    foreach (var item in listaPerfilesDB)
+                    var listaPerfilesDB = (from x in contexto.paciente
+                                           join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona
+                                           join dc in contexto.usuarios on y.codigoPersona equals dc.codigoPersonaFK
+                                           where x.estado == true
+                                           select new
+                                           {
+                                               nombre = y.nombre,
+                                               primerApellido = y.primerApellido,
+                                               segundoApellido = y.segundoApellido,
+                                               identificacion = y.identificacion,
+                                               tipoUsuarioFK = dc.tipoUsuarioFK
+                                           }).OrderBy(dc => dc.tipoUsuarioFK).ToList();
+
+                    if (listaPerfilesDB.Count > 0)
                     {
-                        listaPerfiles.Add(new PersonaETL
+                        foreach (var item in listaPerfilesDB)
                         {
-                            Nombre = item.nombre,
-                            PrimerApellido = item.primerApellido,
-                            SegundoApellido = item.segundoApellido,
-                            Identificacion = item.identificacion,
-                            TipoUsuario = (int)item.tipoUsuarioFK
-                        });
+                            listaPerfiles.Add(new PersonaETL
+                            {
+                                Nombre = item.nombre,
+                                PrimerApellido = item.primerApellido,
+                                SegundoApellido = item.segundoApellido,
+                                Identificacion = item.identificacion,
+                                TipoUsuario = (int)item.tipoUsuarioFK
+                            });
+                        }
                     }
+                    return listaPerfiles;
                 }
-                return listaPerfiles;
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
 
         }
 
@@ -346,6 +365,70 @@ namespace Clinica.DAL
                 throw;
             }
         }
+
+        public Boolean CambiarTipoUsuario(int CodigoTipUsuario, string Identificacion)
+        {
+            try
+            {
+                DoctorDAL doctorinserta = new DoctorDAL();
+                using (var contexto = new ClinicaMedicaV1Entities())
+                {
+                    var usuario = (from x in contexto.usuarios
+                                   join y in contexto.persona on x.codigoPersonaFK equals y.codigoPersona where y.identificacion == Identificacion select x).FirstOrDefault();
+
+                    if (usuario != null)
+                    {
+                        if (CodigoTipUsuario == 1)
+                        {
+                            
+                            usuario.tipoUsuarioFK = CodigoTipUsuario;
+                            contexto.SaveChanges();
+                            return doctorinserta.CambiarEstadoDoctor(Identificacion);
+                        }
+                        else
+                        {
+                            usuario.tipoUsuarioFK = CodigoTipUsuario;
+                            contexto.SaveChanges();
+                            
+                            doctorinserta.RegristrarDoctor(CodigoPersona(Identificacion));
+                            return true;
+                        }
+
+                    }
+                    return false;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
+
+        public long CodigoPersona(string Identificacion)
+        {
+            try
+            {
+                using (var contexto = new ClinicaMedicaV1Entities())
+                {
+                    return (from x in contexto.persona
+                                   where x.identificacion == Identificacion
+                                   select x.codigoPersona).FirstOrDefault();
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
 
     }

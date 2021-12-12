@@ -10,10 +10,10 @@ namespace Clinica.BLL
 {
     public class DoctorBLL
     {
-        public Boolean RegristrarPacienteBLL(DoctorETL doctor)
+        public Boolean RegristrarPacienteBLL(long codigoPersona)
         {
             DoctorDAL dc = new DoctorDAL();
-            return dc.RegristrarDoctor(doctor);
+            return dc.RegristrarDoctor(codigoPersona);
         }
 
         public List<string> ConsultarDoctoresBLL()
