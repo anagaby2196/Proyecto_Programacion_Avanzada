@@ -20,6 +20,8 @@ function MostrarDatos(identificacionSeleccionada) {
             $("#Model_Provincia").val(data.unPaciente.Provincia);
             $("#Model_Canton").val(data.unPaciente.Canton);
             $("#Model_Distrito").val(data.unPaciente.Distrito);
+            $("#Model_Edad").val(data.unPaciente.EDAD);
+            $("#Model_Sexo").val(data.unPaciente.SEXO);
 
             var lista = "";
             $.each(data.exp, function (index, value) {
@@ -46,7 +48,7 @@ function MostrarDatos(identificacionSeleccionada) {
 function datosPaciente(pIdentificacion) {
     $.ajax({
         type: 'GET',
-        url: '/Paciente/ConsultarPaciente',
+        url: '/Paciente/ConsultarDatosCitas',
         data: { identificacion: pIdentificacion },
         dataType: 'json',
         success: function (data) {
@@ -59,14 +61,21 @@ function datosPaciente(pIdentificacion) {
             $("#Model_Provincia").val(data.unPaciente.Provincia);
             $("#Model_Canton").val(data.unPaciente.Canton);
             $("#Model_Distrito").val(data.unPaciente.Distrito);
+            $("#Model_Edad").val(data.unPaciente.Edad);
+            if (data.unPaciente.Edad == 'F') {
+                $("#Model_Sexo").val('Femenino');
+            } else {
+                $("#Model_Sexo").val('Masculino');
+            }         
+
             var fecha;
-            var codigo = "";
+            var codigo;
             $.each(data.exp, function (index, value) {
                 fecha = convertToJavaScriptDate(value.HoraInicio);
-                codigo = value.CodigoCitaProgramada;
+                codigo = value.Codigo;
             })
             
-            $("#Model_Hora").val(fecha);
+            $("#Model_Hora").val(convertToJavaScriptDate(value.HoraInicio););
             $("#Model_codigoCitaProgramadas").val(codigo);
         },
         error: function (data) {

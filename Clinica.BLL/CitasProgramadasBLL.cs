@@ -19,6 +19,16 @@ namespace Clinica.BLL
             return cp.IngresarCitaProgramada(codigoPaciente, codDoctor);
         }
 
+        public CitasProgramadasETL verCitaProgramada(long codigoPersona)
+        {
+
+            CitasProgramadasDAL cpDAL = new CitasProgramadasDAL();
+            return cpDAL.ConsultarCitaProgramada(codigoPersona);
+            
+        }
+
+
+
 
 
     }

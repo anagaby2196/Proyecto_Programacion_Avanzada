@@ -75,12 +75,26 @@ namespace Clinica.DAL
                                        select x).FirstOrDefault();
                 PersonaETL unaPersona = new PersonaETL();
 
+                unaPersona.CodigoPersona = personaDAL.codigoPersona;
                 unaPersona.Nombre = personaDAL.nombre;
                 unaPersona.PrimerApellido = personaDAL.primerApellido;
                 unaPersona.SegundoApellido = personaDAL.segundoApellido;
                 unaPersona.Identificacion = personaDAL.identificacion;
-                unaPersona.Telefono = personaDAL.telefono;
+                unaPersona.Telefono = personaDAL.telefono;                
                 unaPersona.Correo = personaDAL.correo;
+                unaPersona.Edad = (int)personaDAL.EDAD;
+                if (personaDAL.SEXO.Equals('F'))
+                {
+                    unaPersona.Sexo = 'F';
+                }
+                else
+                {
+                    unaPersona.Sexo = 'M';
+                }
+                
+                
+
+
                 if (personaDAL.direccion != null)
                 {   
                     unaPersona.Provincia = personaDAL.direccion.provincia;

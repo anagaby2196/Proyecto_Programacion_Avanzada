@@ -38,5 +38,19 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             else
                 return Json(null, JsonRequestBehavior.DenyGet);
         }
+
+        public ActionResult ConsultarDatosCitas(string identificacion)
+        {
+            PacienteBLL paciente = new PacienteBLL();
+            var unPaciente = paciente.ConsultarPacienteBLL(identificacion);
+            CitasProgramadasBLL verCitaProgramada = new CitasProgramadasBLL();
+            var exp = verCitaProgramada.verCitaProgramada(unPaciente.CodigoPersona);
+
+            if (unPaciente != null)
+                return Json(new { unPaciente, exp }, JsonRequestBehavior.AllowGet);
+            else
+                return Json(null, JsonRequestBehavior.DenyGet);
+        }
+
     }
 }

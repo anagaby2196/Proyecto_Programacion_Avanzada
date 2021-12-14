@@ -13,12 +13,14 @@
     <div class="container-fluid col-10">
         <label style="color:black"><h4><b>Datos para el Expediente</b></h4></label>
         <div class="form-row">
-
+            <div class="form-group col-md-6">
+                <label>Padecimiento</label>
+                <input type="text" class="form-control" id="Model_Padecimiento">
+            </div>
             <div class="form-group col-md-6">
                 <label>Tratamiento</label>
                 <input type="text" class="form-control" id="Model_Tratamiento">
             </div>
-
             <div class="form-group col-md-6">
                 <input type="hidden" class="form-control" id="Model_codigoCitaProgramadas">
             </div>
@@ -31,11 +33,9 @@
             <div class="form-group col-md-6">
                 <input type="hidden" class="form-control" id="Model_codigoDoctorFK">
             </div>
-
-
         </div>
         <div>
-            <input type="submit" name="s_Tratamiento" value="Guardar cambios" onclick="ActualizarExpediente('Model_codigoCitaProgramadas','Model_Tratamiento');" />
+            <input type="submit" name="s_Tratamiento" value="Guardar cambios" onclick="ActualizarExpediente('Model_Padecimiento','Model_codigoCitaProgramadas','Model_Tratamiento');" />
         </div>
 
     </div>

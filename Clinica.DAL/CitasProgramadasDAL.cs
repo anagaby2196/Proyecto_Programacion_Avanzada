@@ -43,43 +43,44 @@ namespace Clinica.DAL
             }
         }
 
-        public List<CitasProgramadasETL> ConsultarCitaProgramada(string codigoDoctor, string pPadecimiento, string pTratamiento)
+        public CitasProgramadasETL ConsultarCitaProgramada(long pCodigoPersona)
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
                 try
                 {
-                    var listaCPBD = (from x in contexto.citasProgramadas                                  
-                                  where x.estado == true 
-                                  select x).ToList();
+                    var codigoPaciente = (from x in contexto.paciente where x.codigoPersonaFK == pCodigoPersona
+                                          select x).FirstOrDefault();
 
 
-                    List<CitasProgramadasETL> listaCP = new List<CitasProgramadasETL>();
-                    if (listaCP.Count > 0)
-                    {
-                        foreach (var item in listaCP)
-                        {
-                            listaCP.Add(new CitasProgramadasETL
-                            {
-                                CodigoCita = item.CodigoCita,
-                                CodigoPaciente = item.CodigoPaciente,
-                                Padecimiento = pPadecimiento,
-                                Tratamiento = pTratamiento
-                            });
-                        }
-                    }
+                    var citaProgramda = (from x in contexto.citasProgramadas
+                                         join c in contexto.citas on x.codigoCitasFK equals c.codigoCitas
+                                         where x.estado == true && x.codigoPacienteFK == codigoPaciente.codigoPaciente
+                                         orderby x.codigoCitaProgramadas descending
+                                         select new
+                                         {
+                                             codigoCitaProgramada = x.codigoCitaProgramadas,
+                                             horaCita = c.horaInicio
+                                         }).FirstOrDefault();
+                    CitasProgramadasETL citasPETL = new CitasProgramadasETL();
 
+                    citasPETL.CodigoCitasProgramadas = citaProgramda.codigoCitaProgramada;
+                    citasPETL.HoraInicio = (DateTime)citaProgramda.horaCita;
+
+                    return citasPETL;
 
                 }
                 catch (Exception)
                 {
-
+                    
                     throw;
                 }
+                
 
-                return null;
             }
         }
+
+       
 
     }
 }

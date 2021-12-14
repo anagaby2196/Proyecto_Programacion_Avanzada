@@ -20,11 +20,13 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         }
 
         [HttpPost]
-        public JsonResult ActualizaExpediente(string expediente)
+        public JsonResult ActualizaExpediente(long CodigoCitaProgramadas,string padecimiento,string tratamiento)
         {
             var status = false;
-            CitasProgramadasBLL cp = new CitasProgramadasBLL(); 
-            
+            ExpedienteBLL cp = new ExpedienteBLL();
+            cp.ActualizaExpedienteBLL(CodigoCitaProgramadas, padecimiento, tratamiento);
+
+
 
             return new JsonResult { Data = new { status = status } };
         }

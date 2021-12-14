@@ -30,5 +30,11 @@ namespace Clinica.BLL
 
             return expediente;
         }
+        public Boolean ActualizaExpedienteBLL(long CodigoCitaProgramadas, string padecimiento, string tratamiento)
+        {
+            ExpedienteDAL cpDAL = new ExpedienteDAL();
+
+            return cpDAL.ActualizaExpedienteDAL(CodigoCitaProgramadas, padecimiento, tratamiento);
+        }
     }
 }
