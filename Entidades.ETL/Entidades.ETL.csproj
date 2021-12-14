@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CitasETL.cs" />
     <Compile Include="CitasProgramadasETL.cs" />
+    <Compile Include="DireccionETL.cs" />
     <Compile Include="DoctorETL.cs" />
     <Compile Include="ExpedienteETL.cs" />
     <Compile Include="PacienteETL.cs" />
