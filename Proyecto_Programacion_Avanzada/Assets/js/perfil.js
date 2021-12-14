@@ -30,8 +30,8 @@
         dataType: 'json',
         success: function (respuesta) {
             swal(
-                'Se ah procesado...',
-                'Sa ah actualizado corrrectamente',
+                'Se ha procesado...',
+                'Sa ha actualizado corrrectamente',
                 'success',
             )
             location.reload();
@@ -39,7 +39,7 @@
         error: function (respuesta) {
             swal(
                 'Oops...',
-                'Ah ocurrido un error' + ' ' + respuesta,
+                'Ha ocurrido un error' + ' ' + respuesta,
                 'error'
             )
         }
@@ -50,8 +50,8 @@
 
 function ActualizarTioUsuario(tipoUsuario,cedula) {
     swal({
-        title: "Esta seguro que quiere cambiar el Ripo de Usuario?",
-        text: "Una vez echo el cambio, el usuario se habilitara con ese otro tipo de rol!",
+        title:"¿Esta seguro que quiere cambiar el tipo de usuario?",
+        text: "Una vez realizado el cambio, el usuario se habilitara con ese otro tipo de rol.",
         icon: "warning",
         buttons: true,
         dangerMode: true,
