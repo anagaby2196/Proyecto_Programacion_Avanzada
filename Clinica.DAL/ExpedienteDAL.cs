@@ -25,11 +25,7 @@ namespace Clinica.DAL
                     contexto.expediente.Add(exp);
                     contexto.SaveChanges();
 
-                    // registrar un reporte
-
-                    ReporteCitasDAL rc = new ReporteCitasDAL();
-                    rc.RegristrarReporteCita();
-
+                    
                 }
                 catch (Exception)
                 {
