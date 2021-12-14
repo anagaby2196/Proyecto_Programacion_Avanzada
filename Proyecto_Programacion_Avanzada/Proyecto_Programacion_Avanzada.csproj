@@ -133,7 +133,6 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PacienteController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
-    <Compile Include="Controllers\ReportesCitasController.cs" />
     <Compile Include="Filtros\VerificarFiltroSession.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -366,7 +365,6 @@
     <Content Include="Views\Home\Nosotros.cshtml" />
     <Content Include="Views\Home\Promociones.cshtml" />
     <Content Include="Views\Home\Contacto.cshtml" />
-    <Content Include="Views\ReportesCitas\ReportesCitas.cshtml" />
     <Content Include="Views\Citas\Index.cshtml" />
     <Content Include="Views\Perfil\Perfil.cshtml" />
     <Content Include="Views\Login\OlvidoContrasena.cshtml" />

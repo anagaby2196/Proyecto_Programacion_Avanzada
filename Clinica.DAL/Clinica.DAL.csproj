@@ -73,7 +73,6 @@
     <Compile Include="direccion.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="DireccionDAL.cs" />
     <Compile Include="doctor.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -109,7 +108,6 @@
     <Compile Include="reporteCitas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ReporteCitasDAL.cs" />
     <Compile Include="tipoUsuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
