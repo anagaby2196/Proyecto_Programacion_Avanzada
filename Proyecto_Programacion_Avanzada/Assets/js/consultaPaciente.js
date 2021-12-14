@@ -20,8 +20,14 @@ function MostrarDatos(identificacionSeleccionada) {
             $("#Model_Provincia").val(data.unPaciente.Provincia);
             $("#Model_Canton").val(data.unPaciente.Canton);
             $("#Model_Distrito").val(data.unPaciente.Distrito);
-            $("#Model_Edad").val(data.unPaciente.EDAD);
-            $("#Model_Sexo").val(data.unPaciente.SEXO);
+            $("#Model_Edad").val(data.unPaciente.Edad);
+            if (data.unPaciente.Sexo == 'F') {
+                $("#Model_Sexo").val('Femenino');
+            } else if (data.unPaciente.Sexo == 'M') {
+                $("#Model_Sexo").val('Masculino');
+            } else {
+                $("#Model_Sexo").val('No indica');
+            }
 
             var lista = "";
             $.each(data.exp, function (index, value) {
@@ -67,9 +73,9 @@ function datosPaciente(pIdentificacion) {
                 $("#Model_Canton").val(data.unPaciente.Canton);
                 $("#Model_Distrito").val(data.unPaciente.Distrito);
                 $("#Model_Edad").val(data.unPaciente.Edad);
-                if (data.unPaciente.Edad == 'F') {
+                if (data.unPaciente.Sexo == 'F') {
                     $("#Model_Sexo").val('Femenino');
-                } else if (data.unPaciente.Edad == 'M') {
+                } else if (data.unPaciente.Sexo == 'M') {
                     $("#Model_Sexo").val('Masculino');
                 } else {
                     $("#Model_Sexo").val('No indica');
@@ -85,7 +91,9 @@ function datosPaciente(pIdentificacion) {
             },
             error: function (data) {
                 alert("Paciente no encontrado")
+                location.reload();
             }
+
 
         });
 
@@ -94,7 +102,8 @@ function datosPaciente(pIdentificacion) {
                     'Oops...',
                     'El campo de Identificacion no valido',
                     'error'
-                )
+        )
+        location.reload();
          }
 
 

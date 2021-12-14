@@ -83,7 +83,7 @@ namespace Clinica.DAL
                 unaPersona.Telefono = personaDAL.telefono;                
                 unaPersona.Correo = personaDAL.correo;
                 unaPersona.Edad = (int)personaDAL.EDAD;
-                if (personaDAL.SEXO.Equals('F'))
+                if (personaDAL.SEXO == "F")
                 {
                     unaPersona.Sexo = 'F';
                 }
