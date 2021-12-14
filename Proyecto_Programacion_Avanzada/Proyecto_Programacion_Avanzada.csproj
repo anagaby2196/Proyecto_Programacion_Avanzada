@@ -187,6 +187,7 @@
     <Content Include="Assets\images\person_3.jpg" />
     <Content Include="Assets\images\PROMO1.jpg" />
     <Content Include="Assets\images\PROMO2.jpg" />
+    <Content Include="Assets\images\sitio-en-construcion.png" />
     <Content Include="Assets\images\surgery.png" />
     <Content Include="Assets\images\uña encarnada.png" />
     <Content Include="Assets\js\aos.js" />

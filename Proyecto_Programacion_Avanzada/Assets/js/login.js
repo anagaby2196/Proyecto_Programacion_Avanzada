@@ -81,14 +81,13 @@ function ValidarCampoCorreo(campoCorreo) {
 
 function ValidarCampoContrasena(pass) {
 
-    var lowerCaseLetters = /[a-z]/g;
-    var numbers = /[0-9]/g;
-    if (/*pass.match(lowerCaseLetters) && */ pass.length >= 6 /*&& pass.match(numbers)*/) {
+    
+    if (pass.length >= 6 ) {
        
     } else {
         swal(
             'Oops...',
-            'El campo de contraseña no valido',
+            'El campo de contrasena no valido',
             'error'
         )
     }
@@ -102,7 +101,7 @@ function ValidarContrasenas(pass) {
     } else {
         swal(
             'Oops...',
-            'El campo de contraseñas no son identicos',
+            'El campo de contrasenas no son identicos',
             'error'
         )
     }

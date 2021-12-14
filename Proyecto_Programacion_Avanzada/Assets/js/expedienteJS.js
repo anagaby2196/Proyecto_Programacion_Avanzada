@@ -32,3 +32,13 @@
         }
     });
 }
+
+function ValidarCampo(campoTXT) {
+    if (campoTXT == "") {
+        swal(
+            'Oops...',
+            'El campo no puede ser vacio',
+            'error'
+        )
+    }
+}
