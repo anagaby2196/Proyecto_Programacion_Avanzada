@@ -10,26 +10,28 @@ namespace Clinica.DAL
     public class ExpedienteDAL
     {
 
-        public Boolean RegristrarExpediente()
+        public Boolean RegristrarExpediente(long pCodigoCitaProgramadas)
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
                 try
                 {
-                    var ultimoCP = (from x in contexto.citasProgramadas select x).LastOrDefault();
-
-
                     expediente exp = new expediente();
-                    exp.codigoCitaProgramadasFK = ultimoCP.codigoCitaProgramadas;
+                    var listaExpedientes = (from x in contexto.expediente
+                                            where x.codigoCitaProgramadasFK == pCodigoCitaProgramadas
+                                            select x).FirstOrDefault();
+                    if(listaExpedientes == null)
+                    {
+                        exp.codigoCitaProgramadasFK = pCodigoCitaProgramadas;
+                        contexto.expediente.Add(exp);
+                        contexto.SaveChanges();
 
-                    contexto.expediente.Add(exp);
-                    contexto.SaveChanges();
-
-                    
+                        return true;
+                    }
+                    return false;   
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
                 return true;
@@ -142,7 +144,7 @@ namespace Clinica.DAL
             }
         }
 
-        public Boolean ActualizaExpedienteDAL(long pCodigoCitaProgramadas, string pPadecimiento, string pTratamiento)
+        public Boolean ActualizaCitaProgramadaDAL(long pCodigoCitaProgramadas, string pPadecimiento, string pTratamiento)
         {
             try
             {
@@ -158,13 +160,16 @@ namespace Clinica.DAL
                         cp.tratamiento = pTratamiento;
                         contexto.SaveChanges();
 
+                        RegristrarExpediente(pCodigoCitaProgramadas);
+                        return true;
                     }
-                    return true;
+
+                    return false;
                 }
             }
             catch (Exception)
             {
-                return false;
+                
                 throw;
             }
 

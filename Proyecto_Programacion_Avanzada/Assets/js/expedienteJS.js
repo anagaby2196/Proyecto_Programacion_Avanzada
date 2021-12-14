@@ -3,7 +3,7 @@
 
     var Model_Padecimiento = $("#Model_Padecimiento").val();
     var Model_Tratamiento = $("#Model_Tratamiento").val();
-    var Model_codigoCitaProgramadas = $("Model_codigoCitaProgramadas").val();
+    var Model_codigoCitaProgramadas = $("#Model_codigoCitaProgramadas").val();
 
     $.ajax({
 
@@ -16,10 +16,19 @@
         },
         datatype: 'json',
         success: function(respuesta) {
-            location.replace('Index');
+            swal(
+                'Se ha actualizado la cita...',
+                'Sa ha generado el expediente corrrectamente',
+                'success',
+            )
+            location.reload();
         },
         error: function (respuesta) {
-            alert("Error")
+            swal(
+                'Oops...',
+                'Ha ocurrido un error' + ' ' + respuesta,
+                'error'
+            )
         }
     });
 }

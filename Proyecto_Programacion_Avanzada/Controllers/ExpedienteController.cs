@@ -24,7 +24,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         {
             var status = false;
             ExpedienteBLL cp = new ExpedienteBLL();
-            cp.ActualizaExpedienteBLL(CodigoCitaProgramadas, padecimiento, tratamiento);
+            cp.ActualizaCitaProgramadaBLL(CodigoCitaProgramadas, padecimiento, tratamiento);
 
 
 

@@ -40,7 +40,7 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         }
 
         public ActionResult ConsultarDatosCitas(string identificacion)
-        {
+        {           
             PacienteBLL paciente = new PacienteBLL();
             var unPaciente = paciente.ConsultarPacienteBLL(identificacion);
             CitasProgramadasBLL verCitaProgramada = new CitasProgramadasBLL();

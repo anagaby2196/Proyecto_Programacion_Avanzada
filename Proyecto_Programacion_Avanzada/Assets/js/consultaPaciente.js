@@ -46,56 +46,61 @@ function MostrarDatos(identificacionSeleccionada) {
 
 
 function datosPaciente(pIdentificacion) {
-    $.ajax({
-        type: 'GET',
-        url: '/Paciente/ConsultarDatosCitas',
-        data: { identificacion: pIdentificacion },
-        dataType: 'json',
-        success: function (data) {
-            $("#Model_Identificacion").val(data.unPaciente.Identificacion);
-            $("#Model_Nombre").val(data.unPaciente.Nombre);
-            $("#Model_PrimerApellido").val(data.unPaciente.PrimerApellido);
-            $("#Model_SegundoApellido").val(data.unPaciente.SegundoApellido);
-            $("#Model_Telefono").val(data.unPaciente.Telefono);
-            $("#Model_Correo").val(data.unPaciente.Correo);
-            $("#Model_Provincia").val(data.unPaciente.Provincia);
-            $("#Model_Canton").val(data.unPaciente.Canton);
-            $("#Model_Distrito").val(data.unPaciente.Distrito);
-            $("#Model_Edad").val(data.unPaciente.Edad);
-            if (data.unPaciente.Edad == 'F') {
-                $("#Model_Sexo").val('Femenino');
-            } else {
-                $("#Model_Sexo").val('Masculino');
-            }         
 
-            var fecha;
-            var codigo;
-            $.each(data.exp, function (index, value) {
-                fecha = convertToJavaScriptDate(value.HoraInicio);
-                codigo = value.Codigo;
-            })
-            
-            $("#Model_Hora").val(convertToJavaScriptDate(value.HoraInicio););
-            $("#Model_codigoCitaProgramadas").val(codigo);
-        },
-        error: function (data) {
-            alert("Paciente no encontrado")
-        }
-    });
+    var valoresAceptados = /^[0-9]+$/;
+    if (pIdentificacion.length <= 9 && pIdentificacion.match(valoresAceptados)) {
+
+        $.ajax({
+            type: 'GET',
+            url: '/Paciente/ConsultarDatosCitas',
+            data: { identificacion: pIdentificacion },
+            dataType: 'json',
+            success: function (data) {
+
+                $("#Model_Identificacion").val(data.unPaciente.Identificacion);
+                $("#Model_Nombre").val(data.unPaciente.Nombre);
+                $("#Model_PrimerApellido").val(data.unPaciente.PrimerApellido);
+                $("#Model_SegundoApellido").val(data.unPaciente.SegundoApellido);
+                $("#Model_Telefono").val(data.unPaciente.Telefono);
+                $("#Model_Correo").val(data.unPaciente.Correo);
+                $("#Model_Provincia").val(data.unPaciente.Provincia);
+                $("#Model_Canton").val(data.unPaciente.Canton);
+                $("#Model_Distrito").val(data.unPaciente.Distrito);
+                $("#Model_Edad").val(data.unPaciente.Edad);
+                if (data.unPaciente.Edad == 'F') {
+                    $("#Model_Sexo").val('Femenino');
+                } else if (data.unPaciente.Edad == 'M') {
+                    $("#Model_Sexo").val('Masculino');
+                } else {
+                    $("#Model_Sexo").val('No indica');
+                }
+
+
+                var fecha = convertToJavaScriptDate(data.exp.HoraInicio);
+                var codigo;
+
+                $("#Model_Hora").val(fecha);
+                $("#Model_codigoCitaProgramadas").val(data.exp.CodigoCitasProgramadas);
+
+            },
+            error: function (data) {
+                alert("Paciente no encontrado")
+            }
+
+        });
+
+} else {
+                swal(
+                    'Oops...',
+                    'El campo de Identificacion no valido',
+                    'error'
+                )
+         }
+
+
+    
+
 }
-
-
-
-function datosCitaProgramada() {
-
-    $.ajax({
-
-        type: 'GET',
-        url: ''
-    });
-   
-}
-
 
 function convertToJavaScriptDate(value) {
     var pattern = /Date\(([^)]+)\)/;
@@ -103,4 +108,5 @@ function convertToJavaScriptDate(value) {
     var dt = new Date(parseFloat(results[1]));
     return (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
 }
+
 
