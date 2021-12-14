@@ -104,13 +104,18 @@
             $.ajax({
                 type: "POST",
                 url: '/Citas/DeleteEvent',
-                data: {eventoID: selectedEvent.eventID},
+                data: { eventoID: selectedEvent.eventID, Sujeto: selectedEvent.title.toUpperCase()},
                 success: function (data) {
                     if (data.status) {
                         //Refresh the calender
                         FetchEventAndRenderCalendar();
                         $('#myModal').modal('hide');
                     }
+                    swal(
+                        '',
+                        'Se ah cancelado correctamente',
+                        'warning'
+                    )
                 },
                 error: function () {
                     alert('Failed');

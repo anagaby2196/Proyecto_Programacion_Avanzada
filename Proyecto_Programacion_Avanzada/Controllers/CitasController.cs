@@ -119,10 +119,15 @@ namespace Proyecto_Programacion_Avanzada.Controllers
         public JsonResult DeleteEvent(int eventoID, string Sujeto)
         {
             var status = false;
+            CitasBLL citas = new CitasBLL();
             var sujetoActivo = Session["nombreCompleto"];
             if (sujetoActivo.ToString().ToUpper() == Sujeto)
             {
-                CitasBLL citas = new CitasBLL();
+                status = citas.CancelarCitaBLL(eventoID);
+                return new JsonResult { Data = new { status = status } };
+            }
+            else
+            {
                 status = citas.CancelarCitaBLL(eventoID);
                 return new JsonResult { Data = new { status = status } };
             }
