@@ -19,7 +19,7 @@ namespace Entidades.ETL
         public long CodigoDireccion { get; set; }
         public Boolean Estado { get; set; }
         public UsuarioETL usuario { get; set; }
-
+        public long codigoDoctor { get; set; }
         public string Contrasena { get; set; }
         public int Edad { get; set; }
         public char Sexo { get; set; }

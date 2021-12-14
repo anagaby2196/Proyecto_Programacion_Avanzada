@@ -38,8 +38,9 @@ namespace Proyecto_Programacion_Avanzada.Controllers
             {
                 combodoctores.Add(new SelectListItem
                 {
-                    Value = doctores[1],
-                    Text = doctores[0]
+                    Text = item.Nombre,
+                    Value = item.codigoDoctor.ToString()
+                    
                 });
             }
 

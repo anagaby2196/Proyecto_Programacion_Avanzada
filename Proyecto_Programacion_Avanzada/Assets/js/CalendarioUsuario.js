@@ -39,6 +39,10 @@
             hiddenDays: [0, 6],
             themeSystem: 'bootstrap',
             timeFormat: 'h(:mm)a',
+            minTime: '08:00:00',
+            maxTime: '17:00:00',
+            slotLabelInterval: "00:30:00",
+            slotDuration: '00:30:00',
             header: {
                 left: 'prev,next today',
                 center: 'title',

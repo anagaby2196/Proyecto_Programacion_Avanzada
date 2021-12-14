@@ -11,29 +11,43 @@ namespace Clinica.DAL
     {
         public Boolean RegristrarDoctor(long codigoPersona)
         {
-            using (var contexto = new ClinicaMedicaV1Entities())
-            {
+            
                 try
                 {
+                    using (var contexto = new ClinicaMedicaV1Entities())
+                    {
+                    var existe = (from x in contexto.doctor where x.codigoPersonaFk == codigoPersona select x).FirstOrDefault();
+
+                        if (existe!=null)
+                        {
+                        existe.estado = true;
+                        contexto.SaveChanges();
+                        return true;
+                        }
+                        else
+                        {
+                            doctor doc = new doctor();
+                            doc.codigoPersonaFk = codigoPersona;
+                            doc.estado = true;
+
+                            contexto.doctor.Add(doc);
+                            contexto.SaveChanges();
+                            return true;
+                        }
+                        
+                    }
                     
-                    doctor doc = new doctor();
-                    doc.codigoPersonaFk = codigoPersona;
-                    doc.estado = true;
-
-                    contexto.doctor.Add(doc);
-                    contexto.SaveChanges();
-
                 }
                 catch (Exception)
                 {
 
                     throw;
                 }
-                return true;
-            }
+                
+            
         }
 
-        public List<string> ConsultarDoctores()
+        public List<PersonaETL> ConsultarDoctores()
         {
             using (var contexto = new ClinicaMedicaV1Entities())
             {
@@ -44,17 +58,17 @@ namespace Clinica.DAL
                                        nombreCompleto = y.nombre + " " + y.primerApellido + " " + y.segundoApellido,
                                        codigoDoctor = x.codigoDoctor
                                        }).ToList();
-                List<string> listaDoctores = new List<string>();
+                List<PersonaETL> listaDoctores = new List<PersonaETL>();
 
                 if (listaDoctoresDB.Count > 0)
                 {
                     foreach (var item in listaDoctoresDB)
                     {
-                   
-                        listaDoctores.AddRange( new string[]
+
+                        listaDoctores.Add(new PersonaETL
                         {
-                            item.nombreCompleto,
-                            item.codigoDoctor.ToString()
+                            Nombre = item.nombreCompleto,
+                            codigoDoctor = item.codigoDoctor
                         });
                     }
                 }
